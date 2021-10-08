@@ -7,9 +7,17 @@ import { Provider } from 'react-redux';
 import theme from '@styles/theme';
 import HeadInfo from 'components/global/HeadInfo';
 import Layout from 'components/global/Layout';
+import { useWindowSize } from 'library/hooks/useWindowSize';
 import store from 'library/redux';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }, [windowSize.height]);
+
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
