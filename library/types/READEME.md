@@ -1,0 +1,1 @@
+interface(또는 type)는 이곳에
