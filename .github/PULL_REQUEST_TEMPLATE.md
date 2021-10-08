@@ -22,5 +22,5 @@
 
 <!-- 아래 사항들이 전부 체크되어야만 review 및 merge 됩니다 -->
 
-[] check build error
-[] sort import
+- [] check build error
+- [] remove console.log
