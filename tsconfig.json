@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     /* Paths */
-    "baseUrl": ".",
-    "outDir": "dist",
-    "paths": {
-      //alias pathing for absolute paths
-      "@src/*": ["src/*"],
-      "@styles/*": ["styles/*"],
-      "@pages/*": ["pages/*"]
-    },
+    "baseUrl": "./",
+    // "outDir": "dist",
+    // "paths": {
+    //   //alias pathing for absolute paths
+    //   "@src/*": ["src/*"],
+    //   "@styles/*": ["src/styles/*"],
+    //   "@pages/*": ["src/pages/*"]
+    // },
 
     /* Project */
     "target": "es5", //Specify ECMAScript target version
