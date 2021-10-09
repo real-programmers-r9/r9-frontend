@@ -11,7 +11,7 @@ import { useWindowSize } from 'library/hooks/useWindowSize';
 import store from 'library/redux';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-  const windowSize = useWindowSize();
+  const { windowSize } = useWindowSize();
 
   useEffect(() => {
     let vh = window.innerHeight * 0.01;
