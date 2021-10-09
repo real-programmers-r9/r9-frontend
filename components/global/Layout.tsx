@@ -1,13 +1,20 @@
 import styled from '@emotion/styled';
+import { useWindowSize } from 'library/hooks/useWindowSize';
+import Footer from './Footer';
+import Navbar from './Navbar';
 
 interface ILayout {
   children: React.ReactNode;
 }
 
 function Layout({ children }: ILayout): JSX.Element {
+  const { isDesktop } = useWindowSize();
+
   return (
     <StyledLayout>
+      <Navbar />
       <StyledContents>{children}</StyledContents>
+      {isDesktop && <Footer />}
     </StyledLayout>
   );
 }
@@ -16,6 +23,7 @@ export default Layout;
 
 const StyledLayout = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: calc(var(--vh, 1vh) * 100);
