@@ -1,4 +1,9 @@
-import { createTheme } from '@material-ui/core/styles';
+import { Theme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
+
+declare module '@mui/styles/defaultTheme' {
+  interface DefaultTheme extends Theme {}
+}
 
 // example
 const theme = createTheme({

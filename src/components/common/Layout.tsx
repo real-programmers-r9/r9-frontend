@@ -1,6 +1,4 @@
-import styled from '@emotion/styled';
-import { useWindowSize } from 'src/library/hooks/useWindowSize';
-import Footer from './Footer';
+import { Box } from '@mui/material';
 import Navbar from './Navbar';
 
 interface ILayout {
@@ -8,36 +6,19 @@ interface ILayout {
 }
 
 const Layout: React.FC<ILayout> = ({ children }) => {
-  const { isDesktop } = useWindowSize();
-
   return (
-    <StyledLayout>
+    <Box
+      sx={{
+        maxWidth: 'sm',
+        marginX: 'auto',
+        overflowY: 'hidden',
+        overflowX: 'hidden',
+      }}
+    >
       <Navbar />
-      <StyledContents>{children}</StyledContents>
-      {isDesktop && <Footer />}
-    </StyledLayout>
+      <Box sx={{ mt: { xs: 9, sm: 10 } }}>{children}</Box>
+    </Box>
   );
 };
 
 export default Layout;
-
-const StyledLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(var(--vh, 1vh) * 100);
-  background-color: #eeeeee;
-`;
-
-const StyledContents = styled.main`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 420px;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background-color: #ffffff;
-`;
