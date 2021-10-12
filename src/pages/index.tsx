@@ -1,98 +1,76 @@
 import type { NextPage } from 'next';
-import { Typography, Card, CardActions, CardContent, Grid, Container, Button } from '@mui/material';
-import useStyles from 'src/styles/mui/main';
+import {
+  Typography,
+  Grid,
+  Box,
+  Button,
+  Stack,
+  TextField,
+  FormControl,
+  InputAdornment,
+} from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import JobPost from 'src/components/home/JobPost';
 
 const Home: NextPage = () => {
-  const classes = useStyles();
+  const recommendKeywords = [
+    { id: 1, item: '안양' },
+    { id: 2, item: '청소' },
+    { id: 3, item: '주방보조' },
+    { id: 4, item: '일용직' },
+  ];
 
   return (
     <>
-      <main>
-        <div>
-          <Container maxWidth="sm" style={{ marginTop: '20px' }}>
-            <Typography variant="h3" align="center" color="textPrimary" gutterBottom>
-              The real job for you, R9
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente unde tempora
-            </Typography>
-            <div>
-              <Grid container spacing={2} justifyContent="center" style={{ marginTop: '20px' }}>
-                <Grid item>
-                  <Button variant="outlined" color="primary" size="small">
-                    #안양
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary" size="small">
-                    #청소
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
-          </Container>
-        </div>
-        <Container className={classes.cardGrid}>
-          <Grid container spacing={4}>
-            <Grid item>
-              <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                  <Typography variant="h5" gutterBottom>
-                    Heading
-                  </Typography>
-                  <Typography>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam iste a deleniti
-                    quasi facere doloremque illo non provident sequi placeat?
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    view
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item>
-              <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                  <Typography variant="h5" gutterBottom>
-                    Heading
-                  </Typography>
-                  <Typography>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam iste a deleniti
-                    quasi facere doloremque illo non provident sequi placeat?
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    view
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item>
-              <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                  <Typography variant="h5" gutterBottom>
-                    Heading
-                  </Typography>
-                  <Typography>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam iste a deleniti
-                    quasi facere doloremque illo non provident sequi placeat?
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    view
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          </Grid>
-        </Container>
-      </main>
+      <Box maxWidth="sm" sx={{ my: 1 }}>
+        <Typography variant="subtitle2" color="secondary.light" gutterBottom>
+          추천 키워드
+        </Typography>
+        <Stack direction="row" spacing={1} justifyContent="center">
+          {recommendKeywords.map(keyword => (
+            <Button
+              key={keyword.id}
+              variant="outlined"
+              color="primary"
+              size="small"
+              sx={{ borderRadius: 8, p: 0 }}
+            >
+              {keyword.item}
+            </Button>
+          ))}
+        </Stack>
+      </Box>
+      <FormControl sx={{ my: 2, width: 1 }}>
+        <TextField
+          variant="standard"
+          color="primary"
+          focused
+          placeholder="검색어를 입력해주세요"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon color="primary" />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </FormControl>
+      <Box sx={{ py: 3 }}>
+        <Grid container spacing={4}>
+          <JobPost />
+        </Grid>
+      </Box>
     </>
   );
 };
+
+/* fetch post lists */
+// export const getStaticProps = async ctx => {
+//   return {
+//     props: {
+//       posts: null,
+//     },
+//   };
+// };
 
 export default Home;
