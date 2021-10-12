@@ -3,3 +3,4 @@ const ApplicantForm: React.FC = () => {
 };
 
 export default ApplicantForm;
+
