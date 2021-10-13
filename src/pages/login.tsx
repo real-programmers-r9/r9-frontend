@@ -3,13 +3,12 @@
 import {useStyles} from '../styles/loginStyle';
 import Visibility from '@mui/icons-material/Visibility';
 import {  
-  Box,
+  Paper,
   Button,
   OutlinedInput,
   InputAdornment,
   FormControl,
   Link,
-  Container,
   IconButton,
   Typography} from '@mui/material';
 
@@ -19,7 +18,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 const login: React.FC = () => {
   const classes = useStyles();
   return <div>
-    <Container sx={{ width:300, height:400, display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+    <Paper sx={{ width:380, height:680, display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
 
     <Typography align="center" mb={5} variant="h4" >로그인</Typography>
 
@@ -69,9 +68,10 @@ const login: React.FC = () => {
   </Button>
 
 
-<Link pt={4} href="#"><Typography color="grey.700" sx={{textDecoration: 'none'}} variant="title" >아직 회원이 아니신가요?</Typography></Link>
+<Link pt={4} href="/signup"><Typography color="grey.700" sx={{textDecoration: 'none'}} variant="title" >아직 회원이 아니신가요?</Typography>
+</Link>
 
-</Container>
+</Paper>
   </div>;
 };
 
