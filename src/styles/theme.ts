@@ -8,10 +8,10 @@ const theme = createTheme({
       white: '#ffffff',
     },
     primary: {
-      light: '#4FC1E9',
-      main: '#1f87bf',
-      dark: '#0288D1',
-      contrastText: '#212121',
+      light: '#2380a8',
+      main: '#1266c7',
+      dark: '#bbbb',
+      contrastText: '#fffff',
     },
     secondary: {
       main: '#f4a199', // omitting light and dark will calculate from main
@@ -26,14 +26,30 @@ const theme = createTheme({
     },
     success: {
       main: '#48cfad',
+      contrastText:"#fffff"
     },
     error: {
       main: '#832838',
+    },
+    background: {
+      default: '#fff',
     },
   },
 
   typography: {
     fontFamily: 'Roboto',
+    h4:{
+      fontWeight:800
+    },
+    h6:{
+      fontWeight:800
+    },
+    subtitle1:{
+      fontWeight:800,
+      textAlight:"left",
+      marginTop:5
+    },
+
   },
 });
 

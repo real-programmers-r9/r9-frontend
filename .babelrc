@@ -1,4 +1,4 @@
-// mui 번들 사이즈로 babel-plugin-import 세팅
+// mui 번들 사이즈 minimize용 babel-plugin-import 세팅
 {
     "presets": ["next/babel"],
     "plugins": [
