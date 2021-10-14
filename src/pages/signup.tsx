@@ -19,12 +19,10 @@ import {
   Typography,
 } from '@mui/material';
 
-import AccountCircle from '@mui/icons-material/AccountCircle';
-
 // const PasswordBox = dynamic(() => import('../components/signup/pwBox'))
 
 const signup: React.FC = () => {
-  const classes = useStyles();
+  //const classes = useStyles();
   return (
     <div>
       <Container

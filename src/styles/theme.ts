@@ -19,7 +19,7 @@ const theme = createTheme({
     },
     grey: {
       '500': '#bcbcbc',
-      '700': '#79797a',
+      '700': '#909090',
     },
     info: {
       main: '#1bb2f1',
@@ -49,6 +49,9 @@ const theme = createTheme({
       textAlight:"left",
       marginTop:5
     },
+    button:{
+      fontWeight:800,
+    }
 
   },
 });
