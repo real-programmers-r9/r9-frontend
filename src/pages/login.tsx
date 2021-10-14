@@ -8,6 +8,7 @@ import {
   InputAdornment,
   FormControl,
   Link,
+  Divider,
   Container,
   IconButton,
   Typography,
@@ -33,10 +34,10 @@ const login: React.FC = () => {
           로그인
         </Typography>
 
-        <Typography variant="subtitle1" gutterBottom>
-          이메일 주소
-        </Typography>
         <FormControl m={2} sx={{ width: 280 }}>
+          <Typography variant="subtitle1" gutterBottom>
+            이메일 주소
+          </Typography>
           <OutlinedInput
             sx={{ border: '1px solid #eee' }}
             id="outlined-adornment-password"
@@ -44,11 +45,11 @@ const login: React.FC = () => {
             label="email"
           />
         </FormControl>
-        <Typography variant="subtitle1" gutterBottom>
-          비밀번호
-        </Typography>
 
         <FormControl sx={{ width: 280 }}>
+          <Typography variant="subtitle1" gutterBottom>
+            비밀번호
+          </Typography>
           <OutlinedInput
             sx={{ border: '1px solid #eee' }}
             id="outlined-adornment-password"
@@ -64,28 +65,29 @@ const login: React.FC = () => {
           />
         </FormControl>
 
-        <Button sx={{ width: 280, margin: 4, padding: 2 }} variant="contained">
+        <Button sx={{ width: 280, margin: 4, padding: 1.5 }} variant="contained">
           <Typography color="common.white" variant="h6">
             로그인
           </Typography>
         </Button>
 
         <Button sx={{ width: 280 }} variant="text">
-          <Typography variant="subtitle1">비밀번호 재설정</Typography>
+          <Typography gutterButtom color="grey.700" variant="subtitle1">
+            비밀번호 재설정
+          </Typography>
         </Button>
 
-        <Typography color="grey.700" p={2} variant="subtitle1">
-          소셜 로그인
-        </Typography>
+        <Divider variant="middle" />
 
-        <Button mb={4} sx={{ background: '#f9e000', width: 280, padding: 2 }} variant="contained">
+        <Button
+          sx={{ background: '#f9e000', width: 280, margin: 2, padding: 1.5 }}
+          variant="contained"
+        >
           <Typography variant="h6">카카오 로그인</Typography>
         </Button>
 
-        <Link pt={4} href="/signup">
-          <Typography color="grey.700" sx={{ textDecoration: 'none' }} variant="title">
-            아직 회원이 아니신가요?
-          </Typography>
+        <Link sx={{ textDecoration: 'none' }} pt={4} href="/signup">
+          <Typography variant="title1">아직 회원이 아니신가요?</Typography>
         </Link>
       </Container>
     </div>

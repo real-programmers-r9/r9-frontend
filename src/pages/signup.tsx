@@ -22,13 +22,12 @@ import {
 // const PasswordBox = dynamic(() => import('../components/signup/pwBox'))
 
 const signup: React.FC = () => {
-  //const classes = useStyles();
+  const classes = useStyles();
   return (
     <div>
       <Container
         sx={{
           width: 380,
-          height: 680,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -39,10 +38,12 @@ const signup: React.FC = () => {
           회원가입
         </Typography>
 
-        <Typography align="left" variant="subtitle1" gutterBottom>
-          이메일 주소
-        </Typography>
-        <FormControl m={2} sx={{ width: 280 }}>
+        {/* inputBox 컴포넌트 */}
+
+        <FormControl sx={{ width: 280 }}>
+          <Typography align="left" variant="subtitle1" gutterBottom>
+            이메일 주소
+          </Typography>
           <OutlinedInput
             sx={{ border: '1px solid #eee' }}
             id="outlined-adornment-password"
@@ -51,11 +52,12 @@ const signup: React.FC = () => {
           />
         </FormControl>
 
-        <Typography align="left" variant="subtitle1" gutterBottom>
-          비밀번호
-        </Typography>
+        {/* inputBox 컴포넌트 */}
 
         <FormControl sx={{ width: 280 }}>
+          <Typography align="left" variant="subtitle1" gutterBottom>
+            비밀번호
+          </Typography>
           <OutlinedInput
             sx={{ border: '1px solid #eee' }}
             id="outlined-adornment-password"
@@ -71,13 +73,35 @@ const signup: React.FC = () => {
           />
         </FormControl>
 
-        <Button sx={{ width: 280, margin: 4, padding: 2 }} variant="contained">
+        {/* inputBox 컴포넌트 */}
+
+        <FormControl sx={{ width: 280 }}>
+          <Typography align="left" variant="subtitle1" gutterBottom>
+            비밀번호
+          </Typography>
+          <OutlinedInput
+            sx={{ border: '1px solid #eee' }}
+            id="outlined-adornment-password"
+            type="password"
+            label="Password"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton aria-label="toggle password visibility" edge="end">
+                  {<Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+
+        {/* BtnBig 컴포넌트 */}
+        <Button sx={{ width: 280, margin: 4, padding: 1.5 }} variant="contained">
           <Typography color="common.white" variant="h6">
             회원가입
           </Typography>
         </Button>
-        {/* <PasswordBox/> */}
 
+        {/* Card 컴포넌트 */}
         <Card sx={{ width: 300, marginBottom: 4 }}>
           <CardContent>
             <Typography align="left" variant="subtitle1" gutterBottom>

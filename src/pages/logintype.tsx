@@ -8,7 +8,6 @@ const loginType: React.FC = () => {
     <Container
       sx={{
         width: 380,
-        height: 680,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -25,8 +24,8 @@ const loginType: React.FC = () => {
       <Grid container spacing={2}>
         {/* 컴포넌트명:userTypeBox */}
         <Grid item xs={6}>
-          <Paper sx={{ background: '#f5f5f5', paddingBottom: 2, textAlign: 'center' }}>
-            <ShoppingBagIcon style={{ fontSize: 50, marginTop: 10 }} />
+          <Paper sx={{ background: '#f5f5f5', paddingBottom: 8, textAlign: 'center' }}>
+            <ShoppingBagIcon style={{ marginTop: 50, fontSize: 80 }} />
             <Typography align="center" mb={3} variant="h6">
               기업
             </Typography>
@@ -53,8 +52,8 @@ const loginType: React.FC = () => {
         </Grid>
         {/* 컴포넌트명:userTypeBox */}
         <Grid item xs={6}>
-          <Paper sx={{ background: '#f5f5f5', paddingBottom: 2, textAlign: 'center' }}>
-            <ShoppingBagIcon style={{ fontSize: 50, marginTop: 10 }} />
+          <Paper sx={{ background: '#f5f5f5', paddingBottom: 8, textAlign: 'center' }}>
+            <AccountCircleIcon style={{ marginTop: 50, fontSize: 80 }} />
             <Typography align="center" mb={3} variant="h6">
               개인
             </Typography>
