@@ -5,18 +5,10 @@ import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import HeadInfo from 'src/components/common/HeadInfo';
 import Layout from 'src/components/common/Layout';
-import { useWindowSize } from 'src/library/hooks/useWindowSize';
-import store from 'src/library/redux';
+import store from 'src/libs/redux';
 import theme from 'src/styles/theme';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-  const { windowSize } = useWindowSize();
-
-  useEffect(() => {
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }, [windowSize.height]);
-
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
