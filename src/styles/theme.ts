@@ -12,24 +12,25 @@ const theme = createTheme({
       white: '#ffffff',
     },
     primary: {
-      light: '#B3E5FC',
-      main: '#03A9F4',
-      dark: '#0288D1',
-      contrastText: '#212121',
+      light: '#2380a8',
+      main: '#1266c7',
+      dark: '#bbbb',
+      contrastText: '#fffff',
     },
     secondary: {
-      main: '#607D8B', // omitting light and dark will calculate from main
+      main: '#f4a199', // omitting light and dark will calculate from main
       contrastText: '#757575',
     },
     grey: {
       '500': '#bcbcbc',
-      '700': '#79797a',
+      '700': '#909090',
     },
     info: {
       main: '#1bb2f1',
     },
     success: {
-      main: '#00d589',
+      main: '#48cfad',
+      contrastText:"#fffff"
     },
     error: {
       main: '#832838',
@@ -41,6 +42,21 @@ const theme = createTheme({
 
   typography: {
     fontFamily: 'Roboto',
+    h4:{
+      fontWeight:800
+    },
+    h6:{
+      fontWeight:800
+    },
+    subtitle1:{
+      fontWeight:800,
+      textAlight:"left",
+      marginTop:5
+    },
+    button:{
+      fontWeight:800,
+    }
+
   },
 });
 
