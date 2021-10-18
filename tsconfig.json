@@ -2,13 +2,6 @@
   "compilerOptions": {
     /* Paths */
     "baseUrl": "./",
-    // "outDir": "dist",
-    // "paths": {
-    //   //alias pathing for absolute paths
-    //   "@src/*": ["src/*"],
-    //   "@styles/*": ["src/styles/*"],
-    //   "@pages/*": ["src/pages/*"]
-    // },
 
     /* Project */
     "target": "es5", //Specify ECMAScript target version
@@ -29,6 +22,6 @@
     "esModuleInterop": true, //Disables namespace imports (import * as fs from "fs") and enables CJS/AMO/UMP sylted imports(import fs form "fs)
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"], // *** The files TypeScript should type check ***
-  "exclude": ["node_modules", "dist", "coverage", ".next"] // *** The files to not type check ***
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.config.js"],
+  "exclude": ["node_modules", "dist", "coverage", ".next"]
 }

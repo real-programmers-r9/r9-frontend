@@ -1,22 +1,12 @@
-import { useEffect } from 'react';
+import '@fontsource/roboto';
+import { AppProps } from 'next/app';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import HeadInfo from 'src/components/common/HeadInfo';
 import Layout from 'src/components/common/Layout';
 import store from 'src/libs/redux';
-import theme from 'src/styles/theme';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-  useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles) {
-      jssStyles?.parentElement?.removeChild(jssStyles);
-    }
-  }, []);
-
   return (
     <>
       <HeadInfo
@@ -25,12 +15,10 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         description="진짜 시니어를 위한 일자리"
       />
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ThemeProvider>
+        <CssBaseline />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
     </>
   );
