@@ -9,11 +9,13 @@ import {
   Stack,
   Divider,
 } from '@mui/material';
-import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import {
+  QueryBuilder,
+  AttachMoney,
+  LocationOnOutlined,
+  FavoriteBorderOutlined,
+  ChevronRight,
+} from '@mui/icons-material';
 
 interface IData {
   id: number;
@@ -28,8 +30,7 @@ interface IData {
   payRate: number;
 }
 
-const JobPost: React.FC = () => {
-  /* mock-data */
+const JobPost = () => {
   const data: IData = {
     id: 1,
     location: '서울시 강남구',
@@ -44,7 +45,6 @@ const JobPost: React.FC = () => {
   };
 
   const {
-    // id,
     location,
     companyName,
     companyCategory,
@@ -56,10 +56,6 @@ const JobPost: React.FC = () => {
     payRate,
   } = data;
 
-  // const handleAddFavorite = (id: number) => {
-  //   console.log(id);
-  // };
-
   return (
     <Grid item sx={{ width: 1 }}>
       <Card sx={{ display: 'flex', flexDirection: 'column', boxShadow: 5 }}>
@@ -68,11 +64,8 @@ const JobPost: React.FC = () => {
             <Typography variant="subtitle1" color="secondary.light">
               {companyCategory}
             </Typography>
-            <IconButton
-              aria-label="addfavorit"
-              //  onClick={() => handleAddFavorite(id)}
-            >
-              <FavoriteBorderOutlinedIcon />
+            <IconButton aria-label="addfavorit">
+              <FavoriteBorderOutlined />
             </IconButton>
           </Stack>
           <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
@@ -86,11 +79,11 @@ const JobPost: React.FC = () => {
 
           <Stack spacing={1}>
             <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-              <LocationOnOutlinedIcon />
+              <LocationOnOutlined />
               <Typography variant="h6">{location}</Typography>
             </Stack>
             <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-              <QueryBuilderIcon />
+              <QueryBuilder />
               <Typography variant="h6">
                 {workDay.length >= 2 ? workDay.join(', ').split('') : workDay}
               </Typography>
@@ -99,7 +92,7 @@ const JobPost: React.FC = () => {
               </Typography>
             </Stack>
             <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-              <AttachMoneyIcon />
+              <AttachMoney />
               <Typography variant="h6">{calutatePayBy}</Typography>
               <Stack direction="row">
                 <Typography variant="h6" color="primary">
@@ -112,12 +105,11 @@ const JobPost: React.FC = () => {
         </CardContent>
         <Divider variant="middle" />
         <CardActions sx={{ width: 1, justifyContent: 'space-between' }}>
-          {/* 위치 정보 공유 시 거리 노출 예시 */}
           <Stack direction="row" spacing={1} sx={{ justifyContent: 'flex-end' }}>
             <Typography color="secondary.light">현 위치로부터</Typography>
             <Typography>200m</Typography>
           </Stack>
-          <Button size="large" endIcon={<ChevronRightIcon />} sx={{ fontSize: '1.25rem' }}>
+          <Button size="large" endIcon={<ChevronRight />} sx={{ fontSize: '1.25rem' }}>
             상세보기
           </Button>
         </CardActions>

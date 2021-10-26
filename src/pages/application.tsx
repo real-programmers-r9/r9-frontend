@@ -1,10 +1,7 @@
-import {Typography, Button} from '@mui/material';
+import { NextPage } from 'next';
 
-const application: React.FC = () => {
-  return <div>지원자정보 페이지/ 지원하기 페이지
-         <Button variant="contained">Text</Button>
-  </div>;
+const ApplicationPage: NextPage = () => {
+  return <div>지원자정보 페이지/ 지원하기 페이지</div>;
 };
 
-export default application;
-
+export default ApplicationPage;

@@ -12,15 +12,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import JobPost from 'src/components/home/JobPost';
 
-const Home: NextPage = () => {
-  if (typeof window !== 'undefined' && navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      const { latitude, longitude } = position.coords;
-
-      console.log('Latitude:', latitude, 'Longitude:', longitude);
-    });
-  }
-
+const HomePage: NextPage = () => {
   const recommendKeywords = [
     { id: 1, item: '안양' },
     { id: 2, item: '청소' },
@@ -72,13 +64,4 @@ const Home: NextPage = () => {
   );
 };
 
-/* fetch post lists */
-// export const getStaticProps = async ctx => {
-//   return {
-//     props: {
-//       posts: null,
-//     },
-//   };
-// };
-
-export default Home;
+export default HomePage;

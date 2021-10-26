@@ -1,12 +1,12 @@
 import Head from 'next/head';
 
-interface HeadInfoProps {
+interface IHeadInfoProps {
   title: string;
   keywords: string;
   description: string;
 }
 
-const HeadInfo: React.FC<HeadInfoProps> = ({ title, keywords, description }) => {
+const HeadInfo = ({ title, keywords, description }: IHeadInfoProps) => {
   return (
     <Head>
       <title>{title}</title>

@@ -1,40 +1,23 @@
-import { useState } from 'react';
-import { Box, Container } from '@mui/material';
+import { useState, ReactNode } from 'react';
+import { Container } from '@mui/material';
 import Navbar from 'src/components/common/Navbar';
 import Sidebar from 'src/components/common/Sidebar';
 
-interface ILayout {
-  children: React.ReactNode;
+interface ILayoutProps {
+  children: ReactNode;
 }
 
-const Layout = ({ children }: ILayout): JSX.Element => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+const Layout = ({ children }: ILayoutProps) => {
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
 
-  const toggleDrawer = (openStatus: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-    if (
-      event &&
-      event.type === 'keydown' &&
-      ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
-    ) {
-      return;
-    }
-    setIsSidebarOpen(openStatus);
-  };
+  const toggleDrawerOpen = () => setDrawerOpen(!isDrawerOpen);
 
   return (
-    <Container
-      sx={{
-        position: 'relative',
-        maxWidth: 'sm',
-        overflowY: 'hidden',
-        overflowX: 'hidden',
-      }}
-    >
-      <Navbar toggleDrawer={toggleDrawer} />
-      <Sidebar isSidebarOpen={isSidebarOpen} toggleDrawer={toggleDrawer} />
-      <Box sx={{ mt: { xs: 9, sm: 10 } }}>{children}</Box>
-    </Container>
+    <>
+      <Navbar toggleOpen={toggleDrawerOpen} />
+      <Sidebar isOpen={isDrawerOpen} toggleOpen={toggleDrawerOpen} />
+      <Container sx={{ mt: 8 }}>{children}</Container>
+    </>
   );
 };
 

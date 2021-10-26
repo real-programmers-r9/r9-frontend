@@ -1,9 +1,8 @@
+import { NextPage } from 'next';
 import { Typography, Button, Grid, Paper, Container, Link } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import { PanoramaPhotosphere } from '@mui/icons-material';
+import { AccountCircle, ShoppingBag } from '@mui/icons-material';
 
-const loginType: React.FC = () => {
+const SignUpType: NextPage = () => {
   return (
     <Container
       sx={{
@@ -22,42 +21,37 @@ const loginType: React.FC = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        {/* 컴포넌트명:userTypeBox */}
         <Grid item xs={6}>
           <Paper sx={{ background: '#f5f5f5', paddingBottom: 8, textAlign: 'center' }}>
-            <ShoppingBagIcon style={{ marginTop: 50, fontSize: 80 }} />
+            <ShoppingBag style={{ marginTop: 50, fontSize: 80 }} />
             <Typography align="center" mb={3} variant="h6">
               기업
             </Typography>
-            {/* buttons */}
             <Button
               size="small"
               sx={{ background: '#f9e000', width: 140, padding: 1 }}
               variant="contained"
             >
-              <Typography variant="button">카카오 회원가입</Typography>
+              카카오 회원가입
             </Button>
 
             <Link sx={{ textDecoration: 'none' }} href="/login">
               <Button
-                mt={2}
                 size="small"
                 sx={{ width: 140, padding: 1, color: '#ffff', marginTop: 1 }}
                 variant="contained"
               >
-                <Typography variant="button">이메일 회원가입</Typography>
+                이메일 회원가입
               </Button>
             </Link>
           </Paper>
         </Grid>
-        {/* 컴포넌트명:userTypeBox */}
         <Grid item xs={6}>
           <Paper sx={{ background: '#f5f5f5', paddingBottom: 8, textAlign: 'center' }}>
-            <AccountCircleIcon style={{ marginTop: 50, fontSize: 80 }} />
+            <AccountCircle style={{ marginTop: 50, fontSize: 80 }} />
             <Typography align="center" mb={3} variant="h6">
               개인
             </Typography>
-            {/* buttons */}
             <Button
               size="small"
               sx={{ background: '#f9e000', width: 140, padding: 1 }}
@@ -68,12 +62,11 @@ const loginType: React.FC = () => {
 
             <Link sx={{ textDecoration: 'none' }} href="/login">
               <Button
-                mt={2}
                 size="small"
                 sx={{ width: 140, padding: 1, color: '#ffff', marginTop: 1 }}
                 variant="contained"
               >
-                <Typography variant="button">이메일 회원가입</Typography>
+                이메일 회원가입
               </Button>
             </Link>
           </Paper>
@@ -83,4 +76,4 @@ const loginType: React.FC = () => {
   );
 };
 
-export default loginType;
+export default SignUpType;
