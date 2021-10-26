@@ -1,7 +1,7 @@
-import { useState, ReactNode } from 'react';
-import { Container } from '@mui/material';
-import Navbar from 'src/components/common/Navbar';
-import Sidebar from 'src/components/common/Sidebar';
+import { useState, ReactNode } from "react";
+import { Container } from "@mui/material";
+import Navbar from "src/components/common/Navbar";
+import Sidebar from "src/components/common/Sidebar";
 
 interface ILayoutProps {
   children: ReactNode;

@@ -1,10 +1,10 @@
-import '@fontsource/roboto';
-import { AppProps } from 'next/app';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Provider } from 'react-redux';
-import HeadInfo from 'src/components/common/HeadInfo';
-import Layout from 'src/components/common/Layout';
-import store from 'src/libs/redux';
+import "@fontsource/roboto";
+import { AppProps } from "next/app";
+import CssBaseline from "@mui/material/CssBaseline";
+import { Provider } from "react-redux";
+import HeadInfo from "src/components/common/HeadInfo";
+import Layout from "src/components/common/Layout";
+import store from "src/libs/redux";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (

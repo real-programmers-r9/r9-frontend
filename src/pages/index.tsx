@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { NextPage } from "next";
 import {
   Typography,
   Grid,
@@ -8,16 +8,16 @@ import {
   TextField,
   FormControl,
   InputAdornment,
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import JobPost from 'src/components/home/JobPost';
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import JobPost from "src/components/home/JobPost";
 
 const HomePage: NextPage = () => {
   const recommendKeywords = [
-    { id: 1, item: '안양' },
-    { id: 2, item: '청소' },
-    { id: 3, item: '주방보조' },
-    { id: 4, item: '일용직' },
+    { id: 1, item: "안양" },
+    { id: 2, item: "청소" },
+    { id: 3, item: "주방보조" },
+    { id: 4, item: "일용직" },
   ];
 
   return (
@@ -27,7 +27,7 @@ const HomePage: NextPage = () => {
           추천 키워드
         </Typography>
         <Stack direction="row" spacing={1} justifyContent="center">
-          {recommendKeywords.map(keyword => (
+          {recommendKeywords.map((keyword) => (
             <Button
               key={keyword.id}
               variant="outlined"

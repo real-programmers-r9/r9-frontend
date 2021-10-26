@@ -1,8 +1,8 @@
-import React from 'react';
-import { NextPage } from 'next';
-import Link from 'next/link';
-import { Button, Typography, TextField, Stack } from '@mui/material';
-import { yellow } from '@mui/material/colors';
+import React from "react";
+import { NextPage } from "next";
+import Link from "next/link";
+import { Button, Typography, TextField, Stack } from "@mui/material";
+import { yellow } from "@mui/material/colors";
 
 const SignInPage: NextPage = () => {
   return (
@@ -19,7 +19,11 @@ const SignInPage: NextPage = () => {
       </Button>
 
       <Button
-        sx={{ background: yellow[500], color: 'black', ':hover': { background: yellow[600] } }}
+        sx={{
+          background: yellow[500],
+          color: "black",
+          ":hover": { background: yellow[600] },
+        }}
         variant="contained"
         size="large"
       >

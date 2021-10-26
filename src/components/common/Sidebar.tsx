@@ -1,7 +1,14 @@
-import React from 'react';
-import Link from 'next/link';
-import { Drawer, ListItem, ListItemIcon, ListItemText, List, Box } from '@mui/material';
-import { Login, PersonAdd } from '@mui/icons-material';
+import React from "react";
+import Link from "next/link";
+import {
+  Drawer,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  List,
+  Box,
+} from "@mui/material";
+import { Login, PersonAdd } from "@mui/icons-material";
 
 interface ISidebarProps {
   isOpen: boolean;
@@ -17,13 +24,13 @@ interface IMenuItem {
 const menuItems: IMenuItem[] = [
   {
     icon: <Login />,
-    display: '로그인',
-    href: 'sign-in',
+    display: "로그인",
+    href: "sign-in",
   },
   {
     icon: <PersonAdd />,
-    display: '회원가입',
-    href: 'sign-up',
+    display: "회원가입",
+    href: "sign-up",
   },
 ];
 
@@ -32,7 +39,7 @@ const Sidebar = ({ isOpen, toggleOpen }: ISidebarProps) => {
     <Drawer anchor="right" open={isOpen} onClose={toggleOpen}>
       <Box sx={{ width: 250 }} role="presentation" onClick={toggleOpen}>
         <List>
-          {menuItems.map(item => (
+          {menuItems.map((item) => (
             <Link key={item.href} href={item.href} passHref>
               <ListItem key={item.href} button>
                 <ListItemIcon>{item.icon}</ListItemIcon>
