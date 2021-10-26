@@ -1,14 +1,14 @@
 import "@fontsource/roboto";
 import { AppProps } from "next/app";
-import CssBaseline from "@mui/material/CssBaseline";
+import { Box, CssBaseline } from "@mui/material/";
 import { Provider } from "react-redux";
 import HeadInfo from "src/components/common/HeadInfo";
 import Layout from "src/components/common/Layout";
 import store from "src/libs/redux";
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <>
+    <Box sx={{ bgcolor: "ghostwhite", minHeight: "100vh" }}>
       <HeadInfo
         title="알구"
         keywords="아르바이트, 알바, 소일거리, 중장년"
@@ -20,7 +20,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           <Component {...pageProps} />
         </Layout>
       </Provider>
-    </>
+    </Box>
   );
 };
 export default MyApp;
