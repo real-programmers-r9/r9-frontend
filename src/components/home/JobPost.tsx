@@ -9,6 +9,7 @@ import {
   Stack,
   Divider,
 } from "@mui/material";
+
 import {
   QueryBuilder,
   AttachMoney,
@@ -33,15 +34,15 @@ interface IData {
 const JobPost = () => {
   const data: IData = {
     id: 1,
-    location: "서울시 강남구",
-    companyName: "도야짬뽕",
-    companyCategory: "일반음식점",
-    role: "홀서빙",
-    workDay: ["월", "수"],
+    location: "성남시 분당구",
+    companyName: "이마트24 서현서머섯호텔점",
+    companyCategory: "편의점",
+    role: "파트타임",
+    workDay: ["월", "수", "금"],
     workStartTime: "10:00",
     workFinishTime: "16:00",
     calutatePayBy: "일당",
-    payRate: 130000,
+    payRate: 8720,//여기 시급 & 일당 고쳐야함
   };
 
   const {
