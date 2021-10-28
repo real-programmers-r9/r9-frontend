@@ -16,9 +16,7 @@ const Layout = ({ children }: ILayoutProps) => {
     <>
       <Navbar toggleOpen={toggleDrawerOpen} />
       <Sidebar isOpen={isDrawerOpen} toggleOpen={toggleDrawerOpen} />
-      <Container component="main" sx={{ pt: 8 }}>
-        {children}
-      </Container>
+      <Container component="main">{children}</Container>
     </>
   );
 };

@@ -11,14 +11,14 @@ const Navbar = ({ toggleOpen }: INabarProps) => {
   const router = useRouter();
 
   return (
-    <AppBar>
+    <AppBar position="static">
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Typography
           variant="h5"
           sx={{ cursor: "pointer" }}
           onClick={() => router.push("/")}
         >
-          Logo
+          R9
         </Typography>
         <IconButton size="large" onClick={toggleOpen}>
           <Menu sx={{ color: "white" }} />
