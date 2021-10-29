@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { AppBar, Toolbar, Typography, IconButton, Button } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import { styled } from "@mui/system";
+import AnimationIcon from "@mui/icons-material/Animation";
 
 interface INabarProps {
   toggleOpen: () => void;
@@ -14,13 +15,10 @@ const Navbar = ({ toggleOpen }: INabarProps) => {
   return (
     <AppBar elevation={0} position="fixed">
       <ToolBar>
-        <Typography
-          variant="h5"
-          sx={{ cursor: "pointer" }}
-          onClick={() => router.push("/")}
-        >
-          Senior alba app
-        </Typography>
+        <LogoBox onClick={() => router.push("/")}>
+          <AnimationIcon />
+          <LogoText>시니어 알바앱 R9</LogoText>
+        </LogoBox>
         {/* web:button groups */}
         <div>
           <Buttons>
@@ -50,6 +48,26 @@ const ToolBar = styled(Toolbar)(({ theme }) => ({
   alignItems: "center",
 }));
 
+const LogoBox = styled("div")({
+  alignItems: "center",
+  justifyContent: "center",
+  display: "flex",
+  color: "#41ba6c",
+  "&:hover": {
+    color: "#bbb",
+  },
+});
+
+const LogoText = styled(Typography)(({ theme }) => ({
+  fontSize: 20,
+  display: "none",
+  fontWeight: 700,
+  marginTop: 10,
+  [theme.breakpoints.up("sm")]: {
+    display: "block",
+  },
+}));
+
 const Buttons = styled("div")(({ theme }) => ({
   alignItems: "center",
   marginRight: 5,
@@ -74,5 +92,6 @@ const TopButton = styled(Button)({
   "&:hover": {
     color: "#212121",
     background: "#bbb",
+    transform: "scale(1.05)",
   },
 });
