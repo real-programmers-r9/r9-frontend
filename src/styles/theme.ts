@@ -13,6 +13,8 @@ export const theme = createTheme({
   typography: {
     h6: {
       fontWeight: "bold",
+      color: "#454443",
+      margin: 5,
     },
     subtitle1: {},
   },

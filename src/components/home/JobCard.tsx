@@ -18,6 +18,8 @@ import {
   ChevronRight,
 } from "@mui/icons-material";
 
+import { styled } from "@mui/system";
+
 interface IData {
   id: number;
   location: string;
@@ -31,7 +33,7 @@ interface IData {
   payRate: number;
 }
 
-const JobPost = () => {
+const JobCard = () => {
   const data: IData = {
     id: 1,
     location: "성남시 분당구",
@@ -42,7 +44,7 @@ const JobPost = () => {
     workStartTime: "10:00",
     workFinishTime: "16:00",
     calutatePayBy: "일당",
-    payRate: 8720,//여기 시급 & 일당 고쳐야함
+    payRate: 8720, //여기 시급 & 일당 고쳐야함
   };
 
   const {
@@ -58,8 +60,8 @@ const JobPost = () => {
   } = data;
 
   return (
-    <Grid item sx={{ width: 1 }}>
-      <Card sx={{ display: "flex", flexDirection: "column", boxShadow: 5 }}>
+    <div>
+      <Card>
         <CardContent sx={{ flexGrow: 1 }}>
           <Stack
             direction="row"
@@ -126,8 +128,8 @@ const JobPost = () => {
           </Button>
         </CardActions>
       </Card>
-    </Grid>
+    </div>
   );
 };
 
-export default JobPost;
+export default JobCard;

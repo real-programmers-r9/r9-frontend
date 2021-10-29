@@ -43,7 +43,7 @@ export default Navbar;
 const ToolBar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
   color: "#212121",
-  background: "#fff",
+  background: "#eee",
   justifyContent: "space-between",
   alignItems: "center",
 }));
@@ -54,7 +54,7 @@ const LogoBox = styled("div")({
   display: "flex",
   color: "#41ba6c",
   "&:hover": {
-    color: "#bbb",
+    color: "#212121",
   },
 });
 
@@ -62,6 +62,7 @@ const LogoText = styled(Typography)(({ theme }) => ({
   fontSize: 20,
   display: "none",
   fontWeight: 700,
+  color: "#212121",
   marginTop: 10,
   [theme.breakpoints.up("sm")]: {
     display: "block",
@@ -91,7 +92,7 @@ const TopButton = styled(Button)({
   width: 80,
   "&:hover": {
     color: "#212121",
-    background: "#bbb",
+    background: "#fff",
     transform: "scale(1.05)",
   },
 });

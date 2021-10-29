@@ -17,7 +17,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         keywords="아르바이트, 알바, 소일거리, 중장년"
         description="시니어를 위한 일자리 정보"
       />
-
       <CssBaseline />
       <Layout>
         <ThemeProvider theme={theme}>

@@ -1,13 +1,14 @@
 import type { NextPage } from "next";
+import { Grid } from "@mui/material";
 import { styled } from "@mui/system";
-import JobPost from "src/components/home/JobPost";
 import Search from "src/components/home/Search";
+import JobCard2 from "src/components/home/JobCard2";
 
 const HomePage: NextPage = () => {
   return (
     <ContainerBox>
       <Search />
-      <JobPost />
+      <JobCard2 />
     </ContainerBox>
   );
 };

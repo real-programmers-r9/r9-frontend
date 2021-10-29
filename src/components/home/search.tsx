@@ -1,31 +1,49 @@
 import {
   Typography,
-  Button,
-  Container,
   FormControl,
+  InputAdornment,
   TextField,
+  Stack,
+  Box,
+  Chip,
 } from "@mui/material";
+
+import { SearchIcon } from "@mui/icons-material";
 import { styled } from "@mui/system";
 //타입정의 해야함
 
 const Search = () => {
-  const RECOMMENDATIONS = ["돌봄", "청소", "주방보조", "주3회", "당일 알바"];
+  const RECOMMENDATIONS = ["돌봄", "주3회", "시니어 일자리", "당일 알바"];
 
   return (
     <SearchWrapper>
-      <h3>일자리를 검색해보세요</h3>
-      <FormControl sx={{ my: 2, width: 1 }}>
+      {/* 검색창 */}
+      <Typography mt={4} gutterBottom variant="h6" component="div">
+        일자리 검색하기
+      </Typography>
+      <FormControl sx={{ maxWidth: 800 }}>
         <TextField
+          size="small"
           focused
           placeholder="검색어를 입력해주세요"
-          // InputProps={{
-          //   endAdornment: (
-          //     <InputAdornment position="start">
-          //       <SearchIcon color="primary" />
-          //     </InputAdornment>
-          //   ),
-          // }}
+          //아래 오류?
+          inputProps={{
+            endAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon color="primary" />
+              </InputAdornment>
+            ),
+          }}
         />
+        {/*추천 검색어 */}
+        <Box mt={1}>
+          <Stack direction="row" spacing={1} justifyContent="center">
+            {/* 클릭 이벤트 넣기 */}
+            {RECOMMENDATIONS.map((item, i) => (
+              <Chip label={item} key={i} />
+            ))}
+          </Stack>
+        </Box>
       </FormControl>
     </SearchWrapper>
   );
@@ -37,28 +55,7 @@ const SearchWrapper = styled("div")({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  // textAlign: "center",
   justifyContent: "center",
   width: "70%",
+  marginBottom: 2,
 });
-
-//   <Box maxWidth="sm" sx={{ my: 1 }}>
-//   <Typography variant="subtitle2" color="secondary.light" gutterBottom>
-//     추천 키워드
-//   </Typography>
-//   <Stack direction="row" spacing={1} justifyContent="center">
-//     {recommendKeywords.map((keyword) => (
-//       <Button
-//         key={keyword.id}
-//         variant="outlined"
-//         color="primary"
-//         size="small"
-//         sx={{ borderRadius: 8, p: 0 }}
-//       >
-//         {keyword.item}
-//       </Button>
-//     ))}
-//   </Stack>
-// </Box>
-
-// <Box sx={{ py: 3 }}>
