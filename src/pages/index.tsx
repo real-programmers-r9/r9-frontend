@@ -12,7 +12,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import JobPost from "src/components/home/JobPost";
 
-const HomePage: NextPage = () => {
+const IndexPage: NextPage = () => {
   const recommendKeywords = [
     { id: 1, item: "안양" },
     { id: 2, item: "청소" },
@@ -64,4 +64,4 @@ const HomePage: NextPage = () => {
   );
 };
 
-export default HomePage;
+export default IndexPage;

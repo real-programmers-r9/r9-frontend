@@ -1,9 +1,12 @@
 import React from "react";
 import { NextPage } from "next";
-import { Typography, Link, Card } from "@mui/material";
+import { Typography, Card } from "@mui/material";
 import { SignInForm } from "src/components/forms/SignInForm";
+import { useRouter } from "next/router";
 
 const SignInPage: NextPage = () => {
+  const router = useRouter();
+
   return (
     <Card
       sx={{
@@ -20,9 +23,9 @@ const SignInPage: NextPage = () => {
         로그인
       </Typography>
       <SignInForm />
-      <Link href="/#" variant="body2">
+      <Typography onClick={() => router.push("/")}>
         비밀번호를 잊었나요?
-      </Link>
+      </Typography>
     </Card>
   );
 };
