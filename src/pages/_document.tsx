@@ -7,6 +7,7 @@ import Document, {
   DocumentContext,
 } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
+import HeadInfo from "src/components/common/HeadInfo";
 import createEmotionCache from "../libs/create-emotion-cache";
 
 class MyDocument extends Document {
@@ -46,7 +47,13 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <HeadInfo
+            title="알구"
+            keywords="아르바이트, 알바, 소일거리, 중장년"
+            description="진짜 시니어를 위한 일자리"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
