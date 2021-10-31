@@ -1,8 +1,10 @@
 import * as React from "react";
 import { Typography, Box, Rating } from "@mui/material";
-import { FavoriteBorderOutlined } from "@mui/icons-material";
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 
 const Detail: React.FC = () => {
+  const [value, setValue] = React.useState<number | null>(4);
+  setValue(1);
   return (
     <div>
       <div className="TitleBar">
@@ -15,26 +17,25 @@ const Detail: React.FC = () => {
           fontWeight="bold"
         >
           강남역 도야짬뽕 홀서빙
-          <FavoriteBorderOutlined
+          <FavoriteBorderRoundedIcon
             sx={{ position: "absolute", right: 30, height: "1.3em" }}
           />
         </Typography>
       </div>
+      <Box
+        className="RatingBar"
+        sx={{
+          "& > legend": { mt: 2 },
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Typography component="legend" />
+        <Rating name="read-only" value={value} readOnly />
+        <span>4.12(12)</span>
+      </Box>
     </div>
   );
 };
 
 export default Detail;
-
-/* <div className: Ratingbar> 
-        <Box align="left" component="fieldset" mb={3} borderColor="transparent">
-          <Rating
-            value={value}
-            name="rating"
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
-            onClick={props.handleInputChange}
-          />
-        </Box>
-      </div> */
