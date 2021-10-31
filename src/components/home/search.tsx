@@ -7,11 +7,19 @@ import {
   Box,
   Chip,
 } from "@mui/material";
-
-import { SearchIcon } from "@mui/icons-material";
+import { Search as SearchIcon } from "@mui/icons-material";
 import { styled } from "@mui/system";
-//타입정의 해야함
 
+const SearchWrapper = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "70%",
+  marginBottom: 2,
+});
+
+// 타입정의 해야함
 const Search = () => {
   const RECOMMENDATIONS = ["돌봄", "주3회", "시니어 일자리", "당일 알바"];
 
@@ -26,7 +34,7 @@ const Search = () => {
           size="small"
           focused
           placeholder="검색어를 입력해주세요"
-          //아래 오류?
+          // 아래 오류?
           inputProps={{
             endAdornment: (
               <InputAdornment position="start">
@@ -35,10 +43,11 @@ const Search = () => {
             ),
           }}
         />
-        {/*추천 검색어 */}
+        {/* 추천 검색어 */}
         <Box mt={1}>
           <Stack direction="row" spacing={1} justifyContent="center">
             {/* 클릭 이벤트 넣기 */}
+            {/* key값으로 index넣으면 안됨 */}
             {RECOMMENDATIONS.map((item, i) => (
               <Chip label={item} key={i} />
             ))}
@@ -50,12 +59,3 @@ const Search = () => {
 };
 
 export default Search;
-
-const SearchWrapper = styled("div")({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  width: "70%",
-  marginBottom: 2,
-});

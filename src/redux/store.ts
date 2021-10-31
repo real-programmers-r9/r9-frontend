@@ -1,26 +1,21 @@
-// import { configureStore } from '@reduxjs/toolkit';
-// import { createWrapper } from "next-redux-wrapper";
-// import logger from 'redux-logger';
+import { configureStore } from "@reduxjs/toolkit";
+import { createWrapper } from "next-redux-wrapper";
+import { r9Api } from "./services/r9-api";
+import { authSlice } from "./slices/auth-slice";
 
-// import reducer from './modules';
+export const makeStore = () =>
+  configureStore({
+    reducer: {
+      [r9Api.reducerPath]: r9Api.reducer,
+      auth: authSlice.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(r9Api.middleware),
+  });
 
+export type AppStore = ReturnType<typeof makeStore>;
+export type AppState = ReturnType<AppStore["getState"]>;
 
-// export const store = configureStore({
-//   reducer: {
-//     //reducer 추가
-//   },
-// });
-
-// const makeStore = (context) => configureStore({
-//   reducer,
-//   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-//   devTools: process.env.NODE_ENV !== 'production',
-// });
-
-// export const wrapper = createWrapper(makeStore, {
-//   debug: process.env.NODE_ENV !== 'production',
-// });
-
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppDispatch = typeof store.dispatch;
-
+export const wrapper = createWrapper<AppStore>(makeStore, {
+  debug: process.env.NODE_ENV === "development",
+});

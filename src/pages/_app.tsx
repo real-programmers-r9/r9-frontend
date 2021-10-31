@@ -1,31 +1,42 @@
-import "@fontsource/roboto";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
+import React from "react";
+import Head from "next/head";
 import { AppProps } from "next/app";
-import CssBaseline from "@mui/material/CssBaseline";
-// import { Provider } from "react-redux"; //리덕스용
-import { ThemeProvider } from "@mui/material/styles";
-import HeadInfo from "src/components/common/HeadInfo";
-import Layout from "src/components/common/Layout";
-import { theme } from "../styles/theme";
-// import store from "../redux/store";
-// import wrapper from "../redux/store";
+import { CacheProvider, EmotionCache } from "@emotion/react";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Layout } from "../components/Layout";
+import { createEmotionCache } from "../libs/create-emotion-cache";
+import { theme } from "../theme";
+import { wrapper } from "../redux/store";
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-  return (
-    <>
-      <HeadInfo
-        title="알구"
-        keywords="아르바이트, 알바, 소일거리, 중장년"
-        description="시니어를 위한 일자리 정보"
-      />
-      <CssBaseline />
-      <Layout>
-        <ThemeProvider theme={theme}>
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+const MyApp = ({
+  Component,
+  pageProps,
+  emotionCache = createEmotionCache(),
+}: MyAppProps) => (
+  <>
+    <Head>
+      <title>알구</title>
+      <meta name="keywords" content="아르바이트, 알바, 소일거리, 중장년" />
+      <meta name="description" content="진짜 시니어를 위한 일자리" />
+    </Head>
+    <CacheProvider value={emotionCache}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Layout>
           <Component {...pageProps} />
-        </ThemeProvider>
-      </Layout>
-    </>
-  );
-};
+        </Layout>
+      </ThemeProvider>
+    </CacheProvider>
+  </>
+);
 
-export default MyApp;
-// export default wrapper.withRedux(MyApp); //wrapper로 감싸기 => getStaticPros,getServerSideProps로 store 접근 가능
+export default wrapper.withRedux(MyApp);
