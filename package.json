@@ -21,6 +21,7 @@
     "@mui/icons-material": "^5.0.5",
     "@mui/lab": "^5.0.0-alpha.53",
     "@mui/material": "^5.0.6",
+    "@mui/system": "^5.0.6",
     "@reduxjs/toolkit": "^1.6.2",
     "react-daum-postcode": "^3.0.0",
     "axios": "^0.24.0",

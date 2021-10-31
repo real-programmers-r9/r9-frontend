@@ -8,10 +8,10 @@ import Head from "next/head";
 import { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Layout } from "../components/Layout";
 import { createEmotionCache } from "../libs/create-emotion-cache";
 import { theme } from "../theme";
-import { wapper } from "../redux/store";
-import { Layout } from "../components/Layout";
+import { wrapper } from "../redux/store";
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -39,4 +39,4 @@ const MyApp = ({
   </>
 );
 
-export default wapper.withRedux(MyApp);
+export default wrapper.withRedux(MyApp);
