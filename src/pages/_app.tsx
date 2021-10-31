@@ -10,7 +10,7 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createEmotionCache } from "../libs/create-emotion-cache";
 import { theme } from "../theme";
-import { wapper } from "../store";
+import { wapper } from "../redux/store";
 import { Layout } from "../components/Layout";
 
 interface MyAppProps extends AppProps {
@@ -25,6 +25,8 @@ const MyApp = ({
   <>
     <Head>
       <title>알구</title>
+      <meta name="keywords" content="아르바이트, 알바, 소일거리, 중장년" />
+      <meta name="description" content="진짜 시니어를 위한 일자리" />
     </Head>
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>

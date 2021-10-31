@@ -46,15 +46,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>
-          <Head>
-            <meta
-              name="keywords"
-              content="아르바이트, 알바, 소일거리, 중장년"
-            />
-            <meta name="description" content="진짜 시니어를 위한 일자리" />
-          </Head>
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />

@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { r9Api } from "./redux/services/r9-api";
-import { authSlice } from "./redux/slices/auth-slice";
+import { r9Api } from "./services/r9-api";
+import { authSlice } from "./slices/auth-slice";
 
 export const makeStore = () =>
   configureStore({
