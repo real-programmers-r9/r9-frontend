@@ -27,12 +27,12 @@ interface MenuItem {
 const menuList: MenuItem[] = [
   {
     name: "로그인",
-    href: "login",
+    href: "signin",
     icon: <Login />,
   },
   {
     name: "회원가입",
-    href: "register",
+    href: "signup",
     icon: <PersonAdd />,
   },
 ];
