@@ -2,12 +2,14 @@
   "compilerOptions": {
     /* Paths */
     "baseUrl": "./",
-
     /* Project */
     "target": "es5", //Specify ECMAScript target version
-    "lib": ["dom", "dom.iterable", "esnext"], //List of libaray files to be included in the compilation
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ], //List of libaray files to be included in the compilation
     "allowJs": true, //Allow JavaScript files to be complied
-
     /* Imports */
     "skipLibCheck": true, //Skip type checking of all declaration files
     "forceConsistentCasingInFileNames": true, //Disallow inconsistently-cased references to the same file
@@ -15,13 +17,23 @@
     "moduleResolution": "node", //Resolve modues using Node.js style
     "resolveJsonModule": true, //Include modules imported with .json extension
     "isolatedModules": true, //Unconditionally emit imports for unresolved files
-
     /* Additional */
     "strict": true, //Enbale all strict type checking options
     "noEmit": true, //Do not emit output (meanin gdo not compile code, only perform type checking)
     "esModuleInterop": true, //Disables namespace imports (import * as fs from "fs") and enables CJS/AMO/UMP sylted imports(import fs form "fs)
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.config.js"],
-  "exclude": ["node_modules", "dist", "coverage", ".next"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.config.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    ".next"
+  ]
 }
