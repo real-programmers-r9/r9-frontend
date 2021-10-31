@@ -10,7 +10,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import JobPost from "src/components/home/JobPost";
+import JobPost from "src/components/JobPost";
 
 const IndexPage: NextPage = () => {
   const recommendKeywords = [

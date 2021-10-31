@@ -1,25 +1,40 @@
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
+import React from "react";
+import Head from "next/head";
 import { AppProps } from "next/app";
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
-import { Provider } from "react-redux";
-import store from "src/store";
-import theme from "src/theme";
-import Layout from "src/components/common/Layout";
+import { CacheProvider, EmotionCache } from "@emotion/react";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { createEmotionCache } from "../libs/create-emotion-cache";
+import { theme } from "../theme";
+import { wapper } from "../store";
+import { Layout } from "../components/Layout";
 
-import "@fontsource/roboto";
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
-  return (
-    <Provider store={store}>
+const MyApp = ({
+  Component,
+  pageProps,
+  emotionCache = createEmotionCache(),
+}: MyAppProps) => (
+  <>
+    <Head>
+      <title>알구</title>
+    </Head>
+    <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
-        <Box sx={{ bgcolor: "ghostwhite", minHeight: "100vh" }}>
-          <CssBaseline />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </Box>
+        <CssBaseline />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
-    </Provider>
-  );
-};
+    </CacheProvider>
+  </>
+);
 
-export default MyApp;
+export default wapper.withRedux(MyApp);

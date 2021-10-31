@@ -7,8 +7,7 @@ import Document, {
   DocumentContext,
 } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
-import HeadInfo from "src/components/common/HeadInfo";
-import createEmotionCache from "../libs/create-emotion-cache";
+import { createEmotionCache } from "../libs/create-emotion-cache";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -48,11 +47,13 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <HeadInfo
-            title="알구"
-            keywords="아르바이트, 알바, 소일거리, 중장년"
-            description="진짜 시니어를 위한 일자리"
-          />
+          <Head>
+            <meta
+              name="keywords"
+              content="아르바이트, 알바, 소일거리, 중장년"
+            />
+            <meta name="description" content="진짜 시니어를 위한 일자리" />
+          </Head>
         </Head>
         <body>
           <Main />

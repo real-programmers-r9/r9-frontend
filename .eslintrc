@@ -4,11 +4,11 @@
     "es2021": true,
     "node": true
   },
+  "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint"],
   "extends": [
     "airbnb",
     "airbnb-typescript",
@@ -17,12 +17,10 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "@next/next/no-document-import-in-page": "off",
     "@typescript-eslint/no-shadow": "off",
-    "@typescript-eslint/return-await": "off",
-    "import/no-named-as-default": "off",
     "import/prefer-default-export": "off",
+    "no-param-reassign": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-param-reassign": "off"
+    "react/require-default-props": "off"
   }
 }
