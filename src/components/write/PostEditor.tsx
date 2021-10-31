@@ -10,32 +10,13 @@ import {
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
-import useModal from "src/hooks/common/useModal";
+import useModal from "src/libs/hooks/common/useModal";
+import useDaumAdress from "src/libs/hooks/kakao/useDaumAdress";
 
 const PostEditor = () => {
   const { isModal, onToggleModal } = useModal();
+  const { address, addressDetail, onCompletePost } = useDaumAdress();
 
-  const [address, setAddress] = useState(""); // 주소
-  const [addressDetail, setAddressDetail] = useState(""); // 상세주소
-
-  const onCompletePost = (data: any) => {
-    let fullAddr = data.address;
-    let extraAddr = "";
-
-    if (data.addressType === "R") {
-      if (data.bname !== "") {
-        extraAddr += data.bname;
-      }
-      if (data.buildingName !== "") {
-        extraAddr +=
-          extraAddr !== "" ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
-    }
-
-    setAddress(data.zonecode);
-    setAddressDetail(fullAddr);
-  };
   return (
     <div>
       <Stack spacing={2} py={4}>
