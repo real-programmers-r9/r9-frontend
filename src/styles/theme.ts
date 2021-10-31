@@ -1,6 +1,28 @@
-import { createTheme } from "@mui/material/styles"; //코어에서!!
+import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
+  breakpoints: {
+    values: { xs: 0, sm: 450, md: 900, lg: 1200, xl: 1536 },
+  },
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "'Segoe UI'",
+      "Roboto",
+      "'Helvetica Neue'",
+      "Arial",
+      "sans-serif",
+      "'Apple Color Emoji'",
+      "'Segoe UI Emoji'",
+      "'Segoe UI Symbol'",
+    ].join(", "),
+    h6: {
+      fontWeight: "bold",
+      color: "#454443",
+      margin: 5,
+    },
+  },
   palette: {
     primary: {
       main: "#41ba6c",
@@ -9,13 +31,5 @@ export const theme = createTheme({
     secondary: {
       main: "#6c8cc4",
     },
-  },
-  typography: {
-    h6: {
-      fontWeight: "bold",
-      color: "#454443",
-      margin: 5,
-    },
-    subtitle1: {},
   },
 });

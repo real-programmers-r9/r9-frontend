@@ -1,26 +1,9 @@
-import {
-  Typography,
-  Card,
-  CardActions,
-  CardContent,
-  Grid,
-  Button,
-  IconButton,
-  Stack,
-  Divider,
-} from "@mui/material";
-
-import {
-  QueryBuilder,
-  AttachMoney,
-  LocationOnOutlined,
-  FavoriteBorderOutlined,
-  ChevronRight,
-} from "@mui/icons-material";
+import { Box, Chip, Grid, Stack, Button, Typography } from "@mui/material";
 
 import { styled } from "@mui/system";
+import SortButtons from "./SortButtons";
 
-interface IData {
+interface Data {
   id: number;
   location: string;
   companyName: string;
@@ -33,8 +16,8 @@ interface IData {
   payRate: number;
 }
 
-const JobCard = () => {
-  const data: IData = {
+const data: Data[] = [
+  {
     id: 1,
     location: "성남시 분당구",
     companyName: "이마트24 서현서머섯호텔점",
@@ -43,92 +26,110 @@ const JobCard = () => {
     workDay: ["월", "수", "금"],
     workStartTime: "10:00",
     workFinishTime: "16:00",
-    calutatePayBy: "일당",
-    payRate: 8720, //여기 시급 & 일당 고쳐야함
-  };
+    calutatePayBy: "시급",
+    payRate: 8720,
+  },
+  {
+    id: 2,
+    location: "서울 동작구",
+    companyName: "부산어묵 노량진점",
+    companyCategory: "일반음식점",
+    role: "단기알바",
+    workDay: ["요일협의"],
+    workStartTime: "18:00",
+    workFinishTime: "23:00",
+    calutatePayBy: "시급",
+    payRate: 11000,
+  },
+  {
+    id: 3,
+    location: "안산시 상록구",
+    companyName: "닥엔돈스",
+    companyCategory: "일반음식점",
+    role: "파트타임",
+    workDay: ["스케쥴 협의"],
+    workStartTime: "",
+    workFinishTime: "",
+    calutatePayBy: "시급",
+    payRate: 10000,
+  },
+  {
+    id: 4,
+    location: "서울 종로구",
+    companyName: "인크루트알바콜",
+    companyCategory: "음성수집",
+    role: "단기알바",
+    workDay: ["평일"],
+    workStartTime: "09:00",
+    workFinishTime: "18:00",
+    calutatePayBy: "건별",
+    payRate: 200,
+  },
+];
 
-  const {
-    location,
-    companyName,
-    companyCategory,
-    role,
-    workDay,
-    workStartTime,
-    workFinishTime,
-    calutatePayBy,
-    payRate,
-  } = data;
+const Cards = styled(Grid)({
+  marginTop: 10,
+  display: "flex",
+  flexWrap: "wrap",
+  alignItems: "center",
+  justifyContent: "center",
+});
 
+const JobCard = () => {
   return (
-    <div>
-      <Card>
-        <CardContent sx={{ flexGrow: 1 }}>
-          <Stack
-            direction="row"
-            sx={{ justifyContent: "space-between", alignItems: "center" }}
-          >
-            <Typography variant="subtitle1" color="secondary.light">
-              {companyCategory}
-            </Typography>
-            <IconButton aria-label="addfavorit">
-              <FavoriteBorderOutlined />
-            </IconButton>
-          </Stack>
-          <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
-            <Typography variant="h4" component="span">
-              [{companyName}]
-            </Typography>
-            <Typography variant="h4" component="span">
-              {role}
-            </Typography>
-          </Stack>
+    <Cards container spacing={3}>
+      <Grid item xs={12} md={12}>
+        <SortButtons />
+      </Grid>
 
-          <Stack spacing={1}>
-            <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-              <LocationOnOutlined />
-              <Typography variant="h6">{location}</Typography>
-            </Stack>
-            <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-              <QueryBuilder />
-              <Typography variant="h6">
-                {workDay.length >= 2 ? workDay.join(", ").split("") : workDay}
-              </Typography>
-              <Typography variant="h6">
-                {workStartTime} ~ {workFinishTime}
-              </Typography>
-            </Stack>
-            <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-              <AttachMoney />
-              <Typography variant="h6">{calutatePayBy}</Typography>
-              <Stack direction="row">
-                <Typography variant="h6" color="primary">
-                  {payRate.toLocaleString()}
+      {/* 맵 돌렸는데 카드 모양이랑 크기가 다름 == why */}
+      {data.map((item) => {
+        return (
+          <Grid item xs={8} md={5} key={item.id}>
+            <Box>
+              <Box sx={{ my: 3, mx: 2 }}>
+                <Grid container alignItems="center">
+                  <Grid item xs>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {item.companyName}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography
+                      gutterBottom
+                      variant="subtitle1"
+                      component="div"
+                    >
+                      {/* 위치정보 넣기  FU */}
+                      1.5km
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Typography color="text.secondary" variant="body2">
+                  {item.location}
+                  <br />
+                  {item.role}
+                  <br />
+                  요일선택: {item.workDay}
+                  <br />
+                  {item.calutatePayBy}: {item.payRate.toLocaleString()}
                 </Typography>
-                <Typography variant="h6">원</Typography>
-              </Stack>
-            </Stack>
-          </Stack>
-        </CardContent>
-        <Divider variant="middle" />
-        <CardActions sx={{ width: 1, justifyContent: "space-between" }}>
-          <Stack
-            direction="row"
-            spacing={1}
-            sx={{ justifyContent: "flex-end" }}
-          >
-            <Typography color="secondary.light">현 위치로부터</Typography>
-            <Typography>200m</Typography>
-          </Stack>
-          <Button
-            size="large"
-            endIcon={<ChevronRight />}
-            sx={{ fontSize: "1.25rem" }}
-          >
-            상세보기
-          </Button>
-        </CardActions>
-      </Card>
-    </div>
+              </Box>
+              {/* 태그 */}
+              <Box sx={{ m: 1 }}>
+                <Stack direction="row" spacing={1}>
+                  <Chip label="캐셔" />
+                  <Chip label="주3회" />
+                </Stack>
+              </Box>
+              <Button sx={{ color: "#fff" }} fullWidth variant="contained">
+                상세보기
+              </Button>
+            </Box>
+          </Grid>
+        );
+      })}
+    </Cards>
   );
 };
 

@@ -5,19 +5,29 @@ import {
   FormControl,
   Select,
   Typography,
-  Button,
-  Container,
   Box,
 } from "@mui/material";
-import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
 import { styled } from "@mui/system";
-//타입정의 해야함
 
+const SortBox = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
+  justifyContent: "center",
+});
+
+const SortButton = styled(FormControl)({
+  minWidth: 100,
+  minHeight: 5,
+  fontSize: 10,
+  marginRight: 5,
+});
+
+// 타입정의 해야함
 const SortButtons = () => {
   return (
     <SortBox>
       {/* 아이콘이 미묘하게 라인 안맞음 */}
-      {/* <AccessAlarmsIcon /> */}
       <Typography variant="h6" component="div">
         오늘의 새 일자리
       </Typography>
@@ -62,18 +72,5 @@ const SortButtons = () => {
     </SortBox>
   );
 };
+
 export default SortButtons;
-
-const SortBox = styled(Box)({
-  display: "flex",
-  alignItems: "center",
-  flexDirection: "column",
-  justifyContent: "center",
-});
-
-const SortButton = styled(FormControl)({
-  minWidth: 100,
-  minHeight: 5,
-  fontSize: 10,
-  marginRight: 5,
-});

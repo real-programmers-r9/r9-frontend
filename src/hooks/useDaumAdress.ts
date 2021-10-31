@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-export default function useDaumAdress() {
+export type UseDaumAdress = [string, string, (data: any) => void];
+
+export default function useDaumAdress(): UseDaumAdress {
   const [address, setAddress] = useState(""); // 우편번호
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
 
   const onCompletePost = (data: any) => {
-    console.log(data);
     let fullAddr = data.address;
     let extraAddr = "";
 
@@ -24,9 +25,5 @@ export default function useDaumAdress() {
     setAddressDetail(fullAddr);
   };
 
-  return {
-    address,
-    addressDetail,
-    onCompletePost,
-  };
+  return [address, addressDetail, onCompletePost];
 }

@@ -1,46 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { AppBar, Toolbar, Typography, IconButton, Button } from "@mui/material";
-import { Menu } from "@mui/icons-material";
+import { Menu, Animation } from "@mui/icons-material";
 import { styled } from "@mui/system";
-import AnimationIcon from "@mui/icons-material/Animation";
 
-interface INabarProps {
-  toggleOpen: () => void;
-}
-
-const Navbar = ({ toggleOpen }: INabarProps) => {
-  const router = useRouter();
-
-  return (
-    <AppBar elevation={0} position="fixed">
-      <ToolBar>
-        <LogoBox onClick={() => router.push("/")}>
-          <AnimationIcon />
-          <LogoText>시니어 알바앱 R9</LogoText>
-        </LogoBox>
-        {/* web:button groups */}
-        <div>
-          <Buttons>
-            <TopButton>로그인</TopButton>
-            <TopButton sx={{ background: "#ed8545", color: "#fff" }}>
-              회원가입
-            </TopButton>
-          </Buttons>
-          {/* mobile: 햄버거 */}
-          <BurgerIcon size="large" onClick={toggleOpen}>
-            <Menu />
-          </BurgerIcon>
-        </div>
-      </ToolBar>
-    </AppBar>
-  );
-};
-
-export default Navbar;
-
-//styles
-const ToolBar = styled(Toolbar)(({ theme }) => ({
+// styles
+const ToolBar = styled(Toolbar)(() => ({
   display: "flex",
   color: "#212121",
   background: "#eee",
@@ -63,7 +28,6 @@ const LogoText = styled(Typography)(({ theme }) => ({
   display: "none",
   fontWeight: 700,
   color: "#212121",
-  marginTop: 10,
   [theme.breakpoints.up("sm")]: {
     display: "block",
   },
@@ -96,3 +60,33 @@ const TopButton = styled(Button)({
     transform: "scale(1.05)",
   },
 });
+
+const Navbar = () => {
+  const router = useRouter();
+
+  return (
+    <AppBar elevation={0} position="sticky">
+      <ToolBar>
+        <LogoBox onClick={() => router.push("/")}>
+          <Animation sx={{ marginRight: 1 }} />
+          <LogoText>시니어 알바앱 R9</LogoText>
+        </LogoBox>
+        {/* web:button groups */}
+        <div>
+          <Buttons>
+            <TopButton>로그인</TopButton>
+            <TopButton sx={{ background: "#ed8545", color: "#fff" }}>
+              회원가입
+            </TopButton>
+          </Buttons>
+          {/* mobile: 햄버거 */}
+          <BurgerIcon size="large">
+            <Menu />
+          </BurgerIcon>
+        </div>
+      </ToolBar>
+    </AppBar>
+  );
+};
+
+export default Navbar;

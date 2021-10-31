@@ -2,9 +2,7 @@ import * as React from "react";
 import { Typography, Box, Rating } from "@mui/material";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 
-const Detail: React.FC = () => {
-  const [value, setValue] = React.useState<number | null>(4);
-  setValue(1);
+const Detail = () => {
   return (
     <div>
       <div className="TitleBar">
@@ -31,7 +29,7 @@ const Detail: React.FC = () => {
         }}
       >
         <Typography component="legend" />
-        <Rating name="read-only" value={value} readOnly />
+        <Rating name="read-only" readOnly />
         <span>4.12(12)</span>
       </Box>
     </div>

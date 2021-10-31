@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   MenuItem,
@@ -8,14 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
-import useModal from "src/libs/hooks/common/useModal";
-import useDaumAdress from "src/libs/hooks/kakao/useDaumAdress";
+import useDaumAdress from "src/hooks/useDaumAdress";
+import useToggle from "src/hooks/useToggle";
 
-const PostEditor = () => {
-  const { isModal, onToggleModal } = useModal();
-  const { address, addressDetail, onCompletePost } = useDaumAdress();
+const JobPostEditor = () => {
+  const [isModal, onToggleModal] = useToggle();
+  const [address, addressDetail, onCompletePost] = useDaumAdress();
 
   return (
     <div>
@@ -167,4 +167,4 @@ const PostEditor = () => {
   );
 };
 
-export default PostEditor;
+export default JobPostEditor;

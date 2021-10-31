@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { styled } from "@mui/system";
 import Search from "src/components/home/Search";
-import JobCard2 from "src/components/home/JobCard2";
+import JobCard from "src/components/home/JobCard";
 
 const ContainerBox = styled("div")({
   display: "flex",
@@ -14,7 +14,7 @@ const HomePage: NextPage = () => {
   return (
     <ContainerBox>
       <Search />
-      <JobCard2 />
+      <JobCard />
     </ContainerBox>
   );
 };

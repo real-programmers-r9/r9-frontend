@@ -1,8 +1,7 @@
 import React from "react";
 import { Box, Container } from "@mui/material";
 import { grey } from "@mui/material/colors";
-
-import { Header } from "./Header";
+import Navbar from "./Navbar";
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -17,7 +16,7 @@ export const Layout = ({ children }: LayoutProps) => {
         backgroundColor: grey[50],
       }}
     >
-      <Header />
+      <Navbar />
       <Container
         sx={{
           paddingY: {

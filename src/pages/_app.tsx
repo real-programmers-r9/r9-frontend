@@ -10,7 +10,7 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Layout } from "../components/Layout";
 import { createEmotionCache } from "../libs/create-emotion-cache";
-import { theme } from "../theme";
+import { theme } from "../styles/theme";
 import { wrapper } from "../redux/store";
 
 interface MyAppProps extends AppProps {
