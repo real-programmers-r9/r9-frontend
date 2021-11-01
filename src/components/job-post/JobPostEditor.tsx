@@ -1,8 +1,13 @@
 import React from "react";
 import {
   Button,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
   MenuItem,
   Modal,
+  Radio,
+  RadioGroup,
   Select,
   Stack,
   TextField,
@@ -10,7 +15,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import DaumPostcode from "react-daum-postcode";
-import useDaumAdress from "src/hooks/useDaumAdress";
+import useDaumAdress from "src/hooks/kakao/useDaumAdress";
 import useToggle from "src/hooks/useToggle";
 
 const JobPostEditor = () => {
@@ -50,42 +55,77 @@ const JobPostEditor = () => {
           />
         </Stack>
         <Typography align="left" variant="h6">
+          근무 요일
+        </Typography>
+
+        <FormGroup>
+          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="월"
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="화"
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="수"
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="목"
+            />
+
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="금"
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="토"
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="일"
+            />
+          </Box>
+        </FormGroup>
+
+        <Typography align="left" variant="h6">
           근무 내용
         </Typography>
-        <Box
-          sx={{
-            width: "100%",
-            minHeight: "500px",
-            border: "1px solid gray",
-            borderRadius: "10px",
-          }}
-        >
-          상세내용
-        </Box>
+
+        <TextField
+          multiline
+          minRows={30}
+          maxRows={100}
+          variant="outlined"
+          label="근무 내용"
+          name="title"
+        />
+
         <Typography align="left" variant="h6">
           근무 일자
         </Typography>
-        <Stack direction="row" spacing={4}>
-          <TextField
-            id="date"
-            label="근무 시작"
-            type="date"
-            sx={{ width: 220 }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <Typography variant="h5">~</Typography>
-          <TextField
-            id="date"
-            label="근무 종료"
-            type="date"
-            sx={{ width: 220 }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </Stack>
+        <FormGroup>
+          <RadioGroup
+            aria-label="gender"
+            defaultValue="female"
+            name="radio-buttons-group"
+          >
+            <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+              <FormControlLabel control={<Radio />} label="하루(1~2일)" />
+              <FormControlLabel control={<Radio />} label="1주일 이하" />
+              <FormControlLabel control={<Radio />} label="1주일~1개월" />
+              <FormControlLabel control={<Radio />} label="1개월~3개월" />
+              <FormControlLabel control={<Radio />} label="3개월~6개월" />
+              <FormControlLabel control={<Radio />} label="6개월~1년" />
+              <FormControlLabel control={<Radio />} label="1년이상" />
+            </Box>
+          </RadioGroup>
+        </FormGroup>
+
         <Typography align="left" variant="h6">
           근무 시간
         </Typography>
@@ -103,6 +143,9 @@ const JobPostEditor = () => {
             }}
             sx={{ width: 150 }}
           />
+          <Typography align="left" variant="h6">
+            ~
+          </Typography>
           <TextField
             id="time"
             label="Alarm clock"
@@ -117,6 +160,7 @@ const JobPostEditor = () => {
             sx={{ width: 150 }}
           />
         </Stack>
+
         <Typography align="left" variant="h6">
           근무 주소
         </Typography>
@@ -128,10 +172,6 @@ const JobPostEditor = () => {
         >
           <Box
             sx={{
-              // display: "flex",
-              // alignItems : "center",
-              // width: "80%",
-              // margin: "0 auto",
               position: "absolute" as "absolute",
               top: "50%",
               left: "50%",
@@ -163,6 +203,16 @@ const JobPostEditor = () => {
         />
         <TextField variant="outlined" label="상세 주소" name="title" />
       </Stack>
+      <Typography align="left" variant="h6">
+        모집마감
+      </Typography>
+      <TextField
+        id="date"
+        type="date"
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
     </div>
   );
 };
