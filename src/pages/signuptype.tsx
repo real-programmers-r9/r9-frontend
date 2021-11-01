@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { AccountCircle, ShoppingBag } from "@mui/icons-material";
 
-const SignUpType: NextPage = () => {
+const SignUpTypePage: NextPage = () => {
   return (
     <Container
       sx={{
@@ -95,4 +95,4 @@ const SignUpType: NextPage = () => {
   );
 };
 
-export default SignUpType;
+export default SignUpTypePage;
