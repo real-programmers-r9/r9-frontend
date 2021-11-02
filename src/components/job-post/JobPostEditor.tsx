@@ -60,35 +60,14 @@ const JobPostEditor = () => {
 
         <FormGroup>
           <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="월"
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="화"
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="수"
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="목"
-            />
+            <FormControlLabel control={<Checkbox />} label="월" />
+            <FormControlLabel control={<Checkbox />} label="화" />
+            <FormControlLabel control={<Checkbox />} label="수" />
+            <FormControlLabel control={<Checkbox />} label="목" />
 
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="금"
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="토"
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="일"
-            />
+            <FormControlLabel control={<Checkbox />} label="금" />
+            <FormControlLabel control={<Checkbox />} label="토" />
+            <FormControlLabel control={<Checkbox />} label="일" />
           </Box>
         </FormGroup>
 
