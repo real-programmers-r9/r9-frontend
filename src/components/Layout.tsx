@@ -11,9 +11,9 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <Box
       sx={{
-        height: "100vh",
-        width: "100vw",
-        backgroundColor: grey[50],
+        minHeight: "100vh",
+        minWidth: "100vw",
+        backgroundColor: grey[100],
       }}
     >
       <Navbar />
