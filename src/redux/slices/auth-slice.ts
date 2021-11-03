@@ -1,10 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import type { Auth } from "src/types/stores";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Auth } from "src/types/stores";
+import { r9Api } from "../services/r9-api";
 
 const initialState: Auth = {
   user: null,
-  accessToken: null,
 };
 
 export const authSlice = createSlice({
@@ -13,8 +12,15 @@ export const authSlice = createSlice({
   reducers: {
     setCredentials: (state, { payload }: PayloadAction<Auth>) => {
       state.user = payload.user;
-      state.accessToken = payload.accessToken;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      r9Api.endpoints.login.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.user;
+      }
+    );
   },
 });
 
