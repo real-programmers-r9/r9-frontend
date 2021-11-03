@@ -17,17 +17,20 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
           사장님이 친절하고 단골손님도 매너가 있음
         </Typography>
         <Box sx={{ textAlign: "left" }}>
-          <Stack direction="row" spacing={4}>
+          <Stack direction="row" spacing={4} justifyContent="space-between">
             <Rating
               name="text-feedback"
               value={3.5}
               readOnly
               precision={0.5}
-              size="large"
+              size="medium"
             />
-            <Typography color="gray">
-              근무기간 : 2021-07-01 ~ 2021-08-01
-            </Typography>
+            <Box sx={{ display: "flex" }}>
+              <Typography mr="10px" fontWeight="bold">
+                김민수
+              </Typography>
+              <Typography color="gray">기간 : 2021-07-01~2021-08-01</Typography>
+            </Box>
           </Stack>
         </Box>
         <Box
@@ -50,10 +53,10 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
         <Box sx={{ textAlign: "left" }}>
           <Rating
             name="text-feedback"
-            value={3.5}
+            value={4.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
@@ -79,7 +82,7 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
             value={3.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
@@ -105,7 +108,7 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
             value={3.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
@@ -131,7 +134,7 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
             value={3.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
@@ -157,7 +160,7 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
             value={3.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
@@ -183,7 +186,7 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
             value={3.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
@@ -209,7 +212,7 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
             value={3.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
@@ -235,7 +238,7 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
             value={3.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
@@ -261,7 +264,7 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
             value={3.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
@@ -287,7 +290,7 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
             value={3.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
@@ -313,7 +316,7 @@ const ReviewDetail = ({ id }: ReviewDetailProps) => {
             value={3.5}
             readOnly
             precision={0.5}
-            size="large"
+            size="medium"
           />
         </Box>
         <Box
