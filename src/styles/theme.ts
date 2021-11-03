@@ -1,8 +1,9 @@
 import { createTheme } from "@mui/material";
+import { blue, green, grey, lightGreen } from "@mui/material/colors";
 
 export const theme = createTheme({
   breakpoints: {
-    values: { xs: 0, sm: 450, md: 900, lg: 1200, xl: 1536 },
+    values: { xs: 0, sm: 500, md: 900, lg: 1200, xl: 1536 },
   },
   typography: {
     fontFamily: [
@@ -19,17 +20,24 @@ export const theme = createTheme({
     ].join(", "),
     h6: {
       fontWeight: "bold",
-      color: "#454443",
-      margin: 5,
+    },
+    h5: {
+      fontWeight: "bold",
+    },
+    h4: {
+      fontWeight: "bold",
     },
   },
   palette: {
     primary: {
-      main: "#41ba6c",
-      dark: "#212121",
+      main: lightGreen[400],
+      dark: green[400],
+      contrastText: grey[100],
     },
     secondary: {
-      main: "#6c8cc4",
+      main: blue[300],
+      dark: blue[700],
+      contrastText: grey[100],
     },
   },
 });
