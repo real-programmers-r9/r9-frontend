@@ -1,3 +1,4 @@
+import { Box } from "@mui/system";
 import { NextPage } from "next";
 import React from "react";
 import JobPostEditor from "src/components/job-post/JobPostEditor";
@@ -5,7 +6,14 @@ import JobPostEditor from "src/components/job-post/JobPostEditor";
 const PostPage: NextPage = () => {
   return (
     <>
-      <JobPostEditor />
+      <Box
+        sx={{
+          margin: "0 auto",
+          maxWidth: "md",
+        }}
+      >
+        <JobPostEditor />
+      </Box>
     </>
   );
 };

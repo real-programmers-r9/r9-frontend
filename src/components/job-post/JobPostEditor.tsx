@@ -181,17 +181,18 @@ const JobPostEditor = () => {
           value={addressDetail}
         />
         <TextField variant="outlined" label="상세 주소" name="title" />
+        <Typography align="left" variant="h6">
+          모집마감일
+        </Typography>
+        <TextField
+          id="date"
+          type="date"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <Button variant="contained">작성</Button>
       </Stack>
-      <Typography align="left" variant="h6">
-        모집마감
-      </Typography>
-      <TextField
-        id="date"
-        type="date"
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
     </div>
   );
 };
