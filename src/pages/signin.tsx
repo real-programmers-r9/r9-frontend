@@ -1,6 +1,6 @@
 import React from "react";
 import { NextPage } from "next";
-import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { Paper, Stack, Typography, TextField, Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Controller, useForm } from "react-hook-form";
@@ -8,12 +8,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { REGEXP_PASSWORD } from "../constants/regexp";
 import { useLoginMutation } from "../redux/services/r9-api";
-import { setCredentials } from "../redux/slices/auth-slice";
-import type { SignInForm } from "../types/forms";
-import type { Auth } from "../types/stores";
+import { SignInForm } from "../types/forms";
 
 const SignInPage: NextPage = () => {
-  const dispatch = useDispatch();
+  const router = useRouter();
   const { handleSubmit, control } = useForm<SignInForm>({
     resolver: yupResolver(
       yup.object().shape({
@@ -31,17 +29,14 @@ const SignInPage: NextPage = () => {
       })
     ),
   });
-
   const [login, { isLoading }] = useLoginMutation();
 
   const onSubmit = handleSubmit(async (value) => {
     if (isLoading) {
       return;
     }
-
-    const { data } = (await login(value)) as { data: Auth };
-
-    dispatch(setCredentials(data));
+    await login(value);
+    router.push("/");
   });
 
   return (
