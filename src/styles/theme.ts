@@ -22,6 +22,9 @@ export const theme = createTheme({
       color: "#454443",
       margin: 5,
     },
+    subtitle2: {
+      fontWeight: "bold",
+    },
   },
   palette: {
     primary: {

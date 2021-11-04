@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import { AppBar, Toolbar, Typography, IconButton, Button } from "@mui/material";
 import { Menu, Animation } from "@mui/icons-material";
 import { styled } from "@mui/system";
+// import Sidebar from "./Sidebar";
+import { useToggle } from "../hooks/useToggle";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
 
 // styles
 const ToolBar = styled(Toolbar)(() => ({
@@ -83,6 +86,7 @@ const Navbar = () => {
           <BurgerIcon size="large">
             <Menu />
           </BurgerIcon>
+          {/* <Sidebar /> */}
         </div>
       </ToolBar>
     </AppBar>
