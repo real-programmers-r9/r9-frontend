@@ -13,10 +13,16 @@ import {
   ListItemText,
   List,
   ListItemButton,
+  Avatar,
+  ListItemAvatar,
+  ListItem,
+  Typography,
 } from "@mui/material";
-import { Menu, Animation, Login, PersonAdd } from "@mui/icons-material";
+import { Menu, Animation, Login, PersonAdd, Home } from "@mui/icons-material";
 import { theme } from "src/styles/theme";
 import useToggle from "src/hooks/useToggle";
+import { useSelector } from "react-redux";
+import { selectAuth } from "src/redux/slices/auth-slice";
 
 export interface NavItem {
   name: string;
@@ -24,19 +30,30 @@ export interface NavItem {
   icon: React.ReactElement;
 }
 
-const navItems: NavItem[] = [
-  { name: "로그인", href: "signin", icon: <Login /> },
-  { name: "회원가입", href: "signup", icon: <PersonAdd /> },
-];
+export interface NavMenuItem extends NavItem {
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+}
+
+const navItems: NavItem[] = [{ name: "홈", href: "/", icon: <Home /> }];
+
+const NavMenuLinkItem = ({ name, href, icon, onClick }: NavMenuItem) => (
+  <Link href={href} passHref>
+    <ListItemButton onClick={onClick}>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText>{name}</ListItemText>
+    </ListItemButton>
+  </Link>
+);
 
 const Navbar = () => {
   const router = useRouter();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [isOpen, toggleOpen] = useToggle();
+  const { user } = useSelector(selectAuth);
 
   return (
     <AppBar position="sticky">
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Toolbar>
         <Link href="/" passHref>
           <IconButton color="inherit" onClick={() => router.push("/")}>
             <Animation />
@@ -44,36 +61,107 @@ const Navbar = () => {
         </Link>
         {isMobile ? (
           <>
-            <IconButton color="inherit" onClick={toggleOpen}>
+            <IconButton
+              color="inherit"
+              onClick={toggleOpen}
+              sx={{ marginLeft: "auto" }}
+            >
               <Menu />
             </IconButton>
             <Drawer anchor="right" open={isOpen} onClose={toggleOpen}>
-              <Box sx={{ width: 250 }}>
+              <Box
+                sx={{
+                  width: 250,
+                  height: "100vh",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <List>
                   {navItems.map((item) => (
-                    <Link key={item.name} href={item.href} passHref>
-                      <ListItemButton onClick={toggleOpen}>
-                        <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText>{item.name}</ListItemText>
-                      </ListItemButton>
-                    </Link>
+                    <NavMenuLinkItem
+                      key={item.name}
+                      name={item.name}
+                      href={item.href}
+                      icon={item.icon}
+                      onClick={toggleOpen}
+                    />
                   ))}
+                </List>
+                <List>
+                  {user ? (
+                    <ListItem>
+                      <ListItemAvatar>
+                        <Avatar alt="profile" variant="rounded" />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={user.name}
+                        secondary={user.email}
+                      />
+                    </ListItem>
+                  ) : (
+                    <>
+                      <NavMenuLinkItem
+                        name="로그인"
+                        href="/signin"
+                        icon={<Login />}
+                        onClick={toggleOpen}
+                      />
+                      <NavMenuLinkItem
+                        name="회원가입"
+                        href="/signup"
+                        icon={<PersonAdd />}
+                        onClick={toggleOpen}
+                      />
+                    </>
+                  )}
                 </List>
               </Box>
             </Drawer>
           </>
         ) : (
-          <Box>
-            {navItems.map((item) => (
-              <Button
-                key={item.name}
-                onClick={() => router.push(item.href)}
-                color="inherit"
-              >
-                {item.name}
-              </Button>
-            ))}
-          </Box>
+          <>
+            <Box>
+              {navItems.map((item) => (
+                <Button
+                  key={item.name}
+                  color="inherit"
+                  onClick={() => router.push(item.href)}
+                >
+                  {item.name}
+                </Button>
+              ))}
+            </Box>
+            <Box sx={{ marginLeft: "auto" }}>
+              {user ? (
+                <>
+                  <Box sx={{ display: "flex" }}>
+                    <Avatar alt="profile" variant="rounded" />
+                    <Box sx={{ marginLeft: 1 }}>
+                      <Typography variant="body2">{user.name}</Typography>
+                      <Typography variant="body2">{user.email}</Typography>
+                    </Box>
+                  </Box>
+                </>
+              ) : (
+                <>
+                  <Button
+                    color="inherit"
+                    onClick={() => router.push("/signin")}
+                  >
+                    로그인
+                  </Button>
+                  <Button
+                    color="inherit"
+                    onClick={() => router.push("/signup")}
+                  >
+                    회원가입
+                  </Button>
+                </>
+              )}
+            </Box>
+          </>
         )}
       </Toolbar>
     </AppBar>

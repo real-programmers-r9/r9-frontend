@@ -6,8 +6,10 @@ import "@fontsource/roboto/700.css";
 import React from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
+import axios from "axios";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { setCredentials } from "src/redux/slices/auth-slice";
 import { Layout } from "../components/Layout";
 import { createEmotionCache } from "../libs/create-emotion-cache";
 import { theme } from "../styles/theme";
@@ -37,6 +39,34 @@ const MyApp = ({
       </ThemeProvider>
     </CacheProvider>
   </>
+);
+
+MyApp.getInitialProps = wrapper.getInitialAppProps(
+  (store) =>
+    async ({ Component, ctx }) => {
+      store.dispatch(
+        setCredentials({
+          user: await axios
+            .get("http://localhost:4000/users/me", {
+              withCredentials: true,
+              headers: {
+                cookie: ctx.req?.headers.cookie || "",
+              },
+            })
+            .then((response) => response.data)
+            .catch(() => null),
+        })
+      );
+
+      return {
+        pageProps: {
+          ...(Component.getInitialProps
+            ? await Component.getInitialProps({ ...ctx, store })
+            : {}),
+          pathname: ctx.pathname,
+        },
+      };
+    }
 );
 
 export default wrapper.withRedux(MyApp);

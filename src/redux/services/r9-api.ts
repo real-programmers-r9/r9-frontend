@@ -19,7 +19,14 @@ export const r9Api = createApi({
         return { user: payload };
       },
     }),
+    getMyInfo: builder.query<User, any>({
+      query: () => ({
+        url: `users/me`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation } = r9Api;
+export const { useLoginMutation, useGetMyInfoQuery, useLazyGetMyInfoQuery } =
+  r9Api;
