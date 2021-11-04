@@ -27,6 +27,9 @@ export const theme = createTheme({
     h4: {
       fontWeight: "bold",
     },
+    subtitle2: {
+      fontWeight: "bold",
+    },
   },
   palette: {
     primary: {
