@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { styled } from "@mui/system";
-import Search from "src/components/home/search";
+import Search from "src/components/home/Search";
 import JobCard from "src/components/home/JobCard";
 
 const ContainerBox = styled("div")({

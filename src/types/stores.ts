@@ -10,5 +10,4 @@ export interface User {
 
 export interface Auth {
   user: User | null;
-  accessToken: string | null;
 }
