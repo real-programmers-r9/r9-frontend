@@ -1,94 +1,81 @@
 import React from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { AppBar, Toolbar, Typography, IconButton, Button } from "@mui/material";
-import { Menu, Animation } from "@mui/icons-material";
-import { styled } from "@mui/system";
-// import Sidebar from "./Sidebar";
-import { useToggle } from "../hooks/useToggle";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Button,
+  useMediaQuery,
+  Drawer,
+  ListItemIcon,
+  ListItemText,
+  List,
+  ListItemButton,
+} from "@mui/material";
+import { Menu, Animation, Login, PersonAdd } from "@mui/icons-material";
+import { theme } from "src/styles/theme";
+import useToggle from "src/hooks/useToggle";
 
-// styles
-const ToolBar = styled(Toolbar)(() => ({
-  display: "flex",
-  color: "#212121",
-  background: "#eee",
-  justifyContent: "space-between",
-  alignItems: "center",
-}));
+export interface NavItem {
+  name: string;
+  href: string;
+  icon: React.ReactElement;
+}
 
-const LogoBox = styled("div")({
-  alignItems: "center",
-  justifyContent: "center",
-  display: "flex",
-  color: "#41ba6c",
-  "&:hover": {
-    color: "#212121",
-  },
-});
-
-const LogoText = styled(Typography)(({ theme }) => ({
-  fontSize: 20,
-  display: "none",
-  fontWeight: 700,
-  color: "#212121",
-  [theme.breakpoints.up("sm")]: {
-    display: "block",
-  },
-}));
-
-const Buttons = styled("div")(({ theme }) => ({
-  alignItems: "center",
-  marginRight: 5,
-  display: "none",
-  [theme.breakpoints.up("sm")]: {
-    display: "block",
-  },
-}));
-
-const BurgerIcon = styled(IconButton)(({ theme }) => ({
-  [theme.breakpoints.up("sm")]: {
-    display: "none",
-  },
-}));
-
-const TopButton = styled(Button)({
-  border: "1px solid #ddd",
-  borderRadius: 5,
-  marginRight: 5,
-  color: "#212121",
-  width: 80,
-  "&:hover": {
-    color: "#212121",
-    background: "#fff",
-    transform: "scale(1.05)",
-  },
-});
+const navItems: NavItem[] = [
+  { name: "로그인", href: "signin", icon: <Login /> },
+  { name: "회원가입", href: "signup", icon: <PersonAdd /> },
+];
 
 const Navbar = () => {
   const router = useRouter();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [isOpen, toggleOpen] = useToggle();
 
   return (
-    <AppBar elevation={0} position="sticky">
-      <ToolBar>
-        <LogoBox onClick={() => router.push("/")}>
-          <Animation sx={{ marginRight: 1 }} />
-          <LogoText>시니어 알바앱 R9</LogoText>
-        </LogoBox>
-        {/* web:button groups */}
-        <div>
-          <Buttons>
-            <TopButton>로그인</TopButton>
-            <TopButton sx={{ background: "#ed8545", color: "#fff" }}>
-              회원가입
-            </TopButton>
-          </Buttons>
-          {/* mobile: 햄버거 */}
-          <BurgerIcon size="large">
-            <Menu />
-          </BurgerIcon>
-          {/* <Sidebar /> */}
-        </div>
-      </ToolBar>
+    <AppBar position="sticky">
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Link href="/" passHref>
+          <IconButton color="inherit" onClick={() => router.push("/")}>
+            <Animation />
+          </IconButton>
+        </Link>
+        {isMobile ? (
+          <>
+            <IconButton color="inherit" onClick={toggleOpen}>
+              <Menu />
+            </IconButton>
+            <Drawer anchor="right" open={isOpen} onClose={toggleOpen}>
+              <Box sx={{ width: 250 }}>
+                <List>
+                  {navItems.map((item) => (
+                    <Link key={item.name} href={item.href} passHref>
+                      <ListItemButton onClick={toggleOpen}>
+                        <ListItemIcon>{item.icon}</ListItemIcon>
+                        <ListItemText>{item.name}</ListItemText>
+                      </ListItemButton>
+                    </Link>
+                  ))}
+                </List>
+              </Box>
+            </Drawer>
+          </>
+        ) : (
+          <Box>
+            {navItems.map((item) => (
+              <Button
+                key={item.name}
+                onClick={() => router.push(item.href)}
+                color="inherit"
+              >
+                {item.name}
+              </Button>
+            ))}
+          </Box>
+        )}
+      </Toolbar>
     </AppBar>
   );
 };
