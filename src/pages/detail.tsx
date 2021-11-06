@@ -193,21 +193,7 @@ const Detail = () => {
         </Box>
       </Container>
       {/* 카카오 지도 Api */}
-      <Container className="map">
-        <Box sx={{ width: "500px", height: "400px" }}>
-          {/* <script
-          type="text/javascript"
-          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b312376fbd7e6c841be0b3c6858da078"
-          ></script>
-          <script>
-            var container = document.getElementById('map'); var options ={" "}
-            {
-              center: new kakao.maps.LatLng(33.450701, 126.570667),
-              level: 3,
-            } var map = new kakao.maps.Map(container, options);
-          </script> */}
-        </Box>
-      </Container>
+      <Container className="map"></Container>
       <Divider />
       <br />
       {/* 지원하기 버튼*/}
