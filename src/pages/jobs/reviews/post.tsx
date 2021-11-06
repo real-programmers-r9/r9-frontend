@@ -1,9 +1,9 @@
 import { Box } from "@mui/system";
-import { NextPage } from "next";
 import React from "react";
-import JobPostEditor from "src/components/job-post/JobPostEditor";
 
-const PostPage: NextPage = () => {
+import ReviewPostEditor from "src/components/review/ReviewPostEditor";
+
+const ReviewPostPage = () => {
   return (
     <>
       <Box
@@ -12,10 +12,10 @@ const PostPage: NextPage = () => {
           maxWidth: "md",
         }}
       >
-        <JobPostEditor isEdit={false} />
+        <ReviewPostEditor />
       </Box>
     </>
   );
 };
 
-export default PostPage;
+export default ReviewPostPage;

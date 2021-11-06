@@ -34,6 +34,7 @@ export interface NavMenuItem extends NavItem {
   onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
+// 메뉴 추가할때 여기 배열에 추가
 const navItems: NavItem[] = [{ name: "홈", href: "/", icon: <Home /> }];
 
 const NavMenuLinkItem = ({ name, href, icon, onClick }: NavMenuItem) => (
