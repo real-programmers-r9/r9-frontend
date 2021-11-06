@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -18,11 +18,19 @@ import {
   ListItem,
   Typography,
 } from "@mui/material";
-import { Menu, Animation, Login, PersonAdd, Home } from "@mui/icons-material";
+import {
+  Menu,
+  Animation,
+  Login,
+  PersonAdd,
+  Home,
+  Logout,
+} from "@mui/icons-material";
 import { theme } from "src/styles/theme";
 import useToggle from "src/hooks/useToggle";
 import { useSelector } from "react-redux";
 import { selectAuth } from "src/redux/slices/auth-slice";
+import { usePostSignOutMutation } from "src/redux/services/api";
 
 export interface NavItem {
   name: string;
@@ -51,6 +59,14 @@ const Navbar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [isOpen, toggleOpen] = useToggle();
   const { user } = useSelector(selectAuth);
+  const [postSignOut] = usePostSignOutMutation();
+
+  const handleSignOut = useCallback(async () => {
+    await postSignOut(null)
+      .unwrap()
+      .then(() => router.push("/"));
+    toggleOpen();
+  }, [postSignOut, router, toggleOpen]);
 
   return (
     <AppBar position="sticky">
@@ -92,15 +108,23 @@ const Navbar = () => {
                 </List>
                 <List>
                   {user ? (
-                    <ListItem>
-                      <ListItemAvatar>
-                        <Avatar alt="profile" variant="rounded" />
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={user.name}
-                        secondary={user.email}
+                    <>
+                      <ListItem>
+                        <ListItemAvatar>
+                          <Avatar alt="profile" variant="rounded" />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={user.name}
+                          secondary={user.email}
+                        />
+                      </ListItem>
+                      <NavMenuLinkItem
+                        name="로그아웃"
+                        href="/signup"
+                        icon={<Logout />}
+                        onClick={handleSignOut}
                       />
-                    </ListItem>
+                    </>
                   ) : (
                     <>
                       <NavMenuLinkItem
@@ -143,6 +167,9 @@ const Navbar = () => {
                       <Typography variant="body2">{user.name}</Typography>
                       <Typography variant="body2">{user.email}</Typography>
                     </Box>
+                    <Button color="inherit" onClick={handleSignOut}>
+                      로그아웃
+                    </Button>
                   </Box>
                 </>
               ) : (

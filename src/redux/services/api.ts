@@ -23,6 +23,12 @@ export const api = createApi({
         body: data,
       }),
     }),
+    postSignOut: builder.mutation<User, null>({
+      query: () => ({
+        url: "auth/signout",
+        method: "POST",
+      }),
+    }),
     getMyInfo: builder.query<User, string>({
       query: (cookie) => ({
         url: `users/me`,
@@ -37,6 +43,7 @@ export const api = createApi({
 
 export const {
   usePostSignInMutation,
+  usePostSignOutMutation,
   useGetMyInfoQuery,
   useLazyGetMyInfoQuery,
 } = api;
