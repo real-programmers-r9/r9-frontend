@@ -5,6 +5,8 @@ import { LoadingButton } from "@mui/lab";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { api } from "src/redux/services/api";
+import { wrapper } from "src/redux/store";
 import { REGEXP_PASSWORD } from "../constants/regexp";
 import type { SignUpForm } from "../types/forms";
 
@@ -122,5 +124,19 @@ const SignUpPage: NextPage = () => {
     </Paper>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    if (context.req.headers.cookie) {
+      store.dispatch(
+        api.endpoints.getMyInfo.initiate(context.req.headers.cookie || "")
+      );
+      await Promise.all(api.util.getRunningOperationPromises());
+    }
+    return {
+      props: {},
+    };
+  }
+);
 
 export default SignUpPage;

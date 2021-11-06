@@ -3,15 +3,18 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Paper, Stack, Typography, TextField, Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import { useSnackbar } from "notistack";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { api, usePostSignInMutation } from "src/redux/services/api";
+import { wrapper } from "src/redux/store";
 import { REGEXP_PASSWORD } from "../constants/regexp";
-import { useLoginMutation } from "../redux/services/r9-api";
 import { SignInForm } from "../types/forms";
 
 const SignInPage: NextPage = () => {
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
   const { handleSubmit, control } = useForm<SignInForm>({
     resolver: yupResolver(
       yup.object().shape({
@@ -30,14 +33,21 @@ const SignInPage: NextPage = () => {
     ),
   });
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [postSignIn, { isLoading }] = usePostSignInMutation();
 
   const onSubmit = handleSubmit(async (value) => {
     if (isLoading) {
       return;
     }
-    await login(value);
-    router.push("/");
+
+    await postSignIn(value)
+      .unwrap()
+      .then(() => {
+        router.push("/");
+      })
+      .catch(() => {
+        enqueueSnackbar("error", { variant: "error" });
+      });
   });
 
   return (
@@ -114,5 +124,19 @@ const SignInPage: NextPage = () => {
     </Paper>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    if (context.req.headers.cookie) {
+      store.dispatch(
+        api.endpoints.getMyInfo.initiate(context.req.headers.cookie || "")
+      );
+      await Promise.all(api.util.getRunningOperationPromises());
+    }
+    return {
+      props: {},
+    };
+  }
+);
 
 export default SignInPage;
