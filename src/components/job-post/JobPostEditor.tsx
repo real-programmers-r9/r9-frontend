@@ -6,6 +6,7 @@ import {
   FormGroup,
   MenuItem,
   Modal,
+  Paper,
   Radio,
   RadioGroup,
   Select,
@@ -21,12 +22,14 @@ import useToggle from "src/hooks/useToggle";
 interface EditorProps {
   isEdit: boolean;
 }
+
 const JobPostEditor = ({ isEdit }: EditorProps) => {
   const [isModal, onToggleModal] = useToggle();
   const [address, addressDetail, onCompletePost] = useDaumAdress();
 
+
   return (
-    <div>
+    <Paper sx={{ padding: "25px" }}>
       {!isEdit ? (
         <Stack spacing={2} py={4}>
           <Typography align="center" variant="h4">
@@ -92,19 +95,43 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
             근무 일자
           </Typography>
           <FormGroup>
-            <RadioGroup
-              aria-label="gender"
-              defaultValue="female"
-              name="radio-buttons-group"
-            >
+            <RadioGroup defaultValue="female" name="radio-buttons-group">
               <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-                <FormControlLabel control={<Radio />} label="하루(1~2일)" />
-                <FormControlLabel control={<Radio />} label="1주일 이하" />
-                <FormControlLabel control={<Radio />} label="1주일~1개월" />
-                <FormControlLabel control={<Radio />} label="1개월~3개월" />
-                <FormControlLabel control={<Radio />} label="3개월~6개월" />
-                <FormControlLabel control={<Radio />} label="6개월~1년" />
-                <FormControlLabel control={<Radio />} label="1년이상" />
+                <FormControlLabel
+                  control={<Radio />}
+                  label="하루(1~2일)"
+                  value={"female"}
+                />
+                <FormControlLabel
+                  control={<Radio />}
+                  label="1주일 이하"
+                  value={"female1"}
+                />
+                <FormControlLabel
+                  control={<Radio />}
+                  label="1주일~1개월"
+                  value={"female2"}
+                />
+                <FormControlLabel
+                  control={<Radio />}
+                  label="1개월~3개월"
+                  value={"female3"}
+                />
+                <FormControlLabel
+                  control={<Radio />}
+                  label="3개월~6개월"
+                  value={"female4"}
+                />
+                <FormControlLabel
+                  control={<Radio />}
+                  label="6개월~1년"
+                  value={"female5"}
+                />
+                <FormControlLabel
+                  control={<Radio />}
+                  label="1년이상"
+                  value={"female6"}
+                />
               </Box>
             </RadioGroup>
           </FormGroup>
@@ -112,7 +139,7 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
           <Typography align="left" variant="h6">
             근무 시간
           </Typography>
-          
+
           <Stack direction="row" spacing={4}>
             <TextField
               id="time"
@@ -199,7 +226,7 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
           <Button variant="contained">작성</Button>
         </Stack>
       ) : null}
-    </div>
+    </Paper>
   );
 };
 
