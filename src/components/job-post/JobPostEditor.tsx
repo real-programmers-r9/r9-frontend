@@ -112,7 +112,7 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
           <Typography align="left" variant="h6">
             근무 시간
           </Typography>
-          
+
           <Stack direction="row" spacing={4}>
             <TextField
               id="time"

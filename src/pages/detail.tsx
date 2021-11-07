@@ -1,8 +1,6 @@
 import * as React from "react";
 import { Typography, Box, Rating } from "@mui/material";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import { api } from "src/redux/services/api";
-import { wrapper } from "src/redux/store";
 
 const Detail = () => {
   return (
@@ -37,19 +35,5 @@ const Detail = () => {
     </div>
   );
 };
-
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => {
-    if (context.req.headers.cookie) {
-      store.dispatch(
-        api.endpoints.getMyInfo.initiate(context.req.headers.cookie || "")
-      );
-      await Promise.all(api.util.getRunningOperationPromises());
-    }
-    return {
-      props: {},
-    };
-  }
-);
 
 export default Detail;

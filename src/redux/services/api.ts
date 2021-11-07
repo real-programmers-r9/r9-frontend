@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HYDRATE } from "next-redux-wrapper";
-import { SignInForm } from "src/types/forms";
+import { SignInForm, SignUpForm } from "src/types/forms";
 import { User } from "src/types/stores";
 
 export const api = createApi({
@@ -23,6 +23,16 @@ export const api = createApi({
         body: data,
       }),
     }),
+    postSignUp: builder.mutation<User, SignUpForm>({
+      query: (data) => {
+        const { confirmPassword, ...body } = data;
+        return {
+          url: "users",
+          method: "POST",
+          body,
+        };
+      },
+    }),
     postSignOut: builder.mutation<User, null>({
       query: () => ({
         url: "auth/signout",
@@ -43,6 +53,7 @@ export const api = createApi({
 
 export const {
   usePostSignInMutation,
+  usePostSignUpMutation,
   usePostSignOutMutation,
   useGetMyInfoQuery,
   useLazyGetMyInfoQuery,
