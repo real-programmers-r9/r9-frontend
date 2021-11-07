@@ -21,7 +21,7 @@ const data: Data[] = [
   {
     id: 1,
     location: "성남시 분당구",
-    companyName: "이마트24 서현서머섯호텔점",
+    companyName: "이마트24 서현서머점",
     companyCategory: "편의점",
     role: "파트타임",
     workDay: ["월", "수", "금"],
@@ -88,8 +88,8 @@ const JobCard = () => {
       {data.map((item) => {
         return (
           <Grid item xs={8} md={5} key={item.id}>
-            <Box>
-              <Box sx={{ my: 3, mx: 2 }}>
+            <Box sx={{ p: 2, background: "#fff" }}>
+              <Box sx={{ m: 1 }}>
                 <Grid container alignItems="center">
                   <Grid item xs>
                     <Typography gutterBottom variant="h6" component="div">

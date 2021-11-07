@@ -30,6 +30,7 @@ const ProfileImage = styled(IconButton)({
 const StyledBtn = styled(Button)({
   color: "#fff",
 });
+// mock data로 바꾸기
 const hashtages1 = ["문서 작업", "매장 관리", "운전 가능"];
 const hashtages2 = ["주3회", "평일 오전", "오픈시간"];
 const hashtages3 = ["마포구", "종로구", "서울시"];
@@ -69,11 +70,16 @@ const JobApplyPage = () => {
           >
             추가사항
           </Typography>
-          <TextField multiline rows={2} fullWidth />
+          <TextField
+            multiline
+            rows={2}
+            fullWidth
+            placeholder="세부사항 기입했음"
+          />
         </Box>
         <Box p={2}>
           <StyledBtn fullWidth variant="contained" size="large">
-            지원하기
+            연락하기
           </StyledBtn>
         </Box>
       </Card>

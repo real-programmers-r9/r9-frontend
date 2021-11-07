@@ -1,3 +1,4 @@
+//Tool bar 양쪽에 paddingX 넣어주세요
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,7 +13,6 @@ import {
   ListItemIcon,
   ListItemText,
   List,
-  ListItemButton,
 } from "@mui/material";
 import { Menu, Animation, Login, PersonAdd } from "@mui/icons-material";
 import { theme } from "src/styles/theme";
@@ -36,7 +36,13 @@ const Navbar = () => {
 
   return (
     <AppBar position="sticky">
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          color: "#212121",
+        }}
+      >
         <Link href="/" passHref>
           <IconButton color="inherit" onClick={() => router.push("/")}>
             <Animation />
@@ -52,10 +58,11 @@ const Navbar = () => {
                 <List>
                   {navItems.map((item) => (
                     <Link key={item.name} href={item.href} passHref>
-                      <ListItemButton onClick={toggleOpen}>
+                      {/* 버튼 스타일 안먹는 것 같은데 link 때문인가요? */}
+                      <Button variant="outlined" onClick={toggleOpen}>
                         <ListItemIcon>{item.icon}</ListItemIcon>
                         <ListItemText>{item.name}</ListItemText>
-                      </ListItemButton>
+                      </Button>
                     </Link>
                   ))}
                 </List>
