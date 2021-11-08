@@ -12,12 +12,13 @@ export const makeStore = () =>
       job: jobSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(r9Api.middleware),
+      getDefaultMiddleware({ serializableCheck: false }).concat(
+        r9Api.middleware
+      ),
   });
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppState = ReturnType<AppStore["getState"]>;
-
 
 export const wrapper = createWrapper<AppStore>(makeStore, {
   debug: process.env.NODE_ENV === "development",
