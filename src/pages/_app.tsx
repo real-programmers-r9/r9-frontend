@@ -8,6 +8,7 @@ import Head from "next/head";
 import { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { SnackbarProvider } from "notistack";
 import { Layout } from "../components/Layout";
 import { createEmotionCache } from "../libs/create-emotion-cache";
 import { theme } from "../styles/theme";
@@ -29,12 +30,14 @@ const MyApp = ({
       <meta name="description" content="진짜 시니어를 위한 일자리" />
     </Head>
     <CacheProvider value={emotionCache}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <SnackbarProvider maxSnack={3}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </SnackbarProvider>
     </CacheProvider>
   </>
 );

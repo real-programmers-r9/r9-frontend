@@ -18,6 +18,7 @@
   ],
   "rules": {
     "@typescript-eslint/no-shadow": "off",
+    "import/no-cycle": "off",
     "import/prefer-default-export": "off",
     "no-param-reassign": "off",
     "react/jsx-props-no-spreading": "off",

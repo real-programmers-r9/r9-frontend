@@ -8,6 +8,8 @@ import {
   Link,
 } from "@mui/material";
 import { AccountCircle, ShoppingBag } from "@mui/icons-material";
+import { api } from "src/redux/services/api";
+import { wrapper } from "src/redux/store";
 
 const SignUpTypePage: NextPage = () => {
   return (
@@ -94,5 +96,19 @@ const SignUpTypePage: NextPage = () => {
     </Container>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    if (context.req.headers.cookie) {
+      store.dispatch(
+        api.endpoints.getMyInfo.initiate(context.req.headers.cookie || "")
+      );
+      await Promise.all(api.util.getRunningOperationPromises());
+    }
+    return {
+      props: {},
+    };
+  }
+);
 
 export default SignUpTypePage;
