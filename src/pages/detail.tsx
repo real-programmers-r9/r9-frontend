@@ -9,12 +9,14 @@ import {
   Button,
   Container,
 } from "@mui/material";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import RoomRoundedIcon from "@mui/icons-material/RoomRounded";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import WorkIcon from "@mui/icons-material/Work";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import {
+  FavoriteBorderRounded,
+  AttachMoneyRounded,
+  WorkOutlineOutlined,
+  AccessTimeOutlined,
+  RoomOutlined,
+  LocalPhoneOutlined,
+} from "@mui/icons-material";
 
 const Detail = () => {
   return (
@@ -29,7 +31,7 @@ const Detail = () => {
           fontWeight="bold"
         >
           강남역 도야짬뽕 홀서빙
-          <FavoriteBorderRoundedIcon
+          <FavoriteBorderRounded
             sx={{ position: "absolute", right: "3rem", height: "1.3em" }}
           />
         </Typography>
@@ -74,7 +76,7 @@ const Detail = () => {
               borderRadius: 2,
             }}
           >
-            <RoomRoundedIcon />
+            <RoomOutlined />
           </Box>
           <Typography sx={{ fontSize: "13px" }}>서울 강남구</Typography>
         </Box>
@@ -90,7 +92,7 @@ const Detail = () => {
               borderRadius: 2,
             }}
           >
-            <AttachMoneyIcon />
+            <AttachMoneyRounded />
           </Box>
           <Typography sx={{ fontSize: "13px" }}>일당 13만원</Typography>
         </Box>
@@ -99,14 +101,12 @@ const Detail = () => {
             id="navicon-3"
             sx={{
               border: "1px solid #ccc",
-              padding: "0.3rem",
-              paddingTop: "0.2rem",
-              paddingBottom: "0.1rem",
+              padding: "0.2rem 0.3rem 0.1rem",
               margin: "1rem",
               borderRadius: 2,
             }}
           >
-            <WorkIcon />
+            <WorkOutlineOutlined />
           </Box>
           <Typography sx={{ fontSize: "13px" }}>홀서빙</Typography>
         </Box>
@@ -115,14 +115,12 @@ const Detail = () => {
             id="navicon-4"
             sx={{
               border: "1px solid #ccc",
-              padding: "0.3rem",
-              paddingTop: "0.2rem",
-              paddingBottom: "0.1rem",
+              padding: "0.2rem 0.3rem 0.1rem",
               margin: "1rem",
               borderRadius: 2,
             }}
           >
-            <AccessTimeIcon />
+            <AccessTimeOutlined />
           </Box>
           <Typography sx={{ fontSize: "11.5px" }}>17:00~21:00</Typography>
           <Typography sx={{ fontSize: "12px" }}>협의가능</Typography>
@@ -166,12 +164,12 @@ const Detail = () => {
           variant="h5"
           gutterBottom
           component="div"
-          sx={{ paddingTop: "1rem", fontWeight: "bold" }}
+          sx={{ paddingTop: "1rem" }}
         >
           채용방법
         </Typography>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
-          <LocalPhoneIcon />
+          <LocalPhoneOutlined />
           <Typography>전화면접</Typography>
         </Box>
       </Container>
@@ -188,7 +186,7 @@ const Detail = () => {
           근무지역
         </Typography>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
-          <RoomRoundedIcon />
+          <RoomOutlined />
           <Typography>서울특별시 강남구 논현동 강남역 3번출구</Typography>
         </Box>
       </Container>
