@@ -1,4 +1,5 @@
 import React from "react";
+import DaumPostcode from "react-daum-postcode";
 import {
   Button,
   Checkbox,
@@ -14,20 +15,20 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import DaumPostcode from "react-daum-postcode";
-import useDaumAdress from "src/hooks/kakao/useDaumAdress";
-import useToggle from "src/hooks/useToggle";
+import { useToggle } from "~/hooks/useToggle";
+import useDaumAdress from "~/hooks/kakao/useDaumAdress";
 
 interface EditorProps {
   isEdit: boolean;
 }
+
 const JobPostEditor = ({ isEdit }: EditorProps) => {
   const [isModal, onToggleModal] = useToggle();
   const [address, addressDetail, onCompletePost] = useDaumAdress();
 
   return (
     <div>
-      {!isEdit ? (
+      {!isEdit ?? (
         <Stack spacing={2} py={4}>
           <Typography align="center" variant="h4">
             공고 등록
@@ -198,7 +199,7 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
           />
           <Button variant="contained">작성</Button>
         </Stack>
-      ) : null}
+      )}
     </div>
   );
 };

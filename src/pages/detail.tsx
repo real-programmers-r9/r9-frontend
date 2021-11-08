@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from "react";
 import { Typography, Box, Rating } from "@mui/material";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import { FavoriteBorderRounded } from "@mui/icons-material";
 
 const Detail = () => {
   return (
@@ -15,7 +15,7 @@ const Detail = () => {
           fontWeight="bold"
         >
           강남역 도야짬뽕 홀서빙
-          <FavoriteBorderRoundedIcon
+          <FavoriteBorderRounded
             sx={{ position: "absolute", right: 30, height: "1.3em" }}
           />
         </Typography>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, FormControl, TextField, Stack, Box } from "@mui/material";
+import { FormControl, TextField, Stack, Box } from "@mui/material";
 import { styled } from "@mui/system";
 
 const SearchWrapper = styled("div")({
@@ -14,7 +14,6 @@ const MiniSearch = () => {
   return (
     <SearchWrapper>
       {/* 검색창 */}
-
       <FormControl sx={{ width: 400 }}>
         <TextField
           size="small"
@@ -23,7 +22,9 @@ const MiniSearch = () => {
         />
         {/* 추천 검색어 */}
         <Box mt={1}>
-          <Stack direction="row" spacing={1} justifyContent="center"></Stack>
+          <Stack direction="row" spacing={1} justifyContent="center">
+            ?
+          </Stack>
         </Box>
       </FormControl>
     </SearchWrapper>

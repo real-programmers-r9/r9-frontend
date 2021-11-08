@@ -23,7 +23,6 @@ const SortButton = styled(FormControl)({
   marginRight: 5,
 });
 
-// 타입정의 해야함
 const SortButtons = () => {
   return (
     <SortBox>

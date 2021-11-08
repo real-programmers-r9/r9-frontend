@@ -82,7 +82,6 @@ const JobCard = () => {
         <SortButtons />
       </Grid>
 
-      {/* 맵 돌렸는데 카드 모양이랑 크기가 다름 == why */}
       {data.map((item) => {
         return (
           <Grid item xs={8} md={5} key={item.id}>

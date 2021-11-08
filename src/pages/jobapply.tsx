@@ -1,3 +1,4 @@
+import React from "react";
 import { NextPage } from "next";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import {
@@ -10,7 +11,7 @@ import {
   Button,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import Jobtags from "src/components/application/Jobtags";
+import { JobTags } from "~/components/application/JobTags";
 
 const ContainerBox = styled(Container)({
   display: "flex",
@@ -55,9 +56,9 @@ const JobApplyPage: NextPage = () => {
         </Box>
         {/* 태그 */}
         <Box>
-          <Jobtags title="나의 장점은?" type={hashtages1} />
-          <Jobtags title="선호 시간대" type={hashtages2} />
-          <Jobtags title="근무 가능 지역?" type={hashtages3} />
+          <JobTags title="나의 장점은?" type={hashtages1} />
+          <JobTags title="선호 시간대" type={hashtages2} />
+          <JobTags title="근무 가능 지역?" type={hashtages3} />
         </Box>
 
         <Box px={2}>
