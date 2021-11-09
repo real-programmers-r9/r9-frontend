@@ -13,29 +13,35 @@ import {
   Select,
   Box,
   Modal,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { MobileDatePicker, LoadingButton } from "@mui/lab";
+import DaumPostcode from "react-daum-postcode";
 import { useSnackbar } from "notistack";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import DaumPostcode from "react-daum-postcode";
-import useToggle from "src/hooks/useToggle";
-import { usePostSignUpMutation } from "src/redux/services/api";
-import { REGEXP_PASSWORD } from "../constants/regexp";
-import { SignUpForm } from "../types/forms";
+import { useToggle } from "~/hooks/useToggle";
+import { useSignUpMutation } from "~/redux/services/api";
+import { REGEXP_PASSWORD } from "~/constants/regexp";
+import { SignUpForm } from "~/types/forms";
+import { Gender, Role } from "~/types/user";
 
 const SignUpPage: NextPage = () => {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [isModal, toggleModal] = useToggle();
+
   const { handleSubmit, control, setValue } = useForm<SignUpForm>({
-    defaultValues: {
-      role: "USER",
-    },
     resolver: yupResolver(
       yup.object().shape({
-        role: yup.string().required("사용자 유형을 선택해주세요!"),
+        role: yup
+          .mixed<Role>()
+          .oneOf(Object.values(Role), "유형이 일치하지 않습니다.")
+          .required("사용자 유형을 선택해주세요!"),
         name: yup
           .string()
           .max(10, "이름은 최대 10자 이하여야합니다.")
@@ -55,19 +61,29 @@ const SignUpPage: NextPage = () => {
           .string()
           .oneOf([yup.ref("password"), null], "비밀번호가 일치하지 않습니다!")
           .required("비밀번호 재입력을 입력해주세요!"),
-        zip: yup.string().required("우편 번호를 입력해주세요!"),
-        address: yup.string().required("주소를 입력해주세요!"),
+        gender: yup
+          .mixed<Gender>()
+          .oneOf(Object.values(Gender), "유형이 일치하지 않습니다.")
+          .required("성별을 선택해주세요!"),
+        dateOfBirth: yup.date().required(),
+        address: yup.object().shape({
+          postalCode: yup.string().required(),
+          state: yup.string().required(),
+          city: yup.string().required(),
+          roadAddress: yup.string().required(),
+        }),
       })
     ),
   });
 
-  const [postSignUp, { isLoading }] = usePostSignUpMutation();
+  const [signUpMutation, { isLoading }] = useSignUpMutation();
 
   const onSubmit = handleSubmit(async (value) => {
     if (isLoading) {
       return;
     }
-    await postSignUp(value)
+
+    await signUpMutation(value)
       .unwrap()
       .then(() => {
         router.push("/");
@@ -100,42 +116,25 @@ const SignUpPage: NextPage = () => {
           <Typography variant="h5" align="center">
             회원가입
           </Typography>
-          <Controller
-            control={control}
-            name="role"
-            render={({ field: { onChange, value } }) => (
-              <FormControl fullWidth>
-                <InputLabel id="role">사용자 유형</InputLabel>
-                <Select
-                  labelId="role"
-                  value={value}
-                  label="사용자 유형"
-                  onChange={onChange}
-                >
-                  <MenuItem value="USER">일반 사용자</MenuItem>
-                  <MenuItem value="BUSINESS">기업 사용자</MenuItem>
-                </Select>
-              </FormControl>
-            )}
-          />
 
           <Stack spacing={2}>
+            <Typography variant="h6">가입 정보</Typography>
             <Controller
               control={control}
-              name="name"
-              render={({
-                field: { onChange, value },
-                fieldState: { error },
-              }) => (
-                <TextField
-                  type="text"
-                  label="이름"
-                  fullWidth
-                  value={value || ""}
-                  error={!!error}
-                  helperText={error?.message}
-                  onChange={onChange}
-                />
+              name="role"
+              render={({ field: { onChange, value } }) => (
+                <FormControl fullWidth>
+                  <InputLabel id="role">사용자 유형</InputLabel>
+                  <Select
+                    labelId="role"
+                    value={value || ""}
+                    label="사용자 유형"
+                    onChange={onChange}
+                  >
+                    <MenuItem value={Role.USER}>일반 사용자</MenuItem>
+                    <MenuItem value={Role.BUSINESS}>기업 사용자</MenuItem>
+                  </Select>
+                </FormControl>
               )}
             />
             <Controller
@@ -195,10 +194,74 @@ const SignUpPage: NextPage = () => {
           </Stack>
 
           <Stack spacing={2}>
+            <Typography variant="h6">개인 정보</Typography>
+            <Controller
+              control={control}
+              name="name"
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  type="text"
+                  label="이름"
+                  fullWidth
+                  value={value || ""}
+                  error={!!error}
+                  helperText={error?.message}
+                  onChange={onChange}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="gender"
+              render={({ field: { onChange, value } }) => (
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">성별</FormLabel>
+                  <RadioGroup
+                    onChange={onChange}
+                    value={value || ""}
+                    row
+                    sx={{ justifyContent: "space-between" }}
+                  >
+                    <FormControlLabel
+                      value={Gender.MALE}
+                      control={<Radio />}
+                      label="남성"
+                    />
+                    <FormControlLabel
+                      value={Gender.FEMALE}
+                      control={<Radio />}
+                      label="여성"
+                    />
+                    <FormControlLabel
+                      value={Gender.OTHER}
+                      control={<Radio />}
+                      label="기타"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              )}
+            />
+            <Controller
+              control={control}
+              name="dateOfBirth"
+              render={({ field: { onChange, value } }) => (
+                <MobileDatePicker
+                  label="생년월일"
+                  mask="____.__.__"
+                  inputFormat="yyyy.MM.DD"
+                  value={value}
+                  onChange={onChange}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              )}
+            />
             <Stack direction="row" spacing={1}>
               <Controller
                 control={control}
-                name="zip"
+                name="address.postalCode"
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
@@ -225,7 +288,7 @@ const SignUpPage: NextPage = () => {
             </Stack>
             <Controller
               control={control}
-              name="address"
+              name="address.roadAddress"
               render={({
                 field: { onChange, value },
                 fieldState: { error },
@@ -268,8 +331,10 @@ const SignUpPage: NextPage = () => {
         >
           <DaumPostcode
             onComplete={(data) => {
-              setValue("zip", data.zonecode);
-              setValue("address", data.roadAddress);
+              setValue("address.postalCode", data.zonecode);
+              setValue("address.state", data.sido);
+              setValue("address.city", data.sigungu);
+              setValue("address.roadAddress", data.roadAddress);
               toggleModal();
             }}
           />

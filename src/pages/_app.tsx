@@ -2,18 +2,24 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import "moment/locale/ko";
 
 import React from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { LocalizationProvider } from "@mui/lab";
+import DateAdapter from "@mui/lab/AdapterMoment";
 import { SnackbarProvider } from "notistack";
-import { api } from "src/redux/services/api";
-import { Layout } from "../components/Layout";
-import { createEmotionCache } from "../libs/create-emotion-cache";
-import { theme } from "../styles/theme";
-import { wrapper } from "../redux/store";
+import moment from "moment";
+import { myInfo, getRunningOperationPromises } from "~/redux/services/api";
+import { wrapper } from "~/redux/store";
+import { createEmotionCache } from "~/libs/create-emotion-cache";
+import { theme } from "~/styles/theme";
+import { Layout } from "~/components/Layout";
+
+moment.locale("ko");
 
 const KAKAO_MAP = "d0a88c50dbf74ee622ba0d4d1aafea93"; // 이거 env로 묻어야하나요
 interface MyAppProps extends AppProps {
@@ -38,10 +44,12 @@ const MyApp = ({
     <CacheProvider value={emotionCache}>
       <SnackbarProvider maxSnack={3}>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <LocalizationProvider dateAdapter={DateAdapter} locale="ko">
+            <CssBaseline />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </LocalizationProvider>
         </ThemeProvider>
       </SnackbarProvider>
     </CacheProvider>
@@ -51,11 +59,10 @@ const MyApp = ({
 MyApp.getInitialProps = wrapper.getInitialAppProps(
   (store) =>
     async ({ Component, ctx }) => {
-      if (ctx.req?.headers.cookie) {
-        store.dispatch(
-          api.endpoints.getMyInfo.initiate(ctx.req.headers.cookie)
-        );
-        await Promise.all(api.util.getRunningOperationPromises());
+      const { req, pathname } = ctx;
+      if (req?.headers.cookie) {
+        store.dispatch(myInfo.initiate({ cookie: req.headers.cookie }));
+        await Promise.all(getRunningOperationPromises());
       }
 
       return {
@@ -63,7 +70,7 @@ MyApp.getInitialProps = wrapper.getInitialAppProps(
           ...(Component.getInitialProps
             ? await Component.getInitialProps({ ...ctx, store })
             : {}),
-          pathname: ctx.pathname,
+          pathname,
         },
       };
     }

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HYDRATE } from "next-redux-wrapper";
-import { SignInForm, SignUpForm } from "src/types/forms";
-import { User } from "src/types/stores";
+import { SignInForm, SignUpForm } from "~/types/forms";
+import { User } from "~/types/user";
 
 export const api = createApi({
   reducerPath: "api",
@@ -16,14 +16,14 @@ export const api = createApi({
     return null;
   },
   endpoints: (builder) => ({
-    postSignIn: builder.mutation<User, SignInForm>({
+    signIn: builder.mutation<User, SignInForm>({
       query: (data) => ({
         url: "auth",
         method: "POST",
         body: data,
       }),
     }),
-    postSignUp: builder.mutation<User, SignUpForm>({
+    signUp: builder.mutation<User, SignUpForm>({
       query: (data) => {
         const { confirmPassword, ...body } = data;
         return {
@@ -33,14 +33,14 @@ export const api = createApi({
         };
       },
     }),
-    postSignOut: builder.mutation<User, null>({
+    signOut: builder.mutation<User, void>({
       query: () => ({
         url: "auth/signout",
         method: "POST",
       }),
     }),
-    getMyInfo: builder.query<User, string>({
-      query: (cookie) => ({
+    myInfo: builder.query<User, { cookie: string }>({
+      query: ({ cookie }) => ({
         url: `users/me`,
         method: "GET",
         headers: {
@@ -52,9 +52,12 @@ export const api = createApi({
 });
 
 export const {
-  usePostSignInMutation,
-  usePostSignUpMutation,
-  usePostSignOutMutation,
-  useGetMyInfoQuery,
-  useLazyGetMyInfoQuery,
+  useLazyMyInfoQuery,
+  useMyInfoQuery,
+  useSignInMutation,
+  useSignOutMutation,
+  useSignUpMutation,
+  util: { getRunningOperationPromise, getRunningOperationPromises },
 } = api;
+
+export const { myInfo, signIn, signOut, signUp } = api.endpoints;

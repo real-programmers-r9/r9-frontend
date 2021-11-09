@@ -7,7 +7,7 @@ import Document, {
   DocumentContext,
 } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
-import { createEmotionCache } from "../libs/create-emotion-cache";
+import { createEmotionCache } from "~/libs/create-emotion-cache";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

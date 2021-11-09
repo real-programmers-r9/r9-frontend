@@ -8,7 +8,7 @@ const PostPage: NextPage = () => {
     <>
       <Box
         sx={{
-          margin: "0 auto",
+          marginX: "auto",
           maxWidth: "md",
         }}
       >

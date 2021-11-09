@@ -1,8 +1,17 @@
 {
   "name": "r9-frontend",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "R9 Frontend Project",
+  "author": {
+    "name": "R9 Team"
+  },
+  "repository": {
+    "type": "GitHub",
+    "url": "https://github.com/real-programmers-r9/r9-frontend"
+  },
+  "bugs": {
+    "url": "https://github.com/real-programmers-r9/r9-frontend/issues"
+  },
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

@@ -1,8 +1,12 @@
+import React from "react";
 import { Typography, Box, Stack, Chip } from "@mui/material";
 
-//타입정의
+export interface JobTagsProps {
+  title: string;
+  type: string[];
+}
 
-const Jobtags = ({ title, type }) => {
+export const JobTags = ({ title, type }: JobTagsProps) => {
   return (
     <Box m={2}>
       <Typography align="left" gutterBottom variant="subtitle2">
@@ -18,4 +22,3 @@ const Jobtags = ({ title, type }) => {
     </Box>
   );
 };
-export default Jobtags;

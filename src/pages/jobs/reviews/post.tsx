@@ -8,7 +8,7 @@ const ReviewPostPage = () => {
     <>
       <Box
         sx={{
-          margin: "0 auto",
+          marginX: "auto",
           maxWidth: "md",
         }}
       >

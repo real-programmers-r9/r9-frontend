@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import DaumPostcode from "react-daum-postcode";
 import {
   Button,
   Checkbox,
@@ -15,8 +16,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import DaumPostcode from "react-daum-postcode";
-import useDaumAdress from "src/hooks/kakao/useDaumAdress";
+import { useToggle } from "~/hooks/useToggle";
+import useDaumAdress from "~/hooks/kakao/useDaumAdress";
 import useToggle from "src/hooks/useToggle";
 import useJobForm from "src/hooks/job/useJobForm";
 import { useSelector } from "react-redux";
