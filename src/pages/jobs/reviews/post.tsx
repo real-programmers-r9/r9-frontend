@@ -1,6 +1,5 @@
-import { Box } from "@mui/system";
 import React from "react";
-
+import { Box } from "@mui/system";
 import ReviewPostEditor from "src/components/review/ReviewPostEditor";
 
 const ReviewPostPage = () => {

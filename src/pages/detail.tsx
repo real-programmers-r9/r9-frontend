@@ -17,8 +17,6 @@ import {
   RoomOutlined,
   LocalPhoneOutlined,
 } from "@mui/icons-material";
-import { api } from "src/redux/services/api";
-import { wrapper } from "src/redux/store";
 
 const Detail = () => {
   return (

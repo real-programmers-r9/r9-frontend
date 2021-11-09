@@ -1,6 +1,6 @@
-import { Box } from "@mui/system";
-import { useRouter } from "next/router";
 import React from "react";
+import { useRouter } from "next/router";
+import { Box } from "@mui/system";
 import ReviewDetail from "src/components/review/ReviewDetail";
 
 const ReviewPage = () => {

@@ -10,7 +10,7 @@ export default function useJobForm() {
   const job = useSelector(selectJob);
   const [weekDay, setWeekgDay] = useState<string[]>([]);
 
-  const map: any = {
+  const map: Record<string, number> = {
     월: 1,
     화: 2,
     수: 3,
@@ -41,7 +41,7 @@ export default function useJobForm() {
     const { value } = e.target;
     const body = {
       key: "adress",
-      value: adress1 + " " + value,
+      value: `${adress1} ${value}`,
     };
     dispatch(setJob(body));
   };
@@ -54,7 +54,8 @@ export default function useJobForm() {
     } else if (!checked && weekDay.includes(id)) {
       setWeekgDay(weekDay.filter((week) => week !== id));
     }
-    weekDay.sort(function (a, b) {
+
+    weekDay.sort((a, b) => {
       return map[a] - map[b];
     });
 
@@ -65,7 +66,7 @@ export default function useJobForm() {
     dispatch(setJob(body));
   };
 
-  /** 공고 생성*/
+  /** 공고 생성 */
   const onCreateJob = async () => {
     try {
       await createJobAPI(job);

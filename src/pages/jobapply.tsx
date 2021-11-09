@@ -1,7 +1,5 @@
 import React from "react";
 import { NextPage } from "next";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import PersonIcon from "@mui/icons-material/Person";
 import {
   Typography,
   IconButton,
@@ -11,6 +9,7 @@ import {
   Container,
   Button,
 } from "@mui/material";
+import { Person } from "@mui/icons-material";
 import { styled } from "@mui/system";
 import { JobTags } from "~/components/application/JobTags";
 
@@ -32,6 +31,7 @@ const ProfileImage = styled(IconButton)({
 const StyledBtn = styled(Button)({
   color: "#fff",
 });
+
 const hashtages1 = ["문서 작업", "매장 관리", "운전 가능"];
 const hashtages2 = ["주3회", "평일 오전", "오픈시간"];
 const hashtages3 = ["마포구", "종로구", "서울시"];
@@ -43,7 +43,7 @@ const JobApplyPage: NextPage = () => {
         {/* 지원자 정보 */}
         <Box pt={4}>
           <ProfileImage>
-            <PersonIcon size="large" />
+            <Person fontSize="large" />
           </ProfileImage>
           <Typography mt={2} gutterBottom variant="subtitle2" component="div">
             홍길동 (65세)

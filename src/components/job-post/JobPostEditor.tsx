@@ -16,12 +16,11 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { useSelector } from "react-redux";
+import { selectJob } from "~/redux/slices/job-slice";
 import { useToggle } from "~/hooks/useToggle";
 import useDaumAdress from "~/hooks/kakao/useDaumAdress";
-import useToggle from "src/hooks/useToggle";
-import useJobForm from "src/hooks/job/useJobForm";
-import { useSelector } from "react-redux";
-import { selectJob } from "src/redux/slices/job-slice";
+import useJobForm from "~/hooks/job/useJobForm";
 
 interface EditorProps {
   isEdit: boolean;
@@ -171,37 +170,37 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
                 <FormControlLabel
                   control={<Radio />}
                   label="하루(1~2일)"
-                  value={"female"}
+                  value="female"
                 />
                 <FormControlLabel
                   control={<Radio />}
                   label="1주일 이하"
-                  value={"female1"}
+                  value="female1"
                 />
                 <FormControlLabel
                   control={<Radio />}
                   label="1주일~1개월"
-                  value={"female2"}
+                  value="female2"
                 />
                 <FormControlLabel
                   control={<Radio />}
                   label="1개월~3개월"
-                  value={"female3"}
+                  value="female3"
                 />
                 <FormControlLabel
                   control={<Radio />}
                   label="3개월~6개월"
-                  value={"female4"}
+                  value="female4"
                 />
                 <FormControlLabel
                   control={<Radio />}
                   label="6개월~1년"
-                  value={"female5"}
+                  value="female5"
                 />
                 <FormControlLabel
                   control={<Radio />}
                   label="1년이상"
-                  value={"female6"}
+                  value="female6"
                 />
               </Box>
             </RadioGroup>

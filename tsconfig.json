@@ -18,7 +18,8 @@
     "paths": {
       "~/*": ["./src/*"],
       "~/public/*": ["./public/*"]
-    }
+    },
+    "types": ["kakao.maps.d.ts"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.config.js"],
   "exclude": ["node_modules", "dist", "coverage", ".next"]

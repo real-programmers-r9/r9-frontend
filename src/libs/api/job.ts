@@ -7,7 +7,7 @@ export const createJobAPI = async (job: IJobState) => {
   return response.data;
 };
 
-/** 공고 리스트 호출*/
+/** 공고 리스트 호출 */
 export const findJobsAPI = async () => {
   const resposne = await client.get("/jobs");
   return resposne.data;
