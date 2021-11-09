@@ -13,18 +13,24 @@ import { Person } from "@mui/icons-material";
 import { styled } from "@mui/system";
 import { JobTags } from "~/components/application/JobTags";
 
-const ContainerBox = styled(Container)({
+const ContainerBox = styled(Container)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  justifyContent: "center",
+  width: "26vw",
+  // justifyContent: "center",
   textAlign: "center",
-});
+  backgroundColor: "#fff",
+  position: "relative", // 하트표시 기준
+  [theme.breakpoints.down("md")]: {
+    width: "90vw",
+  },
+}));
 
 const ProfileImage = styled(IconButton)({
   background: "#796f6f",
   borderRadius: "50",
-  padding: 50,
+  padding: 30,
   color: "#fff",
 });
 
@@ -38,8 +44,8 @@ const hashtages3 = ["마포구", "종로구", "서울시"];
 
 const JobApplyPage: NextPage = () => {
   return (
-    <ContainerBox sx={{ paddingX: 4 }}>
-      <Card>
+    <ContainerBox>
+      <Box>
         {/* 지원자 정보 */}
         <Box pt={4}>
           <ProfileImage>
@@ -77,7 +83,7 @@ const JobApplyPage: NextPage = () => {
             지원하기
           </StyledBtn>
         </Box>
-      </Card>
+      </Box>
     </ContainerBox>
   );
 };

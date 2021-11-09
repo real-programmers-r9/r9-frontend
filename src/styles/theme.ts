@@ -2,9 +2,9 @@ import { createTheme } from "@mui/material";
 import { blue, grey, teal } from "@mui/material/colors";
 
 export const theme = createTheme({
-  breakpoints: {
-    values: { xs: 0, sm: 500, md: 900, lg: 1200, xl: 1536 },
-  },
+  // breakpoints: {
+  //   values: { xs: 0, sm: 420, md: 765, lg: 1200, xl: 1536 },
+  // },
   typography: {
     fontFamily: [
       "-apple-system",
