@@ -4,12 +4,13 @@ import React, { useState } from "react";
 import DateAdapter from "@mui/lab/AdapterMoment";
 
 const ReviewPostEditor = () => {
+
+
+
   const [value, setValue]: any = useState();
 
   const onchange = (datevalue: any) => {
-    console.log(datevalue);
     setValue(datevalue);
-    console.log(value._d);
   };
   return (
     <>
