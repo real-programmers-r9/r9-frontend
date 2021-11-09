@@ -1,16 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { r9Api } from "./services/r9-api";
+import { api } from "./services/api";
 import { authSlice } from "./slices/auth-slice";
 
 export const makeStore = () =>
   configureStore({
     reducer: {
-      [r9Api.reducerPath]: r9Api.reducer,
+      [api.reducerPath]: api.reducer,
       auth: authSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(r9Api.middleware),
+      getDefaultMiddleware().concat(api.middleware),
   });
 
 export type AppStore = ReturnType<typeof makeStore>;

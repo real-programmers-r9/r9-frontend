@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {
   Typography,
   Box,
@@ -17,6 +17,8 @@ import {
   RoomOutlined,
   LocalPhoneOutlined,
 } from "@mui/icons-material";
+import { api } from "src/redux/services/api";
+import { wrapper } from "src/redux/store";
 
 const Detail = () => {
   return (
@@ -191,15 +193,29 @@ const Detail = () => {
         </Box>
       </Container>
       {/* 카카오 지도 Api */}
-      <Container className="map"></Container>
+      <Container className="map">{/* ? */}</Container>
       <Divider />
       <br />
-      {/* 지원하기 버튼*/}
+      {/* 지원하기 버튼 */}
       <Stack className="applyButton">
         <Button variant="contained">지원하기</Button>
       </Stack>
     </Box>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    if (context.req.headers.cookie) {
+      store.dispatch(
+        api.endpoints.getMyInfo.initiate(context.req.headers.cookie || "")
+      );
+      await Promise.all(api.util.getRunningOperationPromises());
+    }
+    return {
+      props: {},
+    };
+  }
+);
 
 export default Detail;

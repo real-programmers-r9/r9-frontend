@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Auth } from "src/types/stores";
-import { r9Api } from "../services/r9-api";
+import { Auth, User } from "src/types/stores";
+import { HYDRATE } from "next-redux-wrapper";
+import { AppState } from "../store";
+import { api } from "../services/api";
 
 const initialState: Auth = {
   user: null,
@@ -10,18 +12,31 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setCredentials: (state, { payload }: PayloadAction<Auth>) => {
-      state.user = payload.user;
+    setCredentials: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
     },
   },
   extraReducers: (builder) => {
+    // action type bug
+    // ref: https://github.com/kirill-konshin/next-redux-wrapper/issues/428
+    builder.addCase(HYDRATE, (state, action: any) => {
+      return { ...state, ...action.payload.auth };
+    });
     builder.addMatcher(
-      r9Api.endpoints.login.matchFulfilled,
-      (state, { payload }) => {
-        state.user = payload.user;
+      api.endpoints.postSignIn.matchFulfilled,
+      (state, action) => {
+        state.user = action.payload;
+      }
+    );
+    builder.addMatcher(
+      api.endpoints.getMyInfo.matchFulfilled,
+      (state, action) => {
+        state.user = action.payload;
       }
     );
   },
 });
 
 export const { setCredentials } = authSlice.actions;
+
+export const selectAuth = (state: AppState) => state.auth;

@@ -1,11 +1,12 @@
 export interface User {
-  createdAt: Date;
-  updatedAt: Date;
   id: string;
   name: string;
   email: string;
   role: string;
   address?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt?: Date;
 }
 
 export interface Auth {
