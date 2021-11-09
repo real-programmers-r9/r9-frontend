@@ -36,7 +36,7 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
     onChangeWorkingDay,
     onCreateJob,
   } = useJobForm();
-  const { title, workType, payment } = job;
+  const { title, workType, payment, personnel, age } = job;
 
   const onCompletePostAndToggleModal = (data: any) => {
     onCompletePost(data);
@@ -70,6 +70,29 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
             name="workType"
             onChange={onChangeJobTextField}
             value={workType}
+          />
+
+          <Typography align="left" variant="h6">
+            모집 인원
+          </Typography>
+          <TextField
+            type="number"
+            variant="outlined"
+            label="모집 인원 (명)"
+            name="personnel"
+            onChange={onChangeJobTextField}
+            value={personnel}
+          />
+          <Typography align="left" variant="h6">
+            희망 연령대
+          </Typography>
+          <TextField
+            type="number"
+            variant="outlined"
+            label="희망 연령대 (세)"
+            name="age"
+            onChange={onChangeJobTextField}
+            value={age}
           />
 
           <Typography align="left" variant="h6">
