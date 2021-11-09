@@ -75,7 +75,13 @@ const Navbar = () => {
 
   return (
     <AppBar position="sticky">
-      <Toolbar>
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          color: "#212121",
+        }}
+      >
         <Link href="/" passHref>
           <IconButton color="inherit" onClick={() => router.push("/")}>
             <Animation />

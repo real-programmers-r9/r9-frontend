@@ -15,6 +15,7 @@ import { createEmotionCache } from "../libs/create-emotion-cache";
 import { theme } from "../styles/theme";
 import { wrapper } from "../redux/store";
 
+const KAKAO_MAP = "d0a88c50dbf74ee622ba0d4d1aafea93"; // 이거 env로 묻어야하나요
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
@@ -29,6 +30,10 @@ const MyApp = ({
       <title>알구</title>
       <meta name="keywords" content="아르바이트, 알바, 소일거리, 중장년" />
       <meta name="description" content="진짜 시니어를 위한 일자리" />
+      <script
+        type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey={KAKAO_MAP}"
+      ></script>
     </Head>
     <CacheProvider value={emotionCache}>
       <SnackbarProvider maxSnack={3}>
