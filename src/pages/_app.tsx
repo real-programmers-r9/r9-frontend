@@ -8,6 +8,8 @@ import Head from "next/head";
 import { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { SnackbarProvider } from "notistack";
+import { api } from "src/redux/services/api";
 import { Layout } from "../components/Layout";
 import { createEmotionCache } from "../libs/create-emotion-cache";
 import { theme } from "../styles/theme";
@@ -34,14 +36,37 @@ const MyApp = ({
       ></script>
     </Head>
     <CacheProvider value={emotionCache}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <SnackbarProvider maxSnack={3}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </SnackbarProvider>
     </CacheProvider>
   </>
+);
+
+MyApp.getInitialProps = wrapper.getInitialAppProps(
+  (store) =>
+    async ({ Component, ctx }) => {
+      if (ctx.req?.headers.cookie) {
+        store.dispatch(
+          api.endpoints.getMyInfo.initiate(ctx.req.headers.cookie)
+        );
+        await Promise.all(api.util.getRunningOperationPromises());
+      }
+
+      return {
+        pageProps: {
+          ...(Component.getInitialProps
+            ? await Component.getInitialProps({ ...ctx, store })
+            : {}),
+          pathname: ctx.pathname,
+        },
+      };
+    }
 );
 
 export default wrapper.withRedux(MyApp);
