@@ -1,4 +1,4 @@
-import { NextPage } from "next"; // what is this?
+import { NextPage } from "next";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import {
   Typography,
@@ -34,10 +34,9 @@ const hashtages1 = ["문서 작업", "매장 관리", "운전 가능"];
 const hashtages2 = ["주3회", "평일 오전", "오픈시간"];
 const hashtages3 = ["마포구", "종로구", "서울시"];
 
-// 타입정의 해야함
-const JobApplyPage = () => {
+const JobApplyPage: NextPage = () => {
   return (
-    <ContainerBox px={4}>
+    <ContainerBox sx={{ paddingX: 4 }}>
       <Card>
         {/* 지원자 정보 */}
         <Box pt={4}>
@@ -56,9 +55,9 @@ const JobApplyPage = () => {
         </Box>
         {/* 태그 */}
         <Box>
-          <Jobtags title={"나의 장점은?"} type={hashtages1} />
-          <Jobtags title={"선호 시간대"} type={hashtages2} />
-          <Jobtags title={"근무 가능 지역?"} type={hashtages3} />
+          <Jobtags title="나의 장점은?" type={hashtages1} />
+          <Jobtags title="선호 시간대" type={hashtages2} />
+          <Jobtags title="근무 가능 지역?" type={hashtages3} />
         </Box>
 
         <Box px={2}>
