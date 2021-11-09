@@ -23,11 +23,13 @@ import {
 const ContainerBox = styled(Container)(({ theme }) => ({
   display: "flex",
   width: "28vw",
+  height: "90vh",
   flexDirection: "column",
   alignItems: "center",
   // justifyContent: "center",
   textAlign: "center",
   backgroundColor: "#fff",
+  boxShadow: "0 1rem 2rem hsl(0 0% 0% / 20%)",
   position: "relative", // 하트표시 기준
   [theme.breakpoints.down("md")]: {
     width: "90vw",
