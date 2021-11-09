@@ -1,6 +1,5 @@
-import { Box } from "@mui/system";
 import React from "react";
-
+import { Box } from "@mui/system";
 import ReviewPostEditor from "src/components/review/ReviewPostEditor";
 
 const ReviewPostPage = () => {
@@ -8,7 +7,7 @@ const ReviewPostPage = () => {
     <>
       <Box
         sx={{
-          margin: "0 auto",
+          marginX: "auto",
           maxWidth: "md",
         }}
       >

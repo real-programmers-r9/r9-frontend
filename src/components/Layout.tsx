@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import Navbar from "./Navbar";
+import { Navbar } from "./navbar/Navbar";
 
 export interface LayoutProps {
   children: React.ReactNode;

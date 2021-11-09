@@ -1,11 +1,12 @@
-import { Box } from "@mui/system";
-import { useRouter } from "next/router";
 import React from "react";
+import { useRouter } from "next/router";
+import { Box } from "@mui/system";
 import ReviewDetail from "src/components/review/ReviewDetail";
 
 const ReviewPage = () => {
   const router = useRouter();
-  const id = router.query.id;
+  const { id } = router.query;
+
   return (
     <>
       <Box

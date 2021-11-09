@@ -17,7 +17,6 @@ const SearchWrapper = styled("div")({
   marginBottom: 2,
 });
 
-// 타입정의 해야함
 const Search = () => {
   const RECOMMENDATIONS = ["돌봄", "주3회", "시니어 일자리", "당일 알바"];
 

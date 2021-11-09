@@ -1,6 +1,6 @@
-import { Box } from "@mui/system";
-import { NextPage } from "next";
 import React from "react";
+import { NextPage } from "next";
+import { Box } from "@mui/system";
 import JobPostEditor from "src/components/job-post/JobPostEditor";
 
 const PostPage: NextPage = () => {
@@ -8,7 +8,7 @@ const PostPage: NextPage = () => {
     <>
       <Box
         sx={{
-          margin: "0 auto",
+          marginX: "auto",
           maxWidth: "md",
         }}
       >

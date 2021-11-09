@@ -7,7 +7,7 @@ import Document, {
   DocumentContext,
 } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
-import { createEmotionCache } from "../libs/create-emotion-cache";
+import { createEmotionCache } from "~/libs/create-emotion-cache";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -46,7 +46,12 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+          <script
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}`}
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

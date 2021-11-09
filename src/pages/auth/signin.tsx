@@ -1,16 +1,15 @@
 import React from "react";
 import { NextPage } from "next";
-import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Paper, Stack, Typography, TextField, Link } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useSnackbar } from "notistack";
 import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { usePostSignInMutation } from "src/redux/services/api";
-import { REGEXP_PASSWORD } from "../constants/regexp";
-import { SignInForm } from "../types/forms";
+import * as yup from "yup";
+import { useSignInMutation } from "~/redux/services/api";
+import { REGEXP_PASSWORD } from "~/constants/regexp";
+import { SignInForm } from "~/types/forms";
 
 const SignInPage: NextPage = () => {
   const router = useRouter();
@@ -33,14 +32,14 @@ const SignInPage: NextPage = () => {
     ),
   });
 
-  const [postSignIn, { isLoading }] = usePostSignInMutation();
+  const [signInMutation, { isLoading }] = useSignInMutation();
 
   const onSubmit = handleSubmit(async (value) => {
     if (isLoading) {
       return;
     }
 
-    await postSignIn(value)
+    await signInMutation(value)
       .unwrap()
       .then(() => {
         router.push("/");
@@ -103,9 +102,9 @@ const SignInPage: NextPage = () => {
               />
             )}
           />
-          <NextLink href="/">
-            <Link align="right">비밀번호를 잊으셨나요?</Link>
-          </NextLink>
+          <Link align="right" onClick={() => router.push("/")}>
+            비밀번호를 잊으셨나요?
+          </Link>
         </Stack>
         <LoadingButton
           type="submit"

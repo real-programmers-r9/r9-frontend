@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { api } from "./services/api";
-import { authSlice } from "./slices/auth-slice";
+import { api } from "~/redux/services/api";
+import { authSlice } from "~/redux/slices/auth-slice";
 import { jobSlice } from "./slices/job-slice";
 
 export const makeStore = () =>
@@ -12,9 +12,7 @@ export const makeStore = () =>
       job: jobSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({ serializableCheck: false }).concat(
-        r9Api.middleware
-      ),
+      getDefaultMiddleware({ serializableCheck: false }).concat(api.middleware),
   });
 
 export type AppStore = ReturnType<typeof makeStore>;

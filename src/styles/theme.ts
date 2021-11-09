@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { blue, green, grey, lightGreen } from "@mui/material/colors";
+import { blue, grey, teal } from "@mui/material/colors";
 
 export const theme = createTheme({
   breakpoints: {
@@ -33,9 +33,13 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: lightGreen[400],
-      dark: green[400],
-      contrastText: grey[100],
+      // 메인컬러 test중
+      main: teal[300],
+      dark: teal[500],
+      contrastText: grey[50],
+      // main: lightGreen[400],
+      // dark: green[400],
+      // contrastText: grey[100],
     },
     secondary: {
       main: blue[300],

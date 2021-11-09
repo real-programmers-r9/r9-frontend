@@ -1,24 +1,25 @@
 {
   "compilerOptions": {
-    /* Paths */
     "baseUrl": "./",
-    /* Project */
-    "target": "es5", //Specify ECMAScript target version
-    "lib": ["dom", "dom.iterable", "esnext"], //List of libaray files to be included in the compilation
-    "allowJs": true, //Allow JavaScript files to be complied
-    /* Imports */
-    "skipLibCheck": true, //Skip type checking of all declaration files
-    "forceConsistentCasingInFileNames": true, //Disallow inconsistently-cased references to the same file
-    "module": "esnext", // Specify modue code generation
-    "moduleResolution": "node", //Resolve modues using Node.js style
-    "resolveJsonModule": true, //Include modules imported with .json extension
-    "isolatedModules": true, //Unconditionally emit imports for unresolved files
-    /* Additional */
-    "strict": true, //Enbale all strict type checking options
-    "noEmit": true, //Do not emit output (meanin gdo not compile code, only perform type checking)
-    "esModuleInterop": true, //Disables namespace imports (import * as fs from "fs") and enables CJS/AMO/UMP sylted imports(import fs form "fs)
+    "target": "ES5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "~/*": ["./src/*"],
+      "~/public/*": ["./public/*"]
+    },
+    "types": ["kakao.maps.d.ts"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.config.js"],
   "exclude": ["node_modules", "dist", "coverage", ".next"]
