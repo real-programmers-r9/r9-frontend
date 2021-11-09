@@ -61,12 +61,17 @@ const Navbar = () => {
   const { user } = useSelector(selectAuth);
   const [postSignOut] = usePostSignOutMutation();
 
-  const handleSignOut = useCallback(async () => {
+  const handleClickSignOut = useCallback(async () => {
     await postSignOut(null)
       .unwrap()
       .then(() => router.push("/"));
     toggleOpen();
   }, [postSignOut, router, toggleOpen]);
+
+  const handleClickMyInfo = useCallback(() => {
+    router.push("/myinfo");
+    toggleOpen();
+  }, [router, toggleOpen]);
 
   return (
     <AppBar position="sticky">
@@ -109,7 +114,7 @@ const Navbar = () => {
                 <List>
                   {user ? (
                     <>
-                      <ListItem>
+                      <ListItem onClick={handleClickMyInfo}>
                         <ListItemAvatar>
                           <Avatar alt="profile" variant="rounded" />
                         </ListItemAvatar>
@@ -122,7 +127,7 @@ const Navbar = () => {
                         name="로그아웃"
                         href="/signup"
                         icon={<Logout />}
-                        onClick={handleSignOut}
+                        onClick={handleClickSignOut}
                       />
                     </>
                   ) : (
@@ -167,7 +172,7 @@ const Navbar = () => {
                       <Typography variant="body2">{user.name}</Typography>
                       <Typography variant="body2">{user.email}</Typography>
                     </Box>
-                    <Button color="inherit" onClick={handleSignOut}>
+                    <Button color="inherit" onClick={handleClickSignOut}>
                       로그아웃
                     </Button>
                   </Box>

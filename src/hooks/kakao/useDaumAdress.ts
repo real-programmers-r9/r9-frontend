@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { Address } from "react-daum-postcode";
 
-export type UseDaumAdress = [string, string, (data: any) => void];
+export type UseDaumAdress = [string, string, (data: Address) => void];
 
 export default function useDaumAdress(): UseDaumAdress {
   const [address, setAddress] = useState(""); // 우편번호
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
 
-  const onCompletePost = (data: any) => {
+  const onCompletePost = (data: Address) => {
     let fullAddr = data.address;
     let extraAddr = "";
 

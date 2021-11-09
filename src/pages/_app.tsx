@@ -9,6 +9,7 @@ import { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { SnackbarProvider } from "notistack";
+import { api } from "src/redux/services/api";
 import { Layout } from "../components/Layout";
 import { createEmotionCache } from "../libs/create-emotion-cache";
 import { theme } from "../styles/theme";
@@ -40,6 +41,27 @@ const MyApp = ({
       </SnackbarProvider>
     </CacheProvider>
   </>
+);
+
+MyApp.getInitialProps = wrapper.getInitialAppProps(
+  (store) =>
+    async ({ Component, ctx }) => {
+      if (ctx.req?.headers.cookie) {
+        store.dispatch(
+          api.endpoints.getMyInfo.initiate(ctx.req.headers.cookie)
+        );
+        await Promise.all(api.util.getRunningOperationPromises());
+      }
+
+      return {
+        pageProps: {
+          ...(Component.getInitialProps
+            ? await Component.getInitialProps({ ...ctx, store })
+            : {}),
+          pathname: ctx.pathname,
+        },
+      };
+    }
 );
 
 export default wrapper.withRedux(MyApp);
