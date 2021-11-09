@@ -4,8 +4,8 @@ import { Address } from "react-daum-postcode";
 export type UseDaumAdress = [string, string, (data: Address) => void];
 
 export default function useDaumAdress(): UseDaumAdress {
-  const [address, setAddress] = useState(""); // 우편번호
-  const [addressDetail, setAddressDetail] = useState(""); // 상세주소
+  const [zonecode, setZonecode] = useState(""); // 우편번호
+  const [address, setAddress] = useState(""); // 상세주소
 
   const onCompletePost = (data: Address) => {
     let fullAddr = data.address;
@@ -22,9 +22,9 @@ export default function useDaumAdress(): UseDaumAdress {
       fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
     }
 
-    setAddress(data.zonecode);
-    setAddressDetail(fullAddr);
+    setZonecode(data.zonecode);
+    setAddress(fullAddr);
   };
 
-  return [address, addressDetail, onCompletePost];
+  return [zonecode, address, onCompletePost];
 }
