@@ -6,7 +6,6 @@ import "moment/locale/ko";
 
 import React from "react";
 import Head from "next/head";
-import Script from "next/script";
 import { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -37,9 +36,6 @@ const MyApp = ({
       <meta name="keywords" content="아르바이트, 알바, 소일거리, 중장년" />
       <meta name="description" content="진짜 시니어를 위한 일자리" />
     </Head>
-    <Script
-      src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}`}
-    />
     <CacheProvider value={emotionCache}>
       <SnackbarProvider maxSnack={3}>
         <ThemeProvider theme={theme}>

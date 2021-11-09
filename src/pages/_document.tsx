@@ -46,7 +46,12 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+          <script
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}`}
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
