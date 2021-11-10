@@ -1,8 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router"; // 라우팅해주는 애
 import { styled } from "@mui/system"; // 전체 container 스타일링
-// import JobIcons from './components/application/JobIcons';
 import { NextPage } from "next";
+import JobIcons from "../components/application/JobIcons";
 import {
   Typography,
   Box,
@@ -62,7 +62,7 @@ const Detail: NextPage = () => {
           <Typography variant="button">4.12(12)</Typography>
         </StyledBox>
         {/* 아이콘들 */}
-        {/* <JobIcons /> */}
+        <JobIcons />
         <Box p={1} sx={{ textAlign: "left" }}>
           <Divider />
           <Typography

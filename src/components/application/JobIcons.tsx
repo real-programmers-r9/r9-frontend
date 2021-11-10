@@ -13,7 +13,7 @@ const StyledBox = styled(Box)({
   position: "relative", // 하트표시 기준
 });
 
-function JobIcons() {
+export default function JobIcons() {
   return (
     <div>
       <Container
@@ -54,12 +54,10 @@ function JobIcons() {
           <StyledBox id="navicon-4">
             <AccessTimeOutlined />
           </StyledBox>
-          <Typography sx={{ fontSize: "11.5px" }}>17:00~21:00</Typography>
-          <Typography sx={{ fontSize: "12px" }}>협의가능</Typography>
+          {/* <Typography sx={{ fontSize: "11.5px" }}>17:00~21:00</Typography> */}
+          <Typography variant="subtitle2">협의가능</Typography>
         </Box>
       </Container>
     </div>
   );
 }
-
-export default Icons;
