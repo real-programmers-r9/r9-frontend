@@ -9,7 +9,7 @@ const initialState: IJobState = {
   deadline: new Date(),
   detail: "",
   personnel: 0,
-  age: 0,
+  age: 50,
   workType: "",
   adress: "",
   payment: PayMentsMethod.PERHOUR,
