@@ -1,8 +1,11 @@
 import React from "react";
-import { Paper, Stack, Typography } from "@mui/material";
-import MiniSearch from "../home/MiniSearch";
+import { Link, Paper, Rating, Stack, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import useReviewEffect from "~/hooks/reviews/useReviewEffect";
 
 const ReviewList = () => {
+  const { reviews, setReviews } = useReviewEffect();
+
   return (
     <Paper sx={{ padding: "25px" }}>
       <Typography align="center" variant="h4" component="div">
@@ -10,8 +13,7 @@ const ReviewList = () => {
       </Typography>
 
       <Stack spacing={2} py={4}>
-        <MiniSearch />
-        {/* {reviews.map((review: any) => (
+        {reviews.map((review: any) => (
           <Box
             key={review.id}
             sx={{
@@ -45,7 +47,7 @@ const ReviewList = () => {
               />
             </Box>
           </Box>
-        ))} */}
+        ))}
       </Stack>
     </Paper>
   );
