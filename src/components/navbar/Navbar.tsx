@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { styled } from "@mui/system";
 import {
   AppBar,
   Box,
@@ -30,7 +31,13 @@ export interface NavItem {
   icon?: React.ReactElement;
 }
 
-export const navItems: NavItem[] = [{ name: "홈", href: "/", icon: <Home /> }];
+// styled background-added
+const StyledToolbar = styled(Toolbar)({
+// background: "linear-gradient(153deg, rgba(147,221,227,1) 8%, rgba(147,232,175,1) 74%, rgba(201,251,126,1) 100%)",
+});
+
+
+export const navItems: NavItem[] = [{ name: "R9", href: "/", icon: <Home /> }];
 
 export const Navbar = () => {
   const router = useRouter();
@@ -56,7 +63,7 @@ export const Navbar = () => {
 
   return (
     <AppBar position="sticky">
-      <Toolbar>
+      <StyledToolbar>
         <Stack
           width="100%"
           direction="row"
@@ -175,7 +182,7 @@ export const Navbar = () => {
             </>
           )}
         </Stack>
-      </Toolbar>
+      </StyledToolbar>
     </AppBar>
   );
 };

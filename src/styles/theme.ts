@@ -1,10 +1,10 @@
 import { createTheme } from "@mui/material";
-import { blue, grey, teal } from "@mui/material/colors";
+import { blue, grey, green, amber,lime } from "@mui/material/colors";
 
 export const theme = createTheme({
-  breakpoints: {
-    values: { xs: 0, sm: 500, md: 900, lg: 1200, xl: 1536 },
-  },
+  // breakpoints: {
+  //   values: { xs: 0, sm: 420, md: 765, lg: 1200, xl: 1536 },
+  // },
   typography: {
     fontFamily: [
       "-apple-system",
@@ -34,17 +34,17 @@ export const theme = createTheme({
   palette: {
     primary: {
       // 메인컬러 test중
-      main: teal[300],
-      dark: teal[500],
-      contrastText: grey[50],
+      main: green[400],
+      dark: green[600],
+      contrastText:grey[50]
       // main: lightGreen[400],
       // dark: green[400],
       // contrastText: grey[100],
     },
     secondary: {
-      main: blue[300],
-      dark: blue[700],
-      contrastText: grey[100],
+      main: lime[300],
+      dark: lime[500],
+      contrastText: grey[900],
     },
   },
 });
