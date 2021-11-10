@@ -1,4 +1,4 @@
-import { Box, Chip, Grid, Stack, Button, Typography } from "@mui/material";
+import { Box, Chip, Grid,Paper, Stack, Button, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { styled } from "@mui/system";
 import SortButtons from "./SortButtons";
@@ -16,7 +16,7 @@ interface Data {
   payRate: number;
 }
 
-// mock data 로 바꾸기
+// 실제 데이터로 바꾸기
 const data: Data[] = [
   {
     id: 1,
@@ -68,6 +68,13 @@ const data: Data[] = [
   },
 ];
 
+const StyledBox = styled(Paper)(({ theme }) => ({
+  paddingTop:20,
+  [theme.breakpoints.down("md")]: {
+    paddingTop:10
+  },
+}));
+
 const Cards = styled(Grid)({
   marginTop: 10,
   display: "flex",
@@ -88,11 +95,11 @@ const JobCard = () => {
       {data.map((item) => {
         return (
           <Grid item xs={8} md={5} key={item.id}>
-            <Box sx={{ p: 2, background: "#fff" }}>
-              <Box sx={{ m: 1 }}>
+            <StyledBox>
+              <Box sx={{ mx: 2 }}>
                 <Grid container alignItems="center">
                   <Grid item xs>
-                    <Typography gutterBottom variant="h6" component="div">
+                    <Typography alingn="center" gutterBottom variant="h6" component="div">
                       {item.companyName}
                     </Typography>
                   </Grid>
@@ -116,22 +123,20 @@ const JobCard = () => {
                   <br />
                   {item.calutatePayBy}: {item.payRate.toLocaleString()}
                 </Typography>
-              </Box>
-              {/* 태그 */}
-              <Box sx={{ m: 1 }}>
+
+                <Box pt={1}>
                 <Stack direction="row" spacing={1}>
                   <Chip label="캐셔" />
                   <Chip label="주3회" />
                 </Stack>
               </Box>
-              <Button
-                onClick={() => router.push("/detail")}
-                fullWidth
-                variant="contained"
-              >
-                상세보기
-              </Button>
-            </Box>
+              </Box>
+              <Box mx={1}>
+          <Button onClick={() => router.push("/detail2")} fullWidth variant="contained" color="secondary" size="large">
+            상세보기
+          </Button>
+        </Box>
+</StyledBox>
           </Grid>
         );
       })}
