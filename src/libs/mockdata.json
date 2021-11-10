@@ -1,0 +1,22 @@
+jobs:[{
+  "hashtags": [
+    "string"
+  ],
+  "title": "string",
+  "deadline": "2021-11-10T01:53:21.492Z",
+  "detail": "string",
+  "personnel": 0,
+  "age": 0,
+  "workType": "string",
+  "adress": "string",
+  "payment": "string",
+  "workingDay": [
+    "string"
+  ],
+  "startTime": "2021-11-10T01:53:21.492Z",
+  "endTime": "2021-11-10T01:53:21.492Z",
+  "wage": 0,
+  "status": "string"
+},
+{}
+]

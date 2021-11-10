@@ -1,4 +1,12 @@
-import { Box, Chip, Grid,Paper, Stack, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Chip,
+  Grid,
+  Paper,
+  Stack,
+  Button,
+  Typography,
+} from "@mui/material";
 import { useRouter } from "next/router";
 import { styled } from "@mui/system";
 import SortButtons from "./SortButtons";
@@ -14,64 +22,13 @@ interface Data {
   workFinishTime: string;
   calutatePayBy: string;
   payRate: number;
+  hashtags: string[]; // 추가
 }
 
-// 실제 데이터로 바꾸기
-const data: Data[] = [
-  {
-    id: 1,
-    location: "성남시 분당구",
-    companyName: "이마트24 서현서머점",
-    companyCategory: "편의점",
-    role: "파트타임",
-    workDay: ["월", "수", "금"],
-    workStartTime: "10:00",
-    workFinishTime: "16:00",
-    calutatePayBy: "시급",
-    payRate: 8720,
-  },
-  {
-    id: 2,
-    location: "서울 동작구",
-    companyName: "부산어묵 노량진점",
-    companyCategory: "일반음식점",
-    role: "단기알바",
-    workDay: ["요일협의"],
-    workStartTime: "18:00",
-    workFinishTime: "23:00",
-    calutatePayBy: "시급",
-    payRate: 11000,
-  },
-  {
-    id: 3,
-    location: "안산시 상록구",
-    companyName: "닥엔돈스",
-    companyCategory: "일반음식점",
-    role: "파트타임",
-    workDay: ["스케쥴 협의"],
-    workStartTime: "",
-    workFinishTime: "",
-    calutatePayBy: "시급",
-    payRate: 10000,
-  },
-  {
-    id: 4,
-    location: "서울 종로구",
-    companyName: "인크루트알바콜",
-    companyCategory: "음성수집",
-    role: "단기알바",
-    workDay: ["평일"],
-    workStartTime: "09:00",
-    workFinishTime: "18:00",
-    calutatePayBy: "건별",
-    payRate: 200,
-  },
-];
-
 const StyledBox = styled(Paper)(({ theme }) => ({
-  paddingTop:20,
+  paddingTop: 20,
   [theme.breakpoints.down("md")]: {
-    paddingTop:10
+    paddingTop: 10,
   },
 }));
 
@@ -83,7 +40,7 @@ const Cards = styled(Grid)({
   justifyContent: "center",
 });
 
-const JobCard = () => {
+const JobCard = ({data}) => {
   const router = useRouter();
 
   return (
@@ -99,7 +56,12 @@ const JobCard = () => {
               <Box sx={{ mx: 2 }}>
                 <Grid container alignItems="center">
                   <Grid item xs>
-                    <Typography alingn="center" gutterBottom variant="h6" component="div">
+                    <Typography
+                      align="center"
+                      gutterBottom
+                      variant="h6"
+                      component="div"
+                    >
                       {item.companyName}
                     </Typography>
                   </Grid>
@@ -125,18 +87,26 @@ const JobCard = () => {
                 </Typography>
 
                 <Box pt={1}>
-                <Stack direction="row" spacing={1}>
-                  <Chip label="캐셔" />
-                  <Chip label="주3회" />
-                </Stack>
-              </Box>
+                  <Stack direction="row" spacing={1}>
+                    <Chip label="캐셔" />
+                    <Chip label="주3회" />
+                  </Stack>
+                </Box>
               </Box>
               <Box mx={1}>
-          <Button onClick={() => router.push("/detail2")} fullWidth variant="contained" color="secondary" size="large">
-            상세보기
-          </Button>
-        </Box>
-</StyledBox>
+                         {" "}
+                <Button
+                  onClick={() => router.push("/detail2")}
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                >
+                              상세보기          {" "}
+                </Button>
+                       {" "}
+              </Box>
+            </StyledBox>
           </Grid>
         );
       })}
