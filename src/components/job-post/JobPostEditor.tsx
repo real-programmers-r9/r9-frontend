@@ -21,6 +21,7 @@ import { selectJob } from "~/redux/slices/job-slice";
 import { useToggle } from "~/hooks/useToggle";
 import useDaumAdress from "~/hooks/kakao/useDaumAdress";
 import useJobForm from "~/hooks/job/useJobForm";
+import { Address } from "react-daum-postcode";
 
 interface EditorProps {
   isEdit: boolean;
@@ -38,7 +39,7 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
   } = useJobForm();
   const { title, workType, payment, personnel, age } = job;
 
-  const onCompletePostAndToggleModal = (data: any) => {
+  const onCompletePostAndToggleModal = (data: Address) => {
     onCompletePost(data);
     onToggleModal();
   };
