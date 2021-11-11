@@ -15,5 +15,5 @@ export default function useReviewEffect() {
     getData();
   }, [setReviews]);
 
-  return {reviews, setReviews};
+  return { reviews, setReviews };
 }

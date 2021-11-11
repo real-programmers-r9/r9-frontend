@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import useReviewEffect from "~/hooks/reviews/useReviewEffect";
 
 const ReviewList = () => {
-  const { reviews, setReviews } = useReviewEffect();
+  const { reviews } = useReviewEffect();
 
   return (
     <Paper sx={{ padding: "25px" }}>
