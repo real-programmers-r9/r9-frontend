@@ -1,6 +1,7 @@
 import React from "react";
 import { Box } from "@mui/system";
 import ReviewList from "~/components/review/ReviewList";
+import MiniSearch from "~/components/home/MiniSearch";
 
 const ReviewPage = () => {
   return (
@@ -10,6 +11,7 @@ const ReviewPage = () => {
         maxWidth: "md",
       }}
     >
+      <MiniSearch />
       <ReviewList />
     </Box>
   );

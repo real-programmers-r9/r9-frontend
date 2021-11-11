@@ -18,6 +18,12 @@ import {
   LocalPhoneOutlined,
   RoomOutlined,
 } from "@mui/icons-material";
+import dynamic from "next/dynamic";
+
+const DynamicComponentWithNoSSR = dynamic(
+  () => import("../components/review/ReviewCarousel"),
+  { ssr: false }
+);
 
 const ContainerBox = styled(Container)({
   display: "flex",
@@ -104,6 +110,9 @@ const Detail: NextPage = () => {
         </Box>
         {/* 카카오 지도 Api */}
         <Container className="map">{/* ? */}</Container>
+        <br />
+        <br />
+        <DynamicComponentWithNoSSR />
         <br />
         <Button
           mb={4}
