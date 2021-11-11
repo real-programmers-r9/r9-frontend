@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { blue, grey, green, amber,lime } from "@mui/material/colors";
+import { grey, green, lime } from "@mui/material/colors";
 
 export const theme = createTheme({
   // breakpoints: {
@@ -36,7 +36,7 @@ export const theme = createTheme({
       // 메인컬러 test중
       main: green[400],
       dark: green[600],
-      contrastText:grey[50]
+      contrastText: grey[50],
       // main: lightGreen[400],
       // dark: green[400],
       // contrastText: grey[100],

@@ -33,9 +33,8 @@ export interface NavItem {
 
 // styled background-added
 const StyledToolbar = styled(Toolbar)({
-// background: "linear-gradient(153deg, rgba(147,221,227,1) 8%, rgba(147,232,175,1) 74%, rgba(201,251,126,1) 100%)",
+  // background: "linear-gradient(153deg, rgba(147,221,227,1) 8%, rgba(147,232,175,1) 74%, rgba(201,251,126,1) 100%)",
 });
-
 
 export const navItems: NavItem[] = [{ name: "R9", href: "/", icon: <Home /> }];
 
@@ -97,7 +96,7 @@ export const Navbar = () => {
                         key={name}
                         onClick={() => router.push(href)}
                       >
-                        {icon ?? <ListItemIcon>{icon}</ListItemIcon>}
+                        <ListItemIcon>{icon}</ListItemIcon>
                         <ListItemText>{name} </ListItemText>
                       </ListItemButton>
                     ))}

@@ -6,8 +6,7 @@ import { User } from "~/types/user";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    // http://r9-backend.herokuapp.com
-    baseUrl: "http://localhost:4000",
+    baseUrl: process.env.NEXT_PUBLIC_BACKEND_BASEURL,
     credentials: "include",
   }),
   extractRehydrationInfo: (action, { reducerPath }) => {
