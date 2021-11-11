@@ -52,7 +52,7 @@ const workingTimes = [
   "#프리",
 ];
 
-const Tag = styled(Chip)(({ theme }) => ({
+export const Tag = styled(Chip)(({ theme }) => ({
   width: "100%",
   ":hover": {
     backgroundColor: theme.palette.primary.light,
