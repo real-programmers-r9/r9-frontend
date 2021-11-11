@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 
-const occupations = [
+const OCCUPATIONS = [
   "외식﹒음료",
   "매장관리﹒판매",
   "서비스",
@@ -30,9 +30,9 @@ const occupations = [
   "교육﹒강사",
 ];
 
-const ages = ["#2학년", "#3학년", "#4학년", "#5학년", "#6학년", "#7학년"];
+const AGES = ["#2학년", "#3학년", "#4학년", "#5학년", "#6학년", "#7학년"];
 
-const advantages = [
+const ADVANTAGES = [
   "#코딩 가능",
   "#간호 가능",
   "#배달 가능",
@@ -79,7 +79,7 @@ const SignUpDetailPage: NextPage = () => {
         <Stack spacing={1}>
           <Typography>나의 정보는?</Typography>
           <Grid container>
-            {ages.map((item) => (
+            {AGES.map((item) => (
               <Grid key={item} item xs={4} p={0.25}>
                 <Tag label={item} />
               </Grid>
@@ -89,7 +89,7 @@ const SignUpDetailPage: NextPage = () => {
         <Stack spacing={1}>
           <Typography>나의 장점은?</Typography>
           <Grid container>
-            {advantages.map((item) => (
+            {ADVANTAGES.map((item) => (
               <Grid key={item} item xs={4} p={0.25}>
                 <Tag label={item} />
               </Grid>
@@ -117,7 +117,7 @@ const SignUpDetailPage: NextPage = () => {
                   id="occupations"
                   label="업직종"
                 >
-                  {occupations.map((item) => (
+                  {OCCUPATIONS.map((item) => (
                     <MenuItem key={item} value={item}>
                       {item}
                     </MenuItem>

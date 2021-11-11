@@ -21,9 +21,9 @@ import { useToggle } from "~/hooks/useToggle";
 import { selectAuth } from "~/redux/slices/auth-slice";
 import { Tag } from "./auth/signupdetail";
 
-const areas = ["#지역 1", "#지역 2", "#지역 3"];
-const advantages = ["#회계 가능", "#운전 가능", "#빠른 계산 가능"];
-const workingTimes = ["#주 3회", "#주간", "#평일"];
+const AREAS = ["#지역 1", "#지역 2", "#지역 3"];
+const ADVANTAGES = ["#회계 가능", "#운전 가능", "#빠른 계산 가능"];
+const WORKING_TIMES = ["#주 3회", "#주간", "#평일"];
 
 const MyInfoPage: NextPage = () => {
   const router = useRouter();
@@ -177,7 +177,7 @@ const MyInfoPage: NextPage = () => {
             <Stack spacing={1}>
               <Typography>근무 가능 지역</Typography>
               <Grid container>
-                {areas.map((item) => (
+                {AREAS.map((item) => (
                   <Grid key={item} item xs={4} p={0.25}>
                     <Tag label={item} />
                   </Grid>
@@ -187,7 +187,7 @@ const MyInfoPage: NextPage = () => {
             <Stack spacing={1}>
               <Typography>나의 장점</Typography>
               <Grid container>
-                {advantages.map((item) => (
+                {ADVANTAGES.map((item) => (
                   <Grid key={item} item xs={4} p={0.25}>
                     <Tag label={item} />
                   </Grid>
@@ -197,7 +197,7 @@ const MyInfoPage: NextPage = () => {
             <Stack spacing={1}>
               <Typography>선호 근무시간</Typography>
               <Grid container>
-                {workingTimes.map((item) => (
+                {WORKING_TIMES.map((item) => (
                   <Grid key={item} item xs={4} p={0.25}>
                     <Tag label={item} />
                   </Grid>
