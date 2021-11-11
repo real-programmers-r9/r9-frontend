@@ -1,12 +1,18 @@
-import React from "react";
-import Location from "~/components/application/Location";
+import React, { useEffect, useState } from "react";
+import { findJobsAPI } from "~/libs/api/job";
 
 function TestPage() {
-  return (
-    <div>
-      <Location />
-    </div>
-  );
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    const fatchData = async () => {
+      const data = await findJobsAPI().catch(console.error);
+      setData(data);
+    };
+    fatchData();
+  }, []);
+
+  return <div>{JSON.stringify(data)}</div>;
 }
 
 export default TestPage;

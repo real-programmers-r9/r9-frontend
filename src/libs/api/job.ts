@@ -1,10 +1,9 @@
-import axios from "axios";
 import { IJobState } from "src/types/stores";
 import client from "./client";
 
 const url = {
   GET_JOBS: "/jobs",
-  GET_JOBID:""
+  GET_JOBID: "",
 };
 
 /** 공고 생성 */
@@ -15,7 +14,7 @@ export const createJobAPI = async (job: IJobState) => {
 
 /** 공고 리스트 호출 */
 export const findJobsAPI = async () => {
-  const resposne = await axios.get(url.GET_JOBS);
+  const resposne = await client.get(url.GET_JOBS);
   return resposne.data;
 };
 
