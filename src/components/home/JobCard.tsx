@@ -92,6 +92,7 @@ const JobCard = ({ data }: JobCardProps) => {
                   variant="contained"
                   color="secondary"
                   size="large"
+                  sx={{ margin: 2 }}
                 >
                   상세보기
                 </Button>
