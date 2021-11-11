@@ -13,6 +13,7 @@ import {
   Select,
   Button,
 } from "@mui/material";
+import { useRouter } from "next/router";
 
 const occupations = [
   "외식﹒음료",
@@ -65,6 +66,8 @@ export const Tag = styled(Chip)(({ theme }) => ({
 }));
 
 const SignUpDetailPage: NextPage = () => {
+  const router = useRouter();
+
   return (
     <Paper sx={{ padding: 2 }}>
       <Stack spacing={4}>
@@ -136,7 +139,11 @@ const SignUpDetailPage: NextPage = () => {
             </Grid>
           </Grid>
         </Stack>
-        <Button fullWidth variant="contained">
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={() => router.push("/auth/signin")}
+        >
           확인
         </Button>
       </Stack>
