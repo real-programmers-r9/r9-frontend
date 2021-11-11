@@ -85,14 +85,14 @@ const JobCard = ({ data }: JobCardProps) => {
                   </Stack>
                 </Box>
               </Box>
-              <Box mx={1}>
+              <Box mx={2}>
                 <Button
                   onClick={() => router.push("/detail2")}
                   fullWidth
                   variant="contained"
                   color="secondary"
                   size="large"
-                  sx={{ margin: 2 }}
+                  sx={{ my: 2 }}
                 >
                   상세보기
                 </Button>
