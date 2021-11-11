@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router"; // 라우팅해주는 애
+import dynamic from "next/dynamic";
 import { styled } from "@mui/system"; // 전체 container 스타일링
 import { NextPage } from "next";
 import {
@@ -18,6 +19,11 @@ import {
   RoomOutlined,
 } from "@mui/icons-material";
 import JobIcons from "~/components/application/JobIcons";
+
+const DynamicComponentWithNoSSR = dynamic(
+  () => import("../components/review/ReviewCarousel"),
+  { ssr: false }
+);
 
 const ContainerBox = styled(Container)({
   display: "flex",
@@ -103,6 +109,9 @@ const Detail: NextPage = () => {
         </Box>
         {/* 카카오 지도 Api */}
         <Container className="map">{/* ? */}</Container>
+        <br />
+        <br />
+        <DynamicComponentWithNoSSR />
         <br />
         <Button
           fullWidth
