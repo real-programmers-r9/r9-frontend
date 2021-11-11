@@ -10,20 +10,7 @@ import {
 import { useRouter } from "next/router";
 import { styled } from "@mui/system";
 import SortButtons from "./SortButtons";
-
-interface Data {
-  id: number;
-  location: string;
-  companyName: string;
-  companyCategory: string;
-  role: string;
-  workDay: string[];
-  workStartTime: string;
-  workFinishTime: string;
-  calutatePayBy: string;
-  payRate: number;
-  hashtags: string[]; // 추가
-}
+import { Data } from "~/pages";
 
 const StyledBox = styled(Paper)(({ theme }) => ({
   paddingTop: 20,
@@ -40,7 +27,11 @@ const Cards = styled(Grid)({
   justifyContent: "center",
 });
 
-const JobCard = ({data}) => {
+export interface JobCardProps {
+  data: Data[];
+}
+
+const JobCard = ({ data }: JobCardProps) => {
   const router = useRouter();
 
   return (
@@ -88,13 +79,13 @@ const JobCard = ({data}) => {
 
                 <Box pt={1}>
                   <Stack direction="row" spacing={1}>
-                    <Chip label="캐셔" />
-                    <Chip label="주3회" />
+                    {item.hashtags.map((hashtag) => (
+                      <Chip key={hashtag} label={hashtag} />
+                    ))}
                   </Stack>
                 </Box>
               </Box>
               <Box mx={1}>
-                         {" "}
                 <Button
                   onClick={() => router.push("/detail2")}
                   fullWidth
@@ -102,9 +93,8 @@ const JobCard = ({data}) => {
                   color="secondary"
                   size="large"
                 >
-                              상세보기          {" "}
+                  상세보기
                 </Button>
-                       {" "}
               </Box>
             </StyledBox>
           </Grid>

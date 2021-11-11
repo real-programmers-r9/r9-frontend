@@ -2,7 +2,6 @@ import React from "react";
 import { useRouter } from "next/router"; // 라우팅해주는 애
 import { styled } from "@mui/system"; // 전체 container 스타일링
 import { NextPage } from "next";
-import JobIcons from "../components/application/JobIcons";
 import {
   Typography,
   Box,
@@ -18,6 +17,7 @@ import {
   LocalPhoneOutlined,
   RoomOutlined,
 } from "@mui/icons-material";
+import JobIcons from "~/components/application/JobIcons";
 
 const ContainerBox = styled(Container)({
   display: "flex",
@@ -38,7 +38,6 @@ const JOBDESC1 = [
   "학력 무관 | 경력무관",
   "2021.12.31까지 채용가능",
 ];
-const JOBDESC2 = ["경력자 우대", "점심시간 카운터", "저녁시간 홀서빙"];
 
 const Detail: NextPage = () => {
   const router = useRouter(); // 라우팅 선언
@@ -106,11 +105,11 @@ const Detail: NextPage = () => {
         <Container className="map">{/* ? */}</Container>
         <br />
         <Button
-          mb={4}
           fullWidth
           onClick={() => router.push("/jobapply")}
           variant="contained"
           color="secondary"
+          sx={{ mb: 4 }}
         >
           지원하기
         </Button>
