@@ -37,3 +37,12 @@ export interface IJobState {
   wage: number;
   status: JobStatus;
 }
+
+export interface IReviewState {
+  writer: User | null;
+  title: string;
+  startDate: Date;
+  endDate: Date;
+  content: string;
+  rating: number;
+}
