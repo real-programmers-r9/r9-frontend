@@ -44,8 +44,10 @@ const SignInPage: NextPage = () => {
       .then(() => {
         router.push("/");
       })
-      .catch(() => {
-        enqueueSnackbar("error", { variant: "error" });
+      .catch((error) => {
+        enqueueSnackbar(error.message || "예기치 못한 에러가 발생했습니다.", {
+          variant: "error",
+        });
       });
   });
 
