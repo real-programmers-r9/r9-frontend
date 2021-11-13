@@ -15,6 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import { MobileDatePicker } from "@mui/lab";
+import { useSnackbar } from "notistack";
 import { Controller } from "react-hook-form";
 import DaumPostcode from "react-daum-postcode";
 import { useToggle } from "~/hooks/useToggle";
@@ -28,6 +29,7 @@ export interface MyInfoPageProps {
 }
 
 const MyInfoPage: NextPage<MyInfoPageProps> = ({ user }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [isModal, toggleModal] = useToggle();
   const { handleSubmit, control, setValue } = useEditProfileForm({
     defaultValues: {
@@ -51,7 +53,21 @@ const MyInfoPage: NextPage<MyInfoPageProps> = ({ user }) => {
       return;
     }
 
-    patchUserMeMutation({ data });
+    patchUserMeMutation({ data })
+      .unwrap()
+      .then(() => {
+        enqueueSnackbar("내 정보가 변경되었습니다.", {
+          variant: "info",
+        });
+      })
+      .catch((error) => {
+        enqueueSnackbar(
+          error.data.message || "예기치 못한 에러가 발생했습니다.",
+          {
+            variant: "error",
+          }
+        );
+      });
   });
 
   return (
