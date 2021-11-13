@@ -1,10 +1,10 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Box, Container } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { Navbar } from "./navbar/Navbar";
 
 export interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const Layout = ({ children }: LayoutProps) => {

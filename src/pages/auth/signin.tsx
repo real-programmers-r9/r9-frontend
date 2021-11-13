@@ -4,50 +4,34 @@ import { useRouter } from "next/router";
 import { Paper, Stack, Typography, TextField, Link } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useSnackbar } from "notistack";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useSignInMutation } from "~/redux/services/api";
-import { REGEXP_PASSWORD } from "~/constants/regexp";
-import { SignInForm } from "~/types/forms";
+import { Controller } from "react-hook-form";
+import { usePostAuthMutation } from "~/redux/services/api";
+import { useSignInForm } from "~/hooks/forms/useSignInForm";
 
 const SignInPage: NextPage = () => {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
-  const { handleSubmit, control } = useForm<SignInForm>({
-    resolver: yupResolver(
-      yup.object().shape({
-        email: yup
-          .string()
-          .email("이메일 형식으로 입력해주세요!")
-          .required("이메일을 입력해주세요!"),
-        password: yup
-          .string()
-          .matches(
-            REGEXP_PASSWORD,
-            "비밀번호는 영문 대소문자, 숫자, 특수문자를 모두 포함하여 8글자 이상이여야합니다!"
-          )
-          .required("비밀번호를 입력해주세요!"),
-      })
-    ),
-  });
+  const { handleSubmit, control } = useSignInForm();
 
-  const [signInMutation, { isLoading }] = useSignInMutation();
+  const [postAuthMutation, { isLoading }] = usePostAuthMutation();
 
-  const onSubmit = handleSubmit(async (value) => {
+  const onSubmit = handleSubmit(async (data) => {
     if (isLoading) {
       return;
     }
 
-    await signInMutation(value)
+    await postAuthMutation(data)
       .unwrap()
       .then(() => {
         router.push("/");
       })
       .catch((error) => {
-        enqueueSnackbar(error.message || "예기치 못한 에러가 발생했습니다.", {
-          variant: "error",
-        });
+        enqueueSnackbar(
+          error.data.message || "예기치 못한 에러가 발생했습니다.",
+          {
+            variant: "error",
+          }
+        );
       });
   });
 
@@ -82,6 +66,7 @@ const SignInPage: NextPage = () => {
                 type="email"
                 label="이메일"
                 fullWidth
+                size="small"
                 value={value || ""}
                 error={!!error}
                 helperText={error?.message}
@@ -97,6 +82,7 @@ const SignInPage: NextPage = () => {
                 type="password"
                 label="비밀번호"
                 fullWidth
+                size="small"
                 value={value || ""}
                 error={!!error}
                 helperText={error?.message}
