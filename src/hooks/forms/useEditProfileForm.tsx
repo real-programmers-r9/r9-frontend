@@ -2,10 +2,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, UseFormProps } from "react-hook-form";
 import * as yup from "yup";
 import { REGEXP_PASSWORD } from "~/constants/regexp";
+import { SignUpForm } from "~/types/forms";
 import { Gender, Role } from "~/types/user";
 
+export interface EditProfileForm extends Partial<SignUpForm> {
+  profileImage?: FileList | string;
+}
+
 export const useEditProfileForm = (props: UseFormProps) =>
-  useForm({
+  useForm<EditProfileForm>({
     resolver: yupResolver(
       yup.object().shape({
         role: yup
@@ -26,6 +31,7 @@ export const useEditProfileForm = (props: UseFormProps) =>
             .oneOf([yup.ref("password"), null], "비밀번호가 일치하지 않습니다!")
             .required("비밀번호 재입력을 입력해주세요!"),
         }),
+        profileImage: yup.mixed(),
         gender: yup
           .mixed<Gender>()
           .oneOf(Object.values(Gender), "유형이 일치하지 않습니다."),

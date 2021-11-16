@@ -31,3 +31,10 @@ export interface User {
   updatedAt: Date;
   deletedAt?: Date;
 }
+export interface ProfileImage {
+  ETag: string;
+  Location: string;
+  key: string;
+  Key: string;
+  Bucket: string;
+}
