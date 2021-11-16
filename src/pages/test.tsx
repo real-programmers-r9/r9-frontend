@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { findJobs } from "~/libs/api/jobs";
+import { findJobs } from "~/libs/api/job";
 
 function TestPage() {
   const [data, setData] = useState<any>(null);

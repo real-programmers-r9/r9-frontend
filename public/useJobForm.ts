@@ -1,9 +1,9 @@
 import { SelectChangeEvent } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createJob, deleteJob } from "~/libs/api/jobs";
-import { selectJob, setJob } from "src/redux/slices/job-slice";
-import { PayMentsMethod } from "src/types/enums";
+import { createJob, deleteJob } from "~/libs/api/job";
+import { selectJob, setJob } from "~/redux/slices/job-slice";
+import { PayMentsMethod } from "~/types/enums";
 
 export default function useJobForm() {
   const dispatch = useDispatch();

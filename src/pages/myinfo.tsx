@@ -16,22 +16,25 @@ import {
 } from "@mui/material";
 import { MobileDatePicker } from "@mui/lab";
 import { useSnackbar } from "notistack";
+import { useSelector } from "react-redux";
 import { Controller } from "react-hook-form";
 import DaumPostcode from "react-daum-postcode";
 import { useToggle } from "~/hooks/useToggle";
-import { wrapper } from "~/redux/store";
+// import { wrapper } from "~/redux/store";
 import { useEditProfileForm } from "~/hooks/forms/useEditProfileForm";
 import { Gender, Role, User } from "~/types/user";
 import {
   usePatchUserMeMutation,
   usePostUploadMutation,
 } from "~/redux/services/api";
+import { selectAuth } from "~/redux/slices/auth-slice";
 
 export interface MyInfoPageProps {
   user: User;
 }
 
-const MyInfoPage: NextPage<MyInfoPageProps> = ({ user }) => {
+const MyInfoPage: NextPage = (/* { user } */) => {
+  const { user } = useSelector(selectAuth) as any;
   const { enqueueSnackbar } = useSnackbar();
   const [isModal, toggleModal] = useToggle();
   const { handleSubmit, control, setValue, register } = useEditProfileForm({
@@ -350,23 +353,23 @@ const MyInfoPage: NextPage<MyInfoPageProps> = ({ user }) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
-    const { user } = store.getState().auth;
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) => async () => {
+//     const { user } = store.getState().auth;
 
-    if (!user) {
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/auth/signin",
-        },
-      };
-    }
+//     if (!user) {
+//       return {
+//         redirect: {
+//           permanent: false,
+//           destination: "/auth/signin",
+//         },
+//       };
+//     }
 
-    return {
-      props: { user },
-    };
-  }
-);
+//     return {
+//       props: { user },
+//     };
+//   }
+// );
 
 export default MyInfoPage;
