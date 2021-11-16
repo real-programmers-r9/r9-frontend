@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HYDRATE } from "next-redux-wrapper";
+import { EditProfileForm } from "~/hooks/forms/useEditProfileForm";
 import { SignInForm, SignUpForm } from "~/types/forms";
-import { User } from "~/types/user";
+import { ProfileImage, User } from "~/types/user";
 
 export const api = createApi({
   reducerPath: "api",
@@ -81,12 +82,24 @@ export const api = createApi({
         };
       },
     }),
-    patchUserById: builder.mutation<void, { id: string; data: any }>({
+    patchUserById: builder.mutation<
+      void,
+      { id: string; data: EditProfileForm }
+    >({
       query: ({ id, data }) => {
         const { confirmPassword, ...body } = data;
         return {
           url: `users/${id}`,
           method: "PATCH",
+          body,
+        };
+      },
+    }),
+    postUpload: builder.mutation<ProfileImage, FormData>({
+      query: (body) => {
+        return {
+          url: "uploads",
+          method: "POST",
           body,
         };
       },
@@ -107,6 +120,7 @@ export const {
   usePostUserMutation,
   usePatchUserByIdMutation,
   usePatchUserMeMutation,
+  usePostUploadMutation,
   util: { getRunningOperationPromise, getRunningOperationPromises },
 } = api;
 
@@ -120,4 +134,5 @@ export const {
   postUser,
   patchUserById,
   patchUserMe,
+  postUpload,
 } = api.endpoints;

@@ -22,7 +22,10 @@ import { useToggle } from "~/hooks/useToggle";
 import { wrapper } from "~/redux/store";
 import { useEditProfileForm } from "~/hooks/forms/useEditProfileForm";
 import { Gender, Role, User } from "~/types/user";
-import { usePatchUserMeMutation } from "~/redux/services/api";
+import {
+  usePatchUserMeMutation,
+  usePostUploadMutation,
+} from "~/redux/services/api";
 
 export interface MyInfoPageProps {
   user: User;
@@ -31,7 +34,7 @@ export interface MyInfoPageProps {
 const MyInfoPage: NextPage<MyInfoPageProps> = ({ user }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [isModal, toggleModal] = useToggle();
-  const { handleSubmit, control, setValue } = useEditProfileForm({
+  const { handleSubmit, control, setValue, register } = useEditProfileForm({
     defaultValues: {
       role: user.role,
       name: user.name,
@@ -47,10 +50,21 @@ const MyInfoPage: NextPage<MyInfoPageProps> = ({ user }) => {
     },
   });
   const [patchUserMeMutation, { isLoading }] = usePatchUserMeMutation();
+  const [postUploadMutatuin] = usePostUploadMutation();
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     if (isLoading) {
       return;
+    }
+
+    if (data.profileImage instanceof FileList) {
+      const formBody = new FormData();
+      formBody.append("file", data.profileImage[0]);
+      await postUploadMutatuin(formBody)
+        .unwrap()
+        .then((res) => {
+          data.profileImage = res.Location;
+        });
     }
 
     patchUserMeMutation({ data })
@@ -173,6 +187,14 @@ const MyInfoPage: NextPage<MyInfoPageProps> = ({ user }) => {
                 />
               )}
             />
+            <Stack spacing={1}>
+              <Typography>프로필 이미지</Typography>
+              <input
+                {...register("profileImage")}
+                accept="image/*"
+                type="file"
+              />
+            </Stack>
             <Box display="flex" justifyContent="flex-end">
               <Button type="submit" variant="contained">
                 수정
