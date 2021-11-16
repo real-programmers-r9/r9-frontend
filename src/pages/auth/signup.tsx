@@ -13,85 +13,43 @@ import {
   Select,
   Box,
   Modal,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
+  FormHelperText,
 } from "@mui/material";
 import { MobileDatePicker, LoadingButton } from "@mui/lab";
 import DaumPostcode from "react-daum-postcode";
 import { useSnackbar } from "notistack";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { Controller } from "react-hook-form";
 import { useToggle } from "~/hooks/useToggle";
-import { useSignUpMutation } from "~/redux/services/api";
-import { REGEXP_PASSWORD } from "~/constants/regexp";
-import { SignUpForm } from "~/types/forms";
+import { usePostUserMutation } from "~/redux/services/api";
 import { Gender, Role } from "~/types/user";
+import { useSignUpForm } from "~/hooks/forms/useSignUpForm";
 
 const SignUpPage: NextPage = () => {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [isModal, toggleModal] = useToggle();
 
-  const { handleSubmit, control, setValue } = useForm<SignUpForm>({
-    resolver: yupResolver(
-      yup.object().shape({
-        role: yup
-          .mixed<Role>()
-          .oneOf(Object.values(Role), "유형이 일치하지 않습니다.")
-          .required("사용자 유형을 선택해주세요!"),
-        name: yup
-          .string()
-          .max(10, "이름은 최대 10자 이하여야합니다.")
-          .required("이름을 입력해주세요!"),
-        email: yup
-          .string()
-          .email("이메일 형식으로 입력해주세요!")
-          .required("이메일을 입력해주세요!"),
-        password: yup
-          .string()
-          .matches(
-            REGEXP_PASSWORD,
-            "비밀번호는 영문 대소문자, 숫자, 특수문자를 모두 포함하여 8글자 이상이여야합니다!"
-          )
-          .required("비밀번호를 입력해주세요!"),
-        confirmPassword: yup
-          .string()
-          .oneOf([yup.ref("password"), null], "비밀번호가 일치하지 않습니다!")
-          .required("비밀번호 재입력을 입력해주세요!"),
-        gender: yup
-          .mixed<Gender>()
-          .oneOf(Object.values(Gender), "유형이 일치하지 않습니다.")
-          .required("성별을 선택해주세요!"),
-        dateOfBirth: yup.date().required(),
-        address: yup.object().shape({
-          postalCode: yup.string().required(),
-          state: yup.string().required(),
-          city: yup.string().required(),
-          roadAddress: yup.string().required(),
-        }),
-      })
-    ),
-  });
+  const { handleSubmit, control, setValue } = useSignUpForm();
 
-  const [signUpMutation, { isLoading }] = useSignUpMutation();
+  const [postUserMutation, { isLoading }] = usePostUserMutation();
 
-  const onSubmit = handleSubmit(async (value) => {
+  const onSubmit = handleSubmit(async (data) => {
     if (isLoading) {
       return;
     }
 
-    await signUpMutation(value)
+    await postUserMutation(data)
       .unwrap()
       .then(() => {
-        router.push("/auth/signupdetail");
+        router.push("/auth/signin");
       })
       .catch((error) => {
-        enqueueSnackbar(error.message || "예기치 못한 에러가 발생했습니다.", {
-          variant: "error",
-        });
+        enqueueSnackbar(
+          error.data.message || "예기치 못한 에러가 발생했습니다.",
+          {
+            variant: "error",
+          }
+        );
       });
   });
 
@@ -124,18 +82,23 @@ const SignUpPage: NextPage = () => {
             <Controller
               control={control}
               name="role"
-              render={({ field: { onChange, value } }) => (
-                <FormControl fullWidth>
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <FormControl size="small" fullWidth>
                   <InputLabel id="role">사용자 유형</InputLabel>
                   <Select
                     labelId="role"
                     value={value || ""}
                     label="사용자 유형"
+                    error={!!error}
                     onChange={onChange}
                   >
                     <MenuItem value={Role.USER}>일반 사용자</MenuItem>
                     <MenuItem value={Role.BUSINESS}>기업 사용자</MenuItem>
                   </Select>
+                  <FormHelperText error>{error?.message}</FormHelperText>
                 </FormControl>
               )}
             />
@@ -150,6 +113,7 @@ const SignUpPage: NextPage = () => {
                   type="email"
                   label="이메일"
                   fullWidth
+                  size="small"
                   value={value || ""}
                   error={!!error}
                   helperText={error?.message}
@@ -168,6 +132,7 @@ const SignUpPage: NextPage = () => {
                   type="password"
                   label="비밀번호"
                   fullWidth
+                  size="small"
                   value={value || ""}
                   error={!!error}
                   helperText={error?.message}
@@ -186,6 +151,7 @@ const SignUpPage: NextPage = () => {
                   type="password"
                   label="비밀번호 재확인"
                   fullWidth
+                  size="small"
                   value={value || ""}
                   error={!!error}
                   helperText={error?.message}
@@ -208,6 +174,7 @@ const SignUpPage: NextPage = () => {
                   type="text"
                   label="이름"
                   fullWidth
+                  size="small"
                   value={value || ""}
                   error={!!error}
                   helperText={error?.message}
@@ -218,31 +185,24 @@ const SignUpPage: NextPage = () => {
             <Controller
               control={control}
               name="gender"
-              render={({ field: { onChange, value } }) => (
-                <FormControl component="fieldset">
-                  <FormLabel component="legend">성별</FormLabel>
-                  <RadioGroup
-                    onChange={onChange}
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <FormControl size="small" fullWidth>
+                  <InputLabel id="gender">성별</InputLabel>
+                  <Select
+                    labelId="gender"
                     value={value || ""}
-                    row
-                    sx={{ justifyContent: "space-between" }}
+                    label="성별"
+                    error={!!error}
+                    onChange={onChange}
                   >
-                    <FormControlLabel
-                      value={Gender.MALE}
-                      control={<Radio />}
-                      label="남성"
-                    />
-                    <FormControlLabel
-                      value={Gender.FEMALE}
-                      control={<Radio />}
-                      label="여성"
-                    />
-                    <FormControlLabel
-                      value={Gender.OTHER}
-                      control={<Radio />}
-                      label="기타"
-                    />
-                  </RadioGroup>
+                    <MenuItem value={Gender.MALE}>남성</MenuItem>
+                    <MenuItem value={Gender.FEMALE}>여성</MenuItem>
+                    <MenuItem value={Gender.OTHER}>기타</MenuItem>
+                  </Select>
+                  <FormHelperText error>{error?.message}</FormHelperText>
                 </FormControl>
               )}
             />
@@ -254,9 +214,14 @@ const SignUpPage: NextPage = () => {
                   label="생년월일"
                   mask="____.__.__"
                   inputFormat="yyyy.MM.DD"
+                  toolbarFormat="yyyy.MM.DD"
+                  okText="확인"
+                  cancelText="취소"
                   value={value}
                   onChange={onChange}
-                  renderInput={(params) => <TextField {...params} />}
+                  renderInput={(params) => (
+                    <TextField size="small" {...params} />
+                  )}
                 />
               )}
             />
@@ -272,9 +237,9 @@ const SignUpPage: NextPage = () => {
                     type="text"
                     label="우편 번호"
                     fullWidth
+                    size="small"
                     value={value || ""}
                     error={!!error}
-                    helperText={error?.message}
                     onChange={onChange}
                     disabled
                   />
@@ -299,6 +264,7 @@ const SignUpPage: NextPage = () => {
                   type="text"
                   label="상세 주소"
                   fullWidth
+                  size="small"
                   value={value || ""}
                   error={!!error}
                   helperText={error?.message}

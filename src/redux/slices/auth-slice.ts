@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { AppState } from "~/redux/store";
-import { api } from "~/redux/services/api";
-import { AuthState } from "~/types/states";
+import { getUserMe, postAuth, postAuthSignOut } from "~/redux/services/api";
+import { AuthState } from "~/types/stores";
 
 const initialState: AuthState = {
   user: null,
@@ -22,13 +22,13 @@ export const authSlice = createSlice({
     builder.addCase(HYDRATE, (state, action: any) => {
       return { ...state, ...action.payload.auth };
     });
-    builder.addMatcher(api.endpoints.signIn.matchFulfilled, (state, action) => {
+    builder.addMatcher(postAuth.matchFulfilled, (state, action) => {
       state.user = action.payload;
     });
-    builder.addMatcher(api.endpoints.signOut.matchFulfilled, (state) => {
+    builder.addMatcher(postAuthSignOut.matchFulfilled, (state) => {
       state.user = null;
     });
-    builder.addMatcher(api.endpoints.myInfo.matchFulfilled, (state, action) => {
+    builder.addMatcher(getUserMe.matchFulfilled, (state, action) => {
       state.user = action.payload;
     });
   },

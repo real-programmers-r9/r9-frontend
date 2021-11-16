@@ -1,11 +1,17 @@
-import { JobStatus, PayMentsMethod } from "./enums";
 import { User } from "./user";
 
-export interface AuthState {
-  user: User | null;
+export enum PayMentsMethod {
+  PERHOUR = "PERHOUR",
+  PERDAY = "PERDAY",
+  PERMONTH = "PERMONTH",
 }
 
-export interface IJobState {
+export enum JobStatus {
+  ACTIVATE = "ACTIVATE",
+  INAVCTIVE = "INAVCTIVE",
+}
+
+export interface Job {
   writer: User | null;
   title: string;
   deadline: Date;
@@ -20,13 +26,4 @@ export interface IJobState {
   endTime: Date;
   wage: number;
   status: JobStatus;
-}
-
-export interface IReviewState {
-  writer: User | null;
-  title: string;
-  startDate: Date;
-  endDate: Date;
-  content: string;
-  rating: number;
 }

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { findJobsAPI } from "~/libs/api/job";
+import { findJobs } from "~/libs/api/jobs";
 
 function TestPage() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
     const fatchData = async () => {
-      const data = await findJobsAPI().catch(console.error);
+      const data = await findJobs().catch(console.error);
       setData(data);
     };
     fatchData();

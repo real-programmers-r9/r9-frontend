@@ -1,9 +1,9 @@
 import { SelectChangeEvent } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createJobAPI, deleteJobAPI } from "src/libs/api/job";
-import { selectJob, setJob } from "src/redux/slices/job-slice";
-import { PayMentsMethod } from "src/types/enums";
+import { createJob, deleteJob } from "~/libs/api/job";
+import { selectJob, setJob } from "~/redux/slices/job-slice";
+import { PayMentsMethod } from "~/types/job";
 
 export default function useJobForm() {
   const dispatch = useDispatch();
@@ -69,7 +69,7 @@ export default function useJobForm() {
   /** 공고 생성 */
   const onCreateJob = async () => {
     try {
-      await createJobAPI(job);
+      await createJob(job);
     } catch (error) {
       alert("공고 작성에 실패했습니다");
     }
@@ -77,7 +77,7 @@ export default function useJobForm() {
 
   const onDeleteJob = async (id: number) => {
     try {
-      await deleteJobAPI(id);
+      await deleteJob(id);
     } catch (error) {
       alert("공고 삭제에 실패했습니다");
     }
