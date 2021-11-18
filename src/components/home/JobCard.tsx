@@ -42,7 +42,7 @@ const JobCard = ({ data }: JobCardProps) => {
 
       {data.map((item) => {
         return (
-          <Grid item xs={8} md={5} key={item.id}>
+          <Grid item xs={10} md={6} key={item.id}>
             <StyledBox>
               <Box sx={{ mx: 2 }}>
                 <Grid container alignItems="center">
