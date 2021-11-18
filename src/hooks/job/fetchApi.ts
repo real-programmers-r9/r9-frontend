@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function useFetch(url) {
-  const [data, setData] = useState(null);
+  const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -11,7 +11,7 @@ function useFetch(url) {
     axios
       .get(url)
       .then((response) => {
-        setData(response.data);
+        setJobs(response.data);
       })
       .catch((err) => {
         setError(err);
@@ -26,7 +26,7 @@ function useFetch(url) {
     axios
       .get(url)
       .then((response) => {
-        setData(response.data);
+        setJobs(response.data);
       })
       .catch((err) => {
         setError(err);
@@ -36,7 +36,7 @@ function useFetch(url) {
       });
   };
 
-  return { data, loading, error, refetch };
+  return { jobs, loading, error, refetch };
 }
 
 export default useFetch;
