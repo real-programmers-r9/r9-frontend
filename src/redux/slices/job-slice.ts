@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { JobStatus, PayMentsMethod } from "src/types/enums";
+import { Gender, JobStatus, PayMentsMethod } from "src/types/enums";
 import { IJobState } from "src/types/stores";
 import { AppState } from "../store";
 
 const initialState: IJobState = {
-  writer: null,
   title: "",
   deadline: new Date(),
   detail: "",
@@ -18,6 +17,9 @@ const initialState: IJobState = {
   endTime: new Date(),
   wage: 8750,
   status: JobStatus.ACTIVATE,
+  period: "하루",
+  gender: Gender.ANY,
+  sectors: "요식업",
 };
 
 export const jobSlice = createSlice({

@@ -37,7 +37,8 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
     onChangeWorkingDay,
     onCreateJob,
   } = useJobForm();
-  const { title, workType, payment, personnel, age } = job;
+  const { title, workType, payment, personnel, age, gender, sectors, period } =
+    job;
 
   const onCompletePostAndToggleModal = (data: Address) => {
     onCompletePost(data);
@@ -84,6 +85,21 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
             onChange={onChangeJobTextField}
             value={personnel}
           />
+          <Typography align="left" variant="h6">
+            성별
+          </Typography>
+          <Select
+            style={{ width: "7rem" }}
+            label="성별"
+            name="gender"
+            onChange={onChangeJobTextField}
+            value={gender}
+          >
+            <MenuItem value="ANY">상관없음</MenuItem>
+            <MenuItem value="MAIL">남성</MenuItem>
+            <MenuItem value="FEMAIL">여성</MenuItem>
+          </Select>
+
           <Typography align="left" variant="h6">
             희망 연령대
           </Typography>
@@ -189,42 +205,58 @@ const JobPostEditor = ({ isEdit }: EditorProps) => {
             근무 일자
           </Typography>
           <FormGroup>
-            <RadioGroup defaultValue="female" name="radio-buttons-group">
+            <RadioGroup defaultValue="하루" name="period">
               <Box sx={{ display: "flex", flexWrap: "wrap" }}>
                 <FormControlLabel
-                  control={<Radio />}
                   label="하루(1~2일)"
-                  value="female"
+                  control={
+                    <Radio value="하루" onChange={onChangeJobTextField} />
+                  }
                 />
                 <FormControlLabel
-                  control={<Radio />}
+                  control={
+                    <Radio value="1주일이하" onChange={onChangeJobTextField} />
+                  }
                   label="1주일 이하"
-                  value="female1"
                 />
                 <FormControlLabel
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      value="1주일~1개월"
+                      onChange={onChangeJobTextField}
+                    />
+                  }
                   label="1주일~1개월"
-                  value="female2"
                 />
                 <FormControlLabel
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      value="1개월~3개월"
+                      onChange={onChangeJobTextField}
+                    />
+                  }
                   label="1개월~3개월"
-                  value="female3"
                 />
                 <FormControlLabel
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      value="1개월~3개월"
+                      onChange={onChangeJobTextField}
+                    />
+                  }
                   label="3개월~6개월"
-                  value="female4"
                 />
                 <FormControlLabel
-                  control={<Radio />}
+                  control={
+                    <Radio value="6개월~1년" onChange={onChangeJobTextField} />
+                  }
                   label="6개월~1년"
-                  value="female5"
                 />
                 <FormControlLabel
-                  control={<Radio />}
+                  control={
+                    <Radio value="1년이상" onChange={onChangeJobTextField} />
+                  }
                   label="1년이상"
-                  value="female6"
                 />
               </Box>
             </RadioGroup>

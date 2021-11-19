@@ -1,9 +1,9 @@
 import { SelectChangeEvent } from "@mui/material";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, SyntheticEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createJobAPI, deleteJobAPI } from "src/libs/api/job";
 import { selectJob, setJob } from "src/redux/slices/job-slice";
-import { PayMentsMethod } from "src/types/enums";
+import { Gender, PayMentsMethod } from "src/types/enums";
 
 export default function useJobForm() {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function useJobForm() {
   const onChangeJobTextField = (
     e:
       | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | SelectChangeEvent<PayMentsMethod>
+      | SelectChangeEvent<PayMentsMethod | Gender>
   ) => {
     const { value, name } = e.target;
     const body = {
@@ -72,6 +72,7 @@ export default function useJobForm() {
       await createJobAPI(job);
     } catch (error) {
       alert("공고 작성에 실패했습니다");
+      console.log(error);
     }
   };
 
