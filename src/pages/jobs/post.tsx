@@ -1,7 +1,7 @@
 import React from "react";
 import { NextPage } from "next";
 import { Box } from "@mui/system";
-import JobPostEditor from "src/components/job-post/JobPostEditor";
+import JobPostEditor from "~/components/job/JobPostEditor";
 
 const PostPage: NextPage = () => {
   return (
