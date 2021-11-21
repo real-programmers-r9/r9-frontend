@@ -1,4 +1,4 @@
-import { JobStatus, PayMentsMethod } from "./enums";
+import { Gender, JobStatus, PayMentsMethod } from "./enums";
 
 export enum Role {
   ADMIN = "ADMIN",
@@ -22,7 +22,6 @@ export interface Auth {
 }
 
 export interface IJobState {
-  writer: User | null;
   title: string;
   deadline: Date;
   detail: string;
@@ -36,6 +35,9 @@ export interface IJobState {
   endTime: Date;
   wage: number;
   status: JobStatus;
+  period: string;
+  gender: Gender;
+  sectors: string;
 }
 
 export interface IReviewState {
@@ -45,4 +47,11 @@ export interface IReviewState {
   endDate: Date;
   content: string;
   rating: number;
+}
+
+export interface IApplyState {
+  user: User | null;
+  title: string;
+  job: IJobState;
+  moreDetail: string;
 }
