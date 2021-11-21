@@ -3,33 +3,18 @@ import {
   LocalPhoneOutlined,
   RoomOutlined,
 } from "@mui/icons-material";
-import {
-  Container,
-  Divider,
-  ListItemText,
-  Rating,
-  Typography,
-} from "@mui/material";
-import React, { useEffect } from "react";
+import { Container, Divider, Rating, Typography } from "@mui/material";
+import React from "react";
 import { Box, styled } from "@mui/system"; // 전체 container 스타일링
 import JobIcons from "../application/JobIcons";
-import { useDispatch, useSelector } from "react-redux";
-import { selectJob, setJob } from "~/redux/slices/job-slice";
 
 import useJobDetailEffect from "~/hooks/job/useJobDetailEffect";
-import { findJobByIdAPI } from "~/libs/api/job";
 
 const StyledBox = styled(Box)({
   textAlign: "center",
   position: "relative", // 하트표시 기준
 });
 // 백데이터 넣기
-const JOBDESC1 = [
-  "50대 선호 | 성별무관",
-  "학력 무관 | 경력무관",
-  "2021.12.31까지 채용가능",
-];
-const JOBDESC2 = ["경력자 우대", "점심시간 카운터", "저녁시간 홀서빙"];
 
 const JobContents = () => {
   const { job, pid } = useJobDetailEffect();
@@ -45,6 +30,7 @@ const JobContents = () => {
         <Typography pt={4} variant="h6" gutterBottom textAlign="center">
           {job?.title}
         </Typography>
+        <Box>{job?.status}</Box>
         <Rating value={3} readOnly />
         <br />
         <Typography variant="button">4.12(12)</Typography>
@@ -52,29 +38,32 @@ const JobContents = () => {
       <JobIcons />
       <Box p={1} sx={{ textAlign: "left" }}>
         <Divider />
-        <Typography
-          // align="center"
-          pt={2}
-          variant="h6"
-          gutterBottom
-          component="div"
-        >
-          {job?.sectors}
+        <Typography pt={2} variant="h6" gutterBottom component="div">
+          근무 조건
         </Typography>
+        <Typography gutterBottom component="div">
+          <li>{job?.age}대 선호</li>
+          <li>
+            {job?.gender === "ANY"
+              ? "성별무관"
+              : job?.gender === "MAIL"
+              ? "남성"
+              : "여성"}{" "}
+            선호
+          </li>
+          <li>근무 요일 : {job?.workingDay}</li>
+          <li>
+            근무 시간 : {job?.startTime} ~ {job?.endTime}
+          </li>
+          <li>업직종 : {job?.sectors}</li>
+          <li>근무 기간 : {job?.period}</li>
+        </Typography>
+
+        <Divider />
         <Typography variant="h6" gutterBottom component="div">
           근무내용
         </Typography>
-        <Typography gutterBottom component="div">
-          {job?.age}대 선호 |{" "}
-          {job?.gender === "ANY"
-            ? "성별무관"
-            : job?.gender === "MAIL"
-            ? "남성"
-            : "여성"}
-        </Typography>
-        {JOBDESC2.map((item) => {
-          return <ListItemText key={item} primary={item} />;
-        })}
+        {job?.detail}
         <Divider />
         {/* job 세부2 */}
         <Typography pt={2} variant="h6" gutterBottom>
