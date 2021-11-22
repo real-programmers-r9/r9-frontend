@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Box,
   Chip,
@@ -11,6 +12,10 @@ import { useRouter } from "next/router";
 import { styled } from "@mui/system";
 import SortButtons from "./SortButtons";
 import { Data } from "~/pages";
+// import useFetch from "./../../hooks/job/fetchApi"; // api-fetching hook
+import { useDispatch } from "react-redux";
+import { findJobs } from "../../libs/api/job";
+import { addJobs } from "../../redux/slices/jobSlice";
 
 const StyledBox = styled(Paper)(({ theme }) => ({
   paddingTop: 20,
@@ -32,7 +37,17 @@ export interface JobCardProps {
 }
 
 const JobCard = ({ data }: JobCardProps) => {
+  const dispatch = useDispatch();
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      const jobs = await findJobs().catch(console.error);
+      // console.log("잡", jobs);
+      dispatch(addJobs(jobs)); // 여기 확인 필요
+    };
+    fetchJobs();
+  }, []);
 
   return (
     <Cards container spacing={3}>
@@ -42,7 +57,7 @@ const JobCard = ({ data }: JobCardProps) => {
 
       {data.map((item) => {
         return (
-          <Grid item xs={8} md={5} key={item.id}>
+          <Grid item xs={10} md={6} key={item.id}>
             <StyledBox>
               <Box sx={{ mx: 2 }}>
                 <Grid container alignItems="center">
