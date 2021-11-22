@@ -6,7 +6,7 @@ export enum PayMentsMethod {
 
 export enum JobStatus {
   ACTIVATE = "ACTIVATE",
-  INAVCTIVE = "INAVCTIVE",
+  INACTIVATE = "INACTIVATE",
   STOP = "STOP",
 }
 
