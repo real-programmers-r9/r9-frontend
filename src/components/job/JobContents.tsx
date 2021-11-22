@@ -1,14 +1,15 @@
 import {
+  CalendarToday,
   FavoriteBorderRounded,
-  LocalPhoneOutlined,
   RoomOutlined,
 } from "@mui/icons-material";
 import { Container, Divider, Rating, Typography } from "@mui/material";
 import React from "react";
 import { Box, styled } from "@mui/system"; // 전체 container 스타일링
 import JobIcons from "../application/JobIcons";
-
 import useJobDetailEffect from "~/hooks/job/useJobDetailEffect";
+import StatusBox from "../home/StatusBox";
+import moment from "moment";
 
 const StyledBox = styled(Box)({
   textAlign: "center",
@@ -18,6 +19,7 @@ const StyledBox = styled(Box)({
 
 const JobContents = () => {
   const { job, pid } = useJobDetailEffect();
+  const editedDeadline = moment(job?.deadline).format("YY년 MM월 Do");
   return (
     <>
       <StyledBox>
@@ -30,7 +32,9 @@ const JobContents = () => {
         <Typography pt={4} variant="h6" gutterBottom textAlign="center">
           {job?.title}
         </Typography>
-        <Box>{job?.status}</Box>
+        <Box sx={{ display: "flex", justifyContent: "center", margin: 1 }}>
+          <StatusBox status={job?.status} />
+        </Box>
         <Rating value={3} readOnly />
         <br />
         <Typography variant="button">4.12(12)</Typography>
@@ -48,7 +52,7 @@ const JobContents = () => {
               ? "성별무관"
               : job?.gender === "MAIL"
               ? "남성"
-              : "여성"}{" "}
+              : "여성"}
             선호
           </li>
           <li>근무 요일 : {job?.workingDay}</li>
@@ -57,6 +61,7 @@ const JobContents = () => {
           </li>
           <li>업직종 : {job?.sectors}</li>
           <li>근무 기간 : {job?.period}</li>
+          <li>모집 인원 : {job?.personnel}명</li>
         </Typography>
 
         <Divider />
@@ -67,11 +72,11 @@ const JobContents = () => {
         <Divider />
         {/* job 세부2 */}
         <Typography pt={2} variant="h6" gutterBottom>
-          채용방법
+          채용 마감일
         </Typography>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
-          <LocalPhoneOutlined />
-          <Typography>전화면접</Typography>
+          <CalendarToday />
+          <Typography> {editedDeadline} 까지</Typography>
         </Box>
         <Typography pt={1} variant="h6" gutterBottom component="div">
           근무지역
@@ -80,7 +85,7 @@ const JobContents = () => {
           sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
         >
           <RoomOutlined />
-          <Typography>서울특별시 강남구 논현동 강남역 3번출구</Typography>
+          <Typography>{job?.adress}</Typography>
         </Box>
       </Box>
       {/* 카카오 지도 Api */}
