@@ -1,20 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NextPage } from "next";
 import { styled } from "@mui/system";
-import {
-  Typography,
-  FormControl,
-  TextField,
-  Chip,
-  IconButton,
-  Stack,
-} from "@mui/material";
-import { ManageSearch } from "@mui/icons-material";
-// import Search from "~/components/home/Search";
+import { Typography, FormControl, TextField, Chip, Stack } from "@mui/material";
 import JobCard from "~/components/home/JobCard";
 
-// 실제 데이터로 바꾸기
-interface Data {
+export interface Data {
   id: number;
   location: string;
   companyName: string;
@@ -25,7 +15,7 @@ interface Data {
   workFinishTime: string;
   calutatePayBy: string;
   payRate: number;
-  hashtags: string[]; // 추가
+  hashtags: string[];
 }
 
 export const data: Data[] = [
@@ -40,7 +30,7 @@ export const data: Data[] = [
     workFinishTime: "16:00",
     calutatePayBy: "시급",
     payRate: 8720,
-    hastags: ["주3일", "급구"],
+    hashtags: ["주3일", "급구"],
   },
   {
     id: 2,
@@ -53,7 +43,7 @@ export const data: Data[] = [
     workFinishTime: "23:00",
     calutatePayBy: "시급",
     payRate: 11000,
-    hastags: ["평일", "시급"],
+    hashtags: ["평일", "시급"],
   },
   {
     id: 3,
@@ -66,7 +56,7 @@ export const data: Data[] = [
     workFinishTime: "",
     calutatePayBy: "시급",
     payRate: 10000,
-    hastags: ["주3일", "급구"],
+    hashtags: ["주3일", "급구"],
   },
   {
     id: 4,
@@ -79,7 +69,7 @@ export const data: Data[] = [
     workFinishTime: "18:00",
     calutatePayBy: "건별",
     payRate: 200,
-    hastags: ["평일", "급구"],
+    hashtags: ["평일", "급구"],
   },
 ];
 
@@ -103,10 +93,12 @@ const StyledStack = styled(Stack)({
   display: "flex",
   alignItems: "center",
 });
+
 const HASHTAGS = ["돌봄", "주3회", "시니어 일자리", "당일 알바"];
 
 const HomePage: NextPage = () => {
-  const [searchTerm, setSearchTerm] = useState(""); // TS
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <ContainerBox>
       {/* 검색창 */}
@@ -125,26 +117,12 @@ const HomePage: NextPage = () => {
             <TextField
               size="small"
               focused
+              value={searchTerm}
               placeholder="검색어를 입력해주세요"
-              onChange={(
-                event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-              ) => {
-                searchTerm(event.target.value);
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
               }}
             />
-            <IconButton
-              onClick={() => {
-                // TS
-                {
-                  data?.map((item) => {
-                    return <JobCard data={data} />;
-                  });
-                }
-              }}
-              aria-label="delete"
-            >
-              <ManageSearch fontSize="large" />
-            </IconButton>
           </StyledStack>
 
           {/* 추천 검색어 */}

@@ -1,8 +1,6 @@
 import React from "react";
-import { Box } from "@mui/system";
-import { styled } from "@mui/system";
+import { Card, Container, styled } from "@mui/material";
 import ReviewPostEditor from "src/components/review/ReviewPostEditor";
-import { Card, Container } from "@mui/material";
 
 const ContainerBox = styled(Container)({
   display: "flex",
@@ -12,6 +10,7 @@ const ContainerBox = styled(Container)({
   textAlign: "center",
   padding: 10,
 });
+
 const ReviewPostPage = () => {
   return (
     <>

@@ -1,23 +1,7 @@
 import { Gender, JobStatus, PayMentsMethod } from "./enums";
+import { User } from "./user";
 
-export enum Role {
-  ADMIN = "ADMIN",
-  USER = "USER",
-  BUSINESS = "BUSINESS",
-}
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: Role;
-  address?: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-}
-
-export interface Auth {
+export interface AuthState {
   user: User | null;
 }
 

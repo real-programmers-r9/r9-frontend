@@ -1,83 +1,134 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NextPage } from "next";
-import { useRouter } from "next/router";
 import {
-  Avatar,
   Box,
   Button,
-  Grid,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
   Modal,
   Paper,
+  Select,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { MobileDatePicker } from "@mui/lab";
+import { useSnackbar } from "notistack";
+import { Controller } from "react-hook-form";
 import DaumPostcode from "react-daum-postcode";
 import { useToggle } from "~/hooks/useToggle";
-import { selectAuth } from "~/redux/slices/auth-slice";
-import { Tag } from "./auth/signupdetail";
+import { wrapper } from "~/redux/store";
+import { useEditProfileForm } from "~/hooks/forms/useEditProfileForm";
+import { Gender, Role, User } from "~/types/user";
+import {
+  usePatchUserMeMutation,
+  usePostUploadMutation,
+} from "~/redux/services/api";
 
-const AREAS = ["#지역 1", "#지역 2", "#지역 3"];
-const ADVANTAGES = ["#회계 가능", "#운전 가능", "#빠른 계산 가능"];
-const WORKING_TIMES = ["#주 3회", "#주간", "#평일"];
+export interface MyInfoPageProps {
+  user: User;
+}
 
-const MyInfoPage: NextPage = () => {
-  const router = useRouter();
-  const { user } = useSelector(selectAuth);
+const MyInfoPage: NextPage<MyInfoPageProps> = ({ user }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [isModal, toggleModal] = useToggle();
-  const { handleSubmit, control, setValue } = useForm({
+  const { handleSubmit, control, setValue, register } = useEditProfileForm({
     defaultValues: {
-      email: user?.email,
-      phone: "",
+      role: user.role,
+      name: user.name,
+      email: user.email,
+      gender: user.gender,
+      dateOfBirth: user.dateOfBirth,
       address: {
-        postalCode: user?.address.postalCode,
-        state: user?.address.state,
-        city: user?.address.city,
-        roadAddress: user?.address.roadAddress,
+        postalCode: user.address.postalCode,
+        state: user.address.state,
+        city: user.address.city,
+        roadAddress: user.address.roadAddress,
       },
     },
-    resolver: yupResolver(
-      yup.object().shape({
-        email: yup.string().email().required(),
-        phone: yup.string().required(),
-        address: yup.object().shape({
-          postalCode: yup.string().required(),
-          state: yup.string().required(),
-          city: yup.string().required(),
-          roadAddress: yup.string().required(),
-        }),
-      })
-    ),
   });
+  const [patchUserMeMutation, { isLoading }] = usePatchUserMeMutation();
+  const [postUploadMutatuin] = usePostUploadMutation();
 
-  useEffect(() => {
-    if (!user) {
-      router.push("/auth/signin");
+  const onSubmit = handleSubmit(async (data) => {
+    if (isLoading) {
+      return;
     }
-  }, [router, user]);
 
-  const onSubmit = handleSubmit((value) => {
-    console.log(value);
+    if (data.profileImage instanceof FileList) {
+      const formBody = new FormData();
+      formBody.append("file", data.profileImage[0]);
+      await postUploadMutatuin(formBody)
+        .unwrap()
+        .then((res) => {
+          data.profileImage = res.Location;
+        });
+    }
+
+    patchUserMeMutation({ data })
+      .unwrap()
+      .then(() => {
+        enqueueSnackbar("내 정보가 변경되었습니다.", {
+          variant: "info",
+        });
+      })
+      .catch((error) => {
+        enqueueSnackbar(
+          error.data.message || "예기치 못한 에러가 발생했습니다.",
+          {
+            variant: "error",
+          }
+        );
+      });
   });
 
   return (
     <>
-      <Paper sx={{ padding: 2 }}>
-        <Stack spacing={4}>
-          <Typography variant="h6">회원정보</Typography>
-          <Stack direction="row" spacing={2}>
-            <Avatar src={user?.profileImage} sx={{ width: 64, height: 64 }} />
-            <Stack>
-              <Typography>{user?.name}</Typography>
-              <Typography variant="body2">{user?.gender}</Typography>
-              <Typography variant="body2">{user?.dateOfBirth}</Typography>
-            </Stack>
-          </Stack>
-          <Stack onSubmit={onSubmit} spacing={3} component="form">
+      <Paper
+        sx={{
+          margin: "auto",
+          paddingX: {
+            xs: 2,
+            sm: 4,
+          },
+          paddingY: {
+            xs: 3,
+            sm: 6,
+          },
+          maxWidth: "sm",
+        }}
+      >
+        <Stack spacing={2}>
+          <Typography variant="h5" align="center">
+            내 정보
+          </Typography>
+          <Stack spacing={2} component="form" onSubmit={onSubmit}>
+            <Typography variant="h6">계정 정보</Typography>
+            <Controller
+              control={control}
+              name="role"
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <FormControl size="small" fullWidth disabled>
+                  <InputLabel id="role">사용자 유형</InputLabel>
+                  <Select
+                    labelId="role"
+                    value={value || ""}
+                    label="사용자 유형"
+                    error={!!error}
+                    onChange={onChange}
+                  >
+                    <MenuItem value={Role.USER}>일반 사용자</MenuItem>
+                    <MenuItem value={Role.BUSINESS}>기업 사용자</MenuItem>
+                  </Select>
+                  <FormHelperText error>{error?.message}</FormHelperText>
+                </FormControl>
+              )}
+            />
             <Controller
               control={control}
               name="email"
@@ -94,19 +145,20 @@ const MyInfoPage: NextPage = () => {
                   error={!!error}
                   helperText={error?.message}
                   onChange={onChange}
+                  disabled
                 />
               )}
             />
             <Controller
               control={control}
-              name="phone"
+              name="password"
               render={({
                 field: { onChange, value },
                 fieldState: { error },
               }) => (
                 <TextField
-                  type="text"
-                  label="전화번호"
+                  type="password"
+                  label="비밀번호"
                   fullWidth
                   size="small"
                   value={value || ""}
@@ -116,46 +168,117 @@ const MyInfoPage: NextPage = () => {
                 />
               )}
             />
-            <Stack spacing={2}>
-              <Stack direction="row" spacing={1}>
-                <Controller
-                  control={control}
-                  name="address.postalCode"
-                  render={({
-                    field: { onChange, value },
-                    fieldState: { error },
-                  }) => (
-                    <TextField
-                      type="text"
-                      label="우편 번호"
-                      fullWidth
-                      size="small"
-                      value={value || ""}
-                      error={!!error}
-                      helperText={error?.message}
-                      onChange={onChange}
-                      disabled
-                    />
+            <Controller
+              control={control}
+              name="confirmPassword"
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  type="password"
+                  label="비밀번호 재확인"
+                  fullWidth
+                  size="small"
+                  value={value || ""}
+                  error={!!error}
+                  helperText={error?.message}
+                  onChange={onChange}
+                />
+              )}
+            />
+            <Stack spacing={1}>
+              <Typography>프로필 이미지</Typography>
+              <input
+                {...register("profileImage")}
+                accept="image/*"
+                type="file"
+              />
+            </Stack>
+            <Box display="flex" justifyContent="flex-end">
+              <Button type="submit" variant="contained">
+                수정
+              </Button>
+            </Box>
+          </Stack>
+
+          <Stack spacing={2} component="form">
+            <Typography variant="h6">개인 정보</Typography>
+            <Controller
+              control={control}
+              name="name"
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  type="text"
+                  label="이름"
+                  fullWidth
+                  size="small"
+                  value={value || ""}
+                  error={!!error}
+                  helperText={error?.message}
+                  onChange={onChange}
+                  disabled
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="gender"
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <FormControl size="small" fullWidth disabled>
+                  <InputLabel id="gender">성별</InputLabel>
+                  <Select
+                    labelId="gender"
+                    value={value || ""}
+                    label="성별"
+                    error={!!error}
+                    onChange={onChange}
+                  >
+                    <MenuItem value={Gender.MALE}>남성</MenuItem>
+                    <MenuItem value={Gender.FEMALE}>여성</MenuItem>
+                    <MenuItem value={Gender.OTHER}>기타</MenuItem>
+                  </Select>
+                  <FormHelperText error>{error?.message}</FormHelperText>
+                </FormControl>
+              )}
+            />
+            <Controller
+              control={control}
+              name="dateOfBirth"
+              render={({ field: { onChange, value } }) => (
+                <MobileDatePicker
+                  label="생년월일"
+                  mask="____.__.__"
+                  inputFormat="yyyy.MM.DD"
+                  toolbarFormat="yyyy.MM.DD"
+                  okText="확인"
+                  cancelText="취소"
+                  value={value}
+                  onChange={onChange}
+                  disabled
+                  renderInput={(params) => (
+                    <TextField size="small" {...params} />
                   )}
                 />
-                <Button
-                  variant="outlined"
-                  onClick={toggleModal}
-                  sx={{ minWidth: "30%" }}
-                >
-                  주소 검색
-                </Button>
-              </Stack>
+              )}
+            />
+            <Stack direction="row" spacing={1}>
               <Controller
                 control={control}
-                name="address.roadAddress"
+                name="address.postalCode"
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
                 }) => (
                   <TextField
                     type="text"
-                    label="상세 주소"
+                    label="우편 번호"
                     fullWidth
                     size="small"
                     value={value || ""}
@@ -166,45 +289,34 @@ const MyInfoPage: NextPage = () => {
                   />
                 )}
               />
-            </Stack>
-            <Box display="flex" justifyContent="flex-end">
-              <Button type="submit" variant="contained">
-                수정
+              <Button
+                variant="outlined"
+                onClick={toggleModal}
+                sx={{ minWidth: "30%" }}
+              >
+                주소 검색
               </Button>
-            </Box>
-          </Stack>
-          <Stack spacing={2}>
-            <Stack spacing={1}>
-              <Typography>근무 가능 지역</Typography>
-              <Grid container>
-                {AREAS.map((item) => (
-                  <Grid key={item} item xs={4} p={0.25}>
-                    <Tag label={item} />
-                  </Grid>
-                ))}
-              </Grid>
             </Stack>
-            <Stack spacing={1}>
-              <Typography>나의 장점</Typography>
-              <Grid container>
-                {ADVANTAGES.map((item) => (
-                  <Grid key={item} item xs={4} p={0.25}>
-                    <Tag label={item} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Stack>
-            <Stack spacing={1}>
-              <Typography>선호 근무시간</Typography>
-              <Grid container>
-                {WORKING_TIMES.map((item) => (
-                  <Grid key={item} item xs={4} p={0.25}>
-                    <Tag label={item} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Stack>
-            <TextField type="text" label="추가 정보" fullWidth multiline />
+            <Controller
+              control={control}
+              name="address.roadAddress"
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  type="text"
+                  label="상세 주소"
+                  fullWidth
+                  size="small"
+                  value={value || ""}
+                  error={!!error}
+                  helperText={error?.message}
+                  onChange={onChange}
+                  disabled
+                />
+              )}
+            />
             <Box display="flex" justifyContent="flex-end">
               <Button type="submit" variant="contained">
                 수정
@@ -237,5 +349,24 @@ const MyInfoPage: NextPage = () => {
     </>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    const { user } = store.getState().auth;
+
+    if (!user) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/auth/signin",
+        },
+      };
+    }
+
+    return {
+      props: { user },
+    };
+  }
+);
 
 export default MyInfoPage;

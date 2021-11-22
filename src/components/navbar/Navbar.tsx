@@ -18,7 +18,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { Menu, Login, PersonAdd, Logout, Home } from "@mui/icons-material";
-import { useSignOutMutation } from "~/redux/services/api";
+import { usePostAuthSignOutMutation } from "~/redux/services/api";
 import { selectAuth } from "~/redux/slices/auth-slice";
 import { theme } from "~/styles/theme";
 import { useToggle } from "~/hooks/useToggle";
@@ -43,14 +43,14 @@ export const Navbar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [isOpen, toggleOpen] = useToggle();
   const { user } = useSelector(selectAuth);
-  const [signOutMutation] = useSignOutMutation();
+  const [postAuthSignOutMutation] = usePostAuthSignOutMutation();
 
   const handleClickSignOut = React.useCallback(async () => {
-    await signOutMutation()
+    await postAuthSignOutMutation()
       .unwrap()
       .then(() => router.push("/"));
     toggleOpen();
-  }, [router, signOutMutation, toggleOpen]);
+  }, [router, postAuthSignOutMutation, toggleOpen]);
 
   const handleClickMenuLink = React.useCallback(
     (href: string) => {

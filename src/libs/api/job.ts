@@ -1,6 +1,6 @@
 import axios from "axios";
 import { IJobState } from "src/types/stores";
-import client from "./client";
+import { client } from ".";
 
 const url = {
   JOBS: "/jobs",

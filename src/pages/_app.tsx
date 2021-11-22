@@ -14,7 +14,7 @@ import DateAdapter from "@mui/lab/AdapterMoment";
 import { SnackbarProvider } from "notistack";
 import moment from "moment";
 import { wrapper } from "~/redux/store";
-import { myInfo, getRunningOperationPromises } from "~/redux/services/api";
+import { getUserMe, getRunningOperationPromises } from "~/redux/services/api";
 import { createEmotionCache } from "~/libs/create-emotion-cache";
 import { theme } from "~/styles/theme";
 import { Layout } from "~/components/Layout";
@@ -37,7 +37,11 @@ const MyApp = ({
       <meta name="description" content="진짜 시니어를 위한 일자리" />
     </Head>
     <CacheProvider value={emotionCache}>
-      <SnackbarProvider maxSnack={3}>
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        autoHideDuration={2000}
+      >
         <ThemeProvider theme={theme}>
           <LocalizationProvider dateAdapter={DateAdapter} locale="ko">
             <CssBaseline />
@@ -56,7 +60,9 @@ MyApp.getInitialProps = wrapper.getInitialAppProps(
     async ({ Component, ctx }) => {
       const { req, pathname } = ctx;
       if (req?.headers.cookie) {
-        store.dispatch(myInfo.initiate({ cookie: req.headers.cookie }));
+        store.dispatch(
+          getUserMe.initiate({ headers: { cookie: req.headers.cookie } })
+        );
         await Promise.all(getRunningOperationPromises());
       }
 

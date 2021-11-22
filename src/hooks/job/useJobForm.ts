@@ -1,5 +1,5 @@
 import { SelectChangeEvent } from "@mui/material";
-import React, { ChangeEvent, SyntheticEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createJobAPI, deleteJobAPI } from "src/libs/api/job";
 import { selectJob, setJob } from "src/redux/slices/job-slice";

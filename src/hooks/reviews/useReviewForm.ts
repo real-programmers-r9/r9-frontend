@@ -1,9 +1,7 @@
-import { SelectChangeEvent } from "@mui/material";
 import { SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createReviewAPI } from "~/libs/api/review";
+import { createReview } from "~/libs/api/reviews";
 import { selectReview, setReview } from "~/redux/slices/review-slice";
-import { PayMentsMethod } from "~/types/enums";
 
 export default function useReviewForm() {
   const dispatch = useDispatch();
@@ -35,7 +33,7 @@ export default function useReviewForm() {
 
   const onCreateReview = async () => {
     try {
-      await createReviewAPI(review);
+      await createReview(review);
     } catch (error) {
       alert("후기 작성에 실패했습니다");
     }

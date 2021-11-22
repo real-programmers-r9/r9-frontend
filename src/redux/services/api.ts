@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HYDRATE } from "next-redux-wrapper";
+import { EditProfileForm } from "~/hooks/forms/useEditProfileForm";
 import { SignInForm, SignUpForm } from "~/types/forms";
-import { User } from "~/types/user";
+import { ProfileImage, User } from "~/types/user";
 
 export const api = createApi({
   reducerPath: "api",
@@ -16,14 +17,30 @@ export const api = createApi({
     return null;
   },
   endpoints: (builder) => ({
-    signIn: builder.mutation<User, SignInForm>({
+    postAuth: builder.mutation<User, SignInForm>({
       query: (data) => ({
         url: "auth",
         method: "POST",
         body: data,
       }),
     }),
-    signUp: builder.mutation<User, SignUpForm>({
+    postAuthRefresh: builder.mutation<
+      User,
+      { headers: Record<string, string | undefined> }
+    >({
+      query: ({ headers }) => ({
+        url: "auth/refresh",
+        method: "POST",
+        headers,
+      }),
+    }),
+    postAuthSignOut: builder.mutation<User, void>({
+      query: () => ({
+        url: "auth/signout",
+        method: "POST",
+      }),
+    }),
+    postUser: builder.mutation<User, SignUpForm>({
       query: (data) => {
         const { confirmPassword, ...body } = data;
         return {
@@ -33,31 +50,89 @@ export const api = createApi({
         };
       },
     }),
-    signOut: builder.mutation<User, void>({
+    getUsers: builder.query<User[], void>({
       query: () => ({
-        url: "auth/signout",
-        method: "POST",
+        url: "users",
+        method: "GET",
       }),
     }),
-    myInfo: builder.query<User, { cookie: string }>({
-      query: ({ cookie }) => ({
-        url: `users/me`,
+    getUserMe: builder.query<
+      User,
+      { headers: Record<string, string | undefined> }
+    >({
+      query: ({ headers }) => ({
+        url: "users/me",
         method: "GET",
-        headers: {
-          cookie,
-        },
+        headers,
       }),
+    }),
+    getUserById: builder.query<User, { id: string }>({
+      query: ({ id }) => ({
+        url: `users/${id}`,
+        method: "GET",
+      }),
+    }),
+    patchUserMe: builder.mutation<User, { data: any }>({
+      query: ({ data }) => {
+        const { confirmPassword, ...body } = data;
+        return {
+          url: "users/me",
+          method: "PATCH",
+          body,
+        };
+      },
+    }),
+    patchUserById: builder.mutation<
+      void,
+      { id: string; data: EditProfileForm }
+    >({
+      query: ({ id, data }) => {
+        const { confirmPassword, ...body } = data;
+        return {
+          url: `users/${id}`,
+          method: "PATCH",
+          body,
+        };
+      },
+    }),
+    postUpload: builder.mutation<ProfileImage, FormData>({
+      query: (body) => {
+        return {
+          url: "uploads",
+          method: "POST",
+          body,
+        };
+      },
     }),
   }),
 });
 
 export const {
-  useLazyMyInfoQuery,
-  useMyInfoQuery,
-  useSignInMutation,
-  useSignOutMutation,
-  useSignUpMutation,
+  useGetUserByIdQuery,
+  useGetUserMeQuery,
+  useGetUsersQuery,
+  useLazyGetUserByIdQuery,
+  useLazyGetUserMeQuery,
+  useLazyGetUsersQuery,
+  usePostAuthMutation,
+  usePostAuthRefreshMutation,
+  usePostAuthSignOutMutation,
+  usePostUserMutation,
+  usePatchUserByIdMutation,
+  usePatchUserMeMutation,
+  usePostUploadMutation,
   util: { getRunningOperationPromise, getRunningOperationPromises },
 } = api;
 
-export const { myInfo, signIn, signOut, signUp } = api.endpoints;
+export const {
+  getUserById,
+  getUserMe,
+  getUsers,
+  postAuth,
+  postAuthRefresh,
+  postAuthSignOut,
+  postUser,
+  patchUserById,
+  patchUserMe,
+  postUpload,
+} = api.endpoints;

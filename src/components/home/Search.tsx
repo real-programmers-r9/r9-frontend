@@ -1,16 +1,6 @@
 import React, { useState } from "react";
-import {
-  Typography,
-  FormControl,
-  TextField,
-  Chip,
-  IconButton,
-  Stack,
-  Box,
-} from "@mui/material";
-import { ManageSearch } from "@mui/icons-material";
+import { Typography, FormControl, TextField, Chip, Stack } from "@mui/material";
 import { styled } from "@mui/system";
-import JobCard, { data } from "./JobCard";
 
 const SearchWrapper = styled("div")({
   display: "flex",
@@ -25,10 +15,11 @@ const StyledStack = styled(Stack)({
   display: "flex",
   alignItems: "center",
 });
+
 const HASHTAGS = ["돌봄", "주3회", "시니어 일자리", "당일 알바"];
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <SearchWrapper>
@@ -42,24 +33,11 @@ const Search = () => {
             size="small"
             focused
             placeholder="검색어를 입력해주세요"
-            onChange={(
-              event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-            ) => {
-              searchTerm(event.target.value);
+            value={searchTerm}
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
             }}
           />
-          <IconButton
-            onClick={() => {
-              {
-                data?.map((item) => {
-                  return <JobCard data={data} />;
-                });
-              }
-            }}
-            aria-label="delete"
-          >
-            <ManageSearch fontSize="large" />
-          </IconButton>
         </StyledStack>
 
         {/* 추천 검색어 */}
