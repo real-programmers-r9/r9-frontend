@@ -12,6 +12,13 @@ export const getUsers = async () => {
   return result;
 };
 
+export const getBusinesses = async () => {
+  const result = await client
+    .get<User[]>("users/businesses")
+    .then((res) => res.data);
+  return result;
+};
+
 export const getUserMe = async () => {
   const result = await client.get<User>("users/me").then((res) => res.data);
   return result;

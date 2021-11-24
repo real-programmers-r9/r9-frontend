@@ -14,7 +14,7 @@ export const createJobAPI = async (job: IJobState) => {
 
 /** 공고 리스트 호출 */
 export const findJobsAPI = async () => {
-  const resposne = await axios.get(url.JOBS);
+  const resposne = await client.get(url.JOBS);
   return resposne.data;
 };
 
