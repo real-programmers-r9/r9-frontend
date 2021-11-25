@@ -7,6 +7,7 @@ interface ReviewDetailProps {
 }
 
 const ReviewDetail = ({ id }: ReviewDetailProps) => {
+
   return (
     <>
       <Typography align="center" variant="h4">

@@ -27,7 +27,7 @@ const ReviewList = () => {
           >
             <Typography gutterBottom variant="h6" component="div">
               <Link
-                href={`/jobs/reviews/${biz.bizNumber}`}
+                href={`/jobs/reviews/${biz.id}`}
                 color="inherit"
                 underline="none"
               >
