@@ -12,3 +12,9 @@ export const createReview = async (review: Review) => {
   const response = await client.post("/reviews", review);
   return response.data;
 };
+
+/** 리뷰 목록 조회 */
+export const findBizReviews = async (bizId: any) => {
+  const response = await client.get(`/reviews/search/${bizId}`);
+  return response.data;
+};

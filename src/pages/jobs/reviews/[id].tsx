@@ -5,7 +5,7 @@ import ReviewDetail from "src/components/review/ReviewDetail";
 
 const ReviewPage = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const {id} = router.query;
 
   return (
     <>
