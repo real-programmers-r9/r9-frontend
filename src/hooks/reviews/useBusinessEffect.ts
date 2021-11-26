@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { findReviews } from "~/libs/api/reviews";
+
 import { getBusinesses } from "~/libs/api/users";
 import { User } from "~/types/user";
+import useInput from "../common/useInput";
 
 export default function useBusinessEffect() {
   const [businesses, setBusinesses] = useState<User[]>([]);
@@ -15,7 +16,15 @@ export default function useBusinessEffect() {
       }
     };
     getData();
-  }, [setBusinesses]);
+  }, []);
 
-  return { businesses, setBusinesses };
+  const [search, onChangeSearch] = useInput("");
+
+  const onSearchReview = async () => {
+    try {
+      /** 추후에 controller 추가되면 추가 */
+    } catch (e) {}
+  };
+
+  return { businesses, setBusinesses, onSearchReview };
 }
