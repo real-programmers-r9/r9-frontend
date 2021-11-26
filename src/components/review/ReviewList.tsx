@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, Paper, Rating, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import useReviewEffect from "~/hooks/reviews/useReviewEffect";
+import useBusinessEffect from "~/hooks/reviews/useBusinessEffect";
 
 const ReviewList = () => {
-  const { reviews } = useReviewEffect();
-
+  const { businesses } = useBusinessEffect();
+  console.log(businesses);
   return (
     <Paper sx={{ padding: "25px" }}>
       <Typography align="center" variant="h4" component="div">
@@ -13,9 +13,9 @@ const ReviewList = () => {
       </Typography>
 
       <Stack spacing={2} py={4}>
-        {reviews.map((review: any) => (
+        {businesses.map((biz: any) => (
           <Box
-            key={review.id}
+            key={biz.id}
             sx={{
               border: "1px solid rgb(192,192,192)",
               borderRadius: "5px",
@@ -27,22 +27,22 @@ const ReviewList = () => {
           >
             <Typography gutterBottom variant="h6" component="div">
               <Link
-                href={`/jobs/reviews/${review.id}`}
+                href={`/jobs/reviews/${biz.id}`}
                 color="inherit"
                 underline="none"
               >
-                {review.title}
+                {biz.bizName}!!
               </Link>
             </Typography>
             <Box sx={{ textAlign: "center" }}>
               <Typography gutterBottom component="div">
-                리뷰 3개
+                리뷰 {biz.bizreview.length}개
               </Typography>
               <Rating
                 name="text-feedback"
-                value={review.rating}
+                value={1}
                 readOnly
-                precision={0.5}
+                precision={1}
                 size="medium"
               />
             </Box>

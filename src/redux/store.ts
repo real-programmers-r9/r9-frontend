@@ -2,14 +2,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { api } from "~/redux/services/api";
 import { authSlice } from "~/redux/slices/auth-slice";
-import { jobSlice } from "./slices/job-slice";
+import { jobSlice } from "~/redux/slices/job-slice";
+import { reviewSlice } from "~/redux/slices/review-slice";
 
 export const makeStore = () =>
   configureStore({
     reducer: {
       [api.reducerPath]: api.reducer,
       auth: authSlice.reducer,
-      jobs: jobSlice.reducer // jobReducer
+      job: jobSlice.reducer, // jobReducer
+      review: reviewSlice.reducer, // jobReducer
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({ serializableCheck: false }).concat(api.middleware),
