@@ -1,11 +1,18 @@
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "~/libs/api/reviews";
 import { selectReview, setReview } from "~/redux/slices/review-slice";
 
-export default function useReviewForm() {
+export default function useReviewForm(pid: string | string[] | undefined) {
   const dispatch = useDispatch();
   const review = useSelector(selectReview);
+
+  useEffect(() => {
+    const setBizId = () => {
+      dispatch(setReview({ key: "bizId", value: pid }));
+    };
+    setBizId();
+  }, []);
 
   const onChangeReview = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
