@@ -3,12 +3,12 @@ import { IReviewState } from "~/types/stores";
 import { AppState } from "../store";
 
 const initialState: IReviewState = {
-  writer: null,
   title: "",
   content: "",
   startDate: new Date(),
   endDate: new Date(),
   rating: 0,
+  bizId: "",
 };
 
 export const reviewSlice = createSlice({

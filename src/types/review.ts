@@ -7,4 +7,5 @@ export interface Review {
   endDate: Date;
   content: string;
   rating: number;
+  bizId: string;
 }

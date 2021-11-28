@@ -3,10 +3,14 @@ import { Button, Rating, Stack, TextField, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import useReviewForm from "~/hooks/reviews/useReviewForm";
 import { selectReview } from "~/redux/slices/review-slice";
+import { useRouter } from "next/router";
 
 const ReviewPostEditor = () => {
+  const router = useRouter();
+  const { pid } = router.query;
+  console.log(pid);
   const review = useSelector(selectReview);
-  const { onChangeReview, onChangeRating, onCreateReview } = useReviewForm();
+  const { onChangeReview, onChangeRating, onCreateReview } = useReviewForm(pid);
   const { title, startDate, rating, endDate, content } = review;
 
   return (
