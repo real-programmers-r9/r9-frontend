@@ -3,9 +3,10 @@ import { useRouter } from "next/router";
 import { Box } from "@mui/system";
 import ReviewDetail from "src/components/review/ReviewDetail";
 
+
 const ReviewPage = () => {
   const router = useRouter();
-  const {id} = router.query;
+  const { id } = router.query;
 
   return (
     <>
@@ -15,6 +16,7 @@ const ReviewPage = () => {
           maxWidth: "md",
         }}
       >
+
         <ReviewDetail id={id} />
       </Box>
     </>
