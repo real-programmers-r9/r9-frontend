@@ -14,8 +14,8 @@ import SortButtons from "./SortButtons";
 import { Data } from "~/pages";
 // import useFetch from "./../../hooks/job/fetchApi"; // api-fetching hook
 import { useDispatch } from "react-redux";
-import { findJobs } from "../../libs/api/job";
 import { addJobs } from "../../redux/slices/jobSlice";
+import { findJobsAPI } from "../../libs/api/job";
 
 const StyledBox = styled(Paper)(({ theme }) => ({
   paddingTop: 20,
@@ -42,7 +42,7 @@ const JobCard = ({ data }: JobCardProps) => {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const jobs = await findJobs().catch(console.error);
+      const jobs = await findJobsAPI().catch(console.error);
       // console.log("잡", jobs);
       dispatch(addJobs(jobs)); // 여기 확인 필요
     };
