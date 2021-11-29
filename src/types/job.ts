@@ -1,15 +1,5 @@
+import { Gender, JobStatus, PayMentsMethod } from "./enums";
 import { User } from "./user";
-
-export enum PayMentsMethod {
-  PERHOUR = "PERHOUR",
-  PERDAY = "PERDAY",
-  PERMONTH = "PERMONTH",
-}
-
-export enum JobStatus {
-  ACTIVATE = "ACTIVATE",
-  INAVCTIVE = "INAVCTIVE",
-}
 
 export interface Job {
   writer: User | null;
@@ -26,4 +16,7 @@ export interface Job {
   endTime: Date;
   wage: number;
   status: JobStatus;
+  period: string;
+  gender: Gender;
+  sectors: string;
 }

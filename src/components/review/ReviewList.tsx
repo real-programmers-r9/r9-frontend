@@ -7,11 +7,7 @@ const ReviewList = () => {
   const { businesses } = useBusinessEffect();
   console.log(businesses);
   return (
-    <Paper sx={{ padding: "25px" }}>
-      <Typography align="center" variant="h4" component="div">
-        후기
-      </Typography>
-
+    <>
       <Stack spacing={2} py={4}>
         {businesses.map((biz: any) => (
           <Box
@@ -31,7 +27,7 @@ const ReviewList = () => {
                 color="inherit"
                 underline="none"
               >
-                {biz.bizName}!!
+                {biz.bizName}
               </Link>
             </Typography>
             <Box sx={{ textAlign: "center" }}>
@@ -49,7 +45,7 @@ const ReviewList = () => {
           </Box>
         ))}
       </Stack>
-    </Paper>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import { NextPage } from "next";
 import { Card, Button, Container } from "@mui/material";
 import dynamic from "next/dynamic";
 import JobContents from "~/components/job/JobContents";
+import useJobDetailEffect from "~/hooks/job/useJobDetailEffect";
 
 const DynamicComponentWithNoSSR = dynamic(
   () => import("../../components/review/ReviewCarousel"),
@@ -22,12 +23,15 @@ const ContainerBox = styled(Container)({
 
 const Detail: NextPage = () => {
   const router = useRouter();
+
+  const { job } = useJobDetailEffect();
+
   return (
     <ContainerBox>
       <Card sx={{ p: 4 }}>
-        <JobContents />
+        <JobContents job={job} />
         <br />
-        <DynamicComponentWithNoSSR />
+        <DynamicComponentWithNoSSR id={job?.writer?.id} />
 
         <Button
           fullWidth

@@ -25,12 +25,12 @@ export interface IJobState {
 }
 
 export interface IReviewState {
-  writer: User | null;
   title: string;
   startDate: Date;
   endDate: Date;
   content: string;
   rating: number;
+  bizId: string;
 }
 
 export interface IApplyState {

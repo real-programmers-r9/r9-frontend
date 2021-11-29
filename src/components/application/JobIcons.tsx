@@ -4,9 +4,10 @@ import {
   AttachMoneyRounded,
   WorkOutlineOutlined,
   AccessTimeOutlined,
-  RoomOutlined,
+  CalendarToday,
 } from "@mui/icons-material";
 import { styled } from "@mui/system";
+import useJobDetailEffect from "~/hooks/job/useJobDetailEffect";
 
 const StyledBox = styled(Box)({
   textAlign: "center",
@@ -14,6 +15,7 @@ const StyledBox = styled(Box)({
 });
 
 export default function JobIcons() {
+  const { job, pid } = useJobDetailEffect();
   return (
     <div>
       <Container
@@ -34,28 +36,37 @@ export default function JobIcons() {
         >
           {/* 공통스타일 styledBox로 정리 */}
           <StyledBox id="navicon-1">
-            <RoomOutlined />
+            <CalendarToday />
           </StyledBox>
-          <Typography variant="subtitle2">서울 강남구</Typography>
+          <Typography variant="subtitle2">{job?.period}</Typography>
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <StyledBox id="navicon-2">
             <AttachMoneyRounded />
           </StyledBox>
-          <Typography variant="subtitle2">일당 13만원</Typography>
+          <Typography variant="subtitle2">
+            {job?.payment === "PERHOUR"
+              ? "시급"
+              : job?.payment === "PERDAY"
+              ? "일급"
+              : "월급"}
+            {job?.wage}원
+          </Typography>
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <StyledBox id="navicon-3">
             <WorkOutlineOutlined />
           </StyledBox>
-          <Typography variant="subtitle2">홀서빙</Typography>
+          <Typography variant="subtitle2"> {job?.workType}</Typography>
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <StyledBox id="navicon-4">
             <AccessTimeOutlined />
           </StyledBox>
           {/* <Typography sx={{ fontSize: "11.5px" }}>17:00~21:00</Typography> */}
-          <Typography variant="subtitle2">협의가능</Typography>
+          <Typography variant="subtitle2">
+            {job?.startTime} ~ {job?.endTime}
+          </Typography>
         </Box>
       </Container>
     </div>

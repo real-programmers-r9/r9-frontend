@@ -17,13 +17,22 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { Menu, Login, PersonAdd, Logout, Home } from "@mui/icons-material";
+import {
+  Menu,
+  Login,
+  PersonAdd,
+  Logout,
+  Home,
+  Comment,
+  PersonAddAlt,
+} from "@mui/icons-material";
 import { usePostAuthSignOutMutation } from "~/redux/services/api";
 import { selectAuth } from "~/redux/slices/auth-slice";
 import { theme } from "~/styles/theme";
 import { useToggle } from "~/hooks/useToggle";
 import { Logo } from "~/components/navbar/Logo";
 import { UserInfo } from "~/components/navbar/UserInfo";
+import { Role } from "~/types/user";
 
 export interface NavItem {
   name: string;
@@ -35,9 +44,18 @@ export interface NavItem {
 const StyledToolbar = styled(Toolbar)({
   // background: "linear-gradient(153deg, rgba(147,221,227,1) 8%, rgba(147,232,175,1) 74%, rgba(201,251,126,1) 100%)",
 });
+export const basicNavItems: NavItem[] = [
+  { name: "R9", href: "/", icon: <Home /> },
+  { name: "알바 후기", href: "/jobs/reviews", icon: <Comment /> },
+];
+export const userNavItems: NavItem[] = [
+  { name: "지원 내역", href: "???", icon: <PersonAddAlt /> },
+  //추후 추가 바람.
+];
 
-export const navItems: NavItem[] = [{ name: "R9", href: "/", icon: <Home /> }];
-
+export const businessNavItem: NavItem[] = [
+  { name: "지원자 내역", href: "/apply/applyer", icon: <PersonAddAlt /> },
+];
 export const Navbar = () => {
   const router = useRouter();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -72,6 +90,7 @@ export const Navbar = () => {
         >
           <Logo />
           {isMobile ? (
+            //모바일 버전
             <>
               <IconButton
                 color="inherit"
@@ -91,7 +110,7 @@ export const Navbar = () => {
                   }}
                 >
                   <List>
-                    {navItems.map(({ name, href, icon }) => (
+                    {basicNavItems.map(({ name, href, icon }) => (
                       <ListItemButton
                         key={name}
                         onClick={() => router.push(href)}
@@ -100,6 +119,25 @@ export const Navbar = () => {
                         <ListItemText>{name} </ListItemText>
                       </ListItemButton>
                     ))}
+                    {user?.role === Role.BUSINESS
+                      ? businessNavItem.map(({ name, href, icon }) => (
+                          <ListItemButton
+                            key={name}
+                            onClick={() => router.push(href)}
+                          >
+                            <ListItemIcon>{icon}</ListItemIcon>
+                            <ListItemText>{name} </ListItemText>
+                          </ListItemButton>
+                        ))
+                      : userNavItems.map(({ name, href, icon }) => (
+                          <ListItemButton
+                            key={name}
+                            onClick={() => router.push(href)}
+                          >
+                            <ListItemIcon>{icon}</ListItemIcon>
+                            <ListItemText>{name} </ListItemText>
+                          </ListItemButton>
+                        ))}
                   </List>
                   <List>
                     {user ? (
@@ -141,6 +179,7 @@ export const Navbar = () => {
               </Drawer>
             </>
           ) : (
+            //pc 버전
             <>
               <Stack
                 spacing={2}
@@ -148,7 +187,7 @@ export const Navbar = () => {
                 direction="row"
                 justifyContent="flex-start"
               >
-                {navItems.map((item) => (
+                {basicNavItems.map((item) => (
                   <Button
                     key={item.name}
                     color="inherit"
@@ -157,6 +196,25 @@ export const Navbar = () => {
                     {item.name}
                   </Button>
                 ))}
+                {user?.role === Role.BUSINESS
+                  ? businessNavItem.map((item) => (
+                      <Button
+                        key={item.name}
+                        color="inherit"
+                        onClick={() => router.push(item.href)}
+                      >
+                        {item.name}
+                      </Button>
+                    ))
+                  : userNavItems.map((item) => (
+                      <Button
+                        key={item.name}
+                        color="inherit"
+                        onClick={() => router.push(item.href)}
+                      >
+                        {item.name}
+                      </Button>
+                    ))}
               </Stack>
               <Stack spacing={2} direction="row">
                 {user ? (
