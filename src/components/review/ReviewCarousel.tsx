@@ -1,11 +1,10 @@
 import { Link, Paper, Rating, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
 import Carousel from "react-material-ui-carousel";
 import useReviewEffect from "~/hooks/reviews/useReviewsEffect";
 
-function ReviewCarousel() {
-  const { reviews } = useReviewEffect();
+function ReviewCarousel(props: any) {
+  const { reviews } = useReviewEffect(props.id);
   return (
     <Carousel animation="slide" duration={700}>
       {reviews.map((review: any) => (

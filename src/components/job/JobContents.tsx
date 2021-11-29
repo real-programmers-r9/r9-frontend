@@ -7,18 +7,20 @@ import { Container, Divider, Rating, Typography } from "@mui/material";
 import React from "react";
 import { Box, styled } from "@mui/system"; // 전체 container 스타일링
 import JobIcons from "../application/JobIcons";
-import useJobDetailEffect from "~/hooks/job/useJobDetailEffect";
+
 import StatusBox from "../home/StatusBox";
 import moment from "moment";
+import { Job } from "~/types/job";
 
 const StyledBox = styled(Box)({
   textAlign: "center",
   position: "relative", // 하트표시 기준
 });
-// 백데이터 넣기
 
-const JobContents = () => {
-  const { job, pid } = useJobDetailEffect();
+interface JobContentsProps {
+  job?: Job;
+}
+const JobContents = ({ job }: JobContentsProps) => {
   const editedDeadline = moment(job?.deadline).format("YY년 MM월 Do");
   return (
     <>

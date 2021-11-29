@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { findJobByIdAPI } from "~/libs/api/job";
-import { IJobState } from "~/types/stores";
+import { Job } from "~/types/job";
 
 export default function useJobDetailEffect() {
   const router = useRouter();
   const { pid } = router.query;
 
-  const [job, setJob] = useState<IJobState>();
+  const [job, setJob] = useState<Job>();
 
   useEffect(() => {
     const getData = async () => {

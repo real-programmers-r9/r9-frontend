@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AnyObject } from "yup/lib/object";
 import { findBizReviews } from "~/libs/api/reviews";
 
 export default function useReviewEffect(bizId: any) {

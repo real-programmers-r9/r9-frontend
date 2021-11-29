@@ -1,4 +1,5 @@
-import { Review } from "~/types/review";
+
+import { IReviewState } from "~/types/stores";
 import { client } from ".";
 
 /** 리뷰 목록 조회 */
@@ -8,7 +9,7 @@ export const findReviews = async () => {
 };
 
 /** 리뷰 등록 */
-export const createReview = async (review: Review) => {
+export const createReview = async (review: IReviewState) => {
   const response = await client.post("/reviews", review);
   return response.data;
 };
